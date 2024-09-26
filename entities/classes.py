@@ -14,6 +14,11 @@ class Court:
     
     #average of the rating array
     average_rating = float("nan")
+    def calc_av(self):
+        if len(self.rating_array) > 0:
+            self.average_rating = sum(self.rating_array) / len(self.rating_array)
+        else:
+            self.average_rating = float("nan")
     
     #description of the court quality
     quality = ""
