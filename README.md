@@ -14,7 +14,7 @@
 - Jaekyeong Lee (jaekung, [jale3090@colorado.edu](mailto:jale3090@colorado.edu))
 - Alex Chang (inch6134-cu, [inch6134@colorado.edu](mailto:inch6134@colorado.edu))
 - Toan Lam ()
-- Jonathan Hu ()
+- Jonathan Hu (jjjohnywaffles, [johu5262@colorado.edu](mailto:johu5262@colorado.edu))
 
 ### Weekly Team Meeting: Sundays, 12PM, MST
 
