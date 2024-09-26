@@ -13,7 +13,7 @@
 - Kathryn Woessner (KatieWoe, [kawo7071@colorado.edu](mailto:kawo7071@colorado.edu))
 - Jaekyeong Lee (jaekung, [jale3090@colorado.edu](mailto:jale3090@colorado.edu))
 - Alex Chang (inch6134-cu, [inch6134@colorado.edu](mailto:inch6134@colorado.edu))
-- Toan Lam ([tola6570@colorado.edu](mailto:tola6570@colorado.edu))
+- Toan Lam (toebyesong, [tola6570@colorado.edu](mailto:tola6570@colorado.edu))
 - Jonathan Hu (jjjohnywaffles, [johu5262@colorado.edu](mailto:johu5262@colorado.edu))
 
 ### Weekly Team Meeting: Sundays, 12PM, MST
