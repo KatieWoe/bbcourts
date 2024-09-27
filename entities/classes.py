@@ -18,7 +18,7 @@ class Court:
         self.rating_array.append(rating)
     
     #average of the rating array
-    average_rating = float("nan")
+    average_rating = None
     def calc_av(self):
         if len(self.rating_array) > 0:
             self.average_rating = sum(self.rating_array) / len(self.rating_array)
@@ -68,7 +68,7 @@ class Comment:
         self.comment_id = c_id
     
     #id of parent comment
-    parent_id = float("nan")
+    parent_id = None
     def set_parent(self, parent):
         self.parent_id = parent
     
