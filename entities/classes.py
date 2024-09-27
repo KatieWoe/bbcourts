@@ -6,6 +6,11 @@ class Court:
     name_of_court = ""
     def set_name(self, name):
         self.name_of_court = name
+        
+    #identifying number of court
+    court_id = 0
+    def set_id(self, new_id):
+        self.court_id = new_id
     
     #array of all the ratings given to the court
     rating_array = []
@@ -49,3 +54,30 @@ class Court:
     pic_of_court = ""
     def set_pic(self, pic):
         self.pic_of_court = pic
+
+#The Comment class holds the features a comment on a post should have
+class Comment:
+    #id of court comment is on
+    court_id = 0
+    def set_court(self, court):
+        self.court_id = court
+    
+    #id of comment
+    comment_id = 0
+    def set_comment_id(self, c_id):
+        self.comment_id = c_id
+    
+    #id of parent comment
+    parent_id = float("nan")
+    def set_parent(self, parent):
+        self.parent_id = parent
+    
+    #time comment was mad
+    comment_time = 0
+    def set_time(self, t):
+        self.comment_time = t
+    
+    #connent of comment
+    comment = ""
+    def set_comment(self, comment):
+        self.comment = comment
