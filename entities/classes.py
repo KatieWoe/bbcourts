@@ -27,7 +27,7 @@ class Court:
     
     #description of the court quality
     quality = ""
-    def set__quality(self, quality):
+    def set_quality(self, quality):
         self.quality = quality
     
     #is the court accessible?
