@@ -3,6 +3,11 @@ Wire Frames: https://miro.com/app/board/uXjVLZRMTL4=/
 Features
 
 Court:
+* URL Route: /<court_id>/
+* Links To:
+    Review Form
+    Search Page through search bar
+    Outside link to google maps and weather
 * Name of Court
 * Court ID
     Unique ID for each court
@@ -14,7 +19,7 @@ Court:
     5 Star System
     Users can enter a star rating
     Average of all user submitted ratings is displayed
-*Court Quality 
+* Court Quality 
     Series of features and yes no or good average bad
     Determined by user vote?
         * Nets Present
@@ -37,6 +42,24 @@ Court:
 Comments/User Reviews:
 
 Search Results:
+* URL Route: /search?search_entry
+* Links to:
+    Court Pages from results
+    Search Results from search bar
+* Search looks for matches in:
+    Name
+    Address
+* Sort by:
+    Rating
+    Alphabetic
+    Price
+* Results Show:
+    First Gallery Image
+    Name of Court
+    Average Rating
+    Address
+    In/Out Door
+    Price
 
 Photo Gallery:
 
