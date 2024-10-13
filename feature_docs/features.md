@@ -1,8 +1,10 @@
 Wire Frames: https://miro.com/app/board/uXjVLZRMTL4=/
 
+Pages: Main Landing, Search Results/Court Listings, Court Details, Make a Review/Raiting, Favorites Page
+
 Features
 
-Main Landing Page:
+Main Landing Page: (Toanp)
 
 Court:
 * URL Route: /<court_id>/
@@ -40,8 +42,10 @@ Court:
     Connect to Google Maps
 * Current Weather
     Use Address to pull weather data in the area
+* Photo Gallery
+* Comment Section
 
-Comments/User Reviews:
+Make Review: (Jonathan):
 
 Search Results:
 * URL Route: /search?search_entry
@@ -63,5 +67,4 @@ Search Results:
     In/Out Door
     Price
 
-Photo Gallery:
-
+Favorites: (Jaekyeong Lee)
