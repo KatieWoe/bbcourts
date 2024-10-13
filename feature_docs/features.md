@@ -2,6 +2,8 @@ Wire Frames: https://miro.com/app/board/uXjVLZRMTL4=/
 
 Features
 
+Main Landing Page:
+
 Court:
 * URL Route: /<court_id>/
 * Links To:
