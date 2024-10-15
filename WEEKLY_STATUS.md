@@ -17,6 +17,7 @@ Alex Chang: Last week, I researched what external data sources and APIs are avai
 Jaekyeong Lee: Last week, I spent most of my time learning more about the end-to-end web development process and diving deeper into Flask. Since I had already created some basic wireframes the week before, I wanted to get a better idea of the technologies needed to implement the pages presented on the wireframes. This week, I’ll be working with the team to finalise our page designs. I will also try to create a skeleton template for a basketball court entry that will be part of the court details page.
 
 # Week 10/13
+![image](./Trello_Board/week10-13.png)
 
 ## Individual Updates
 Kathryn Woessner: Last week I made feature outlines for search results. This week I'll get the file for the next milestone working and move things over that we already have done.
