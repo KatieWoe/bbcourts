@@ -23,3 +23,5 @@ Jaekyeong Lee: Last week, I spent most of my time learning more about the end-to
 Kathryn Woessner: Last week I made feature outlines for search results. This week I'll get the file for the next milestone working and move things over that we already have done.
 
 Jonathan Hu: Last week, I spent the majority of my time researching how to use and implement MongoDB for our project. This week, I am working on creating a wireframe and completing the feature doc for the Reviews page in our project.
+
+Jaekyeong Lee: Last week, I made a wireframe for the 'My favourites' page that displays the basketball courts that the user has favourited. This week, I will create a skeleton html and a basic script to render the 'My Favourite' page, along with its design documentation.
