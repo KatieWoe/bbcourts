@@ -48,9 +48,9 @@ Court:
 Make Review: (Jonathan):
 * URL Route: /<court_id>/reviews/
 * Links to:
-      * Court Page
-      * Other Courts on the site
-      * Search Bar
+    * Court Page
+    * Other Courts on the site
+    * Search Bar
 * Search Bar:
     * Include an input field for users to search reviews by name, keywords, or rating.
     * Placeholder text: "Search Reviews"
