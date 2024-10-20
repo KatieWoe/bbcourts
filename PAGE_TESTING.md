@@ -141,11 +141,22 @@ Our service has five main types of pages that we will need to design. First is a
 ## Favorites
 
 - **Page Title:**
+    * My Favorites
 
 - **Page Description:**
+    * Users can find the courts they have saved on this page.
 
 - **Parameters:** 
-
+    * user_id: required to get the list of court_ids that the user marked as 'favourite'
+    
 - **Data Needed:**
-
+    * user_id
+    * court_id
+    * court_name
+    * court_location
+    * court_image
+    
 - **Link Destinations:**
+    * landing page: users can select the 'home' or similar button to go back to the landing page
+    * court: users can go to one of the favourited courts by clicking the card image in the favourites list
+    * search bar: users can access the search bar at the top of the page to use the regular court search functionality
