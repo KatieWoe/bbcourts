@@ -46,7 +46,31 @@ Court:
 * Comment Section
 
 Make Review: (Jonathan):
+* URL Route: /<court_id>/reviews/
+* Links to:
+      Court Page
+      Other Courts on the site
+      Search Bar
+* Search Bar:
+    Include an input field for users to search reviews by name, keywords, or rating.
+    Placeholder text: "Search Reviews"
 
+* Average Rating (5-Star System)
+    Display a star-based system (average of all user ratings).
+    Add text: "Average Rating: X/5" where "X" is dynamically calculated based on all user ratings.
+
+* Individual Reviews:
+    Reviewer’s Username
+    Rating: x/5 stars visual 
+    Date: When the review was submitted.
+    Review Text: User's feedback.
+
+* Other Courts Section:
+    Thumbnail of the court 
+    Name of the court
+    Average rating out of 5 stars
+    Link to the specific court’s page for more information.
+  
 Search Results:
 * URL Route: /search?search_entry
 * Links to:
