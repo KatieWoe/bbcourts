@@ -121,14 +121,22 @@ Our service has five main types of pages that we will need to design. First is a
 ## Make a Review
 
 - **Page Title:**
+    * Make a Review for [Court Name]
 
 - **Page Description:**
+    * Users can submit their review for the basketball court, rate the court on a 5-star system, and provide feedback on specific features like cleanliness, accessibility, and overall experience.
 
 - **Parameters:** 
-
+    * court_id: This will identify which court the review is for, allowing the review to be attached to the correct court in the database.
 - **Data Needed:**
-
+    * Reviewer’s Username: The name or username of the person submitting the review.
+    * Rating: A 5-star system where users can click to select how many stars to give the court.
+    * Review Text: A textbox for users to provide written feedback.
+    * Date: Automatically capture the submission date.
 - **Link Destinations:**
+    * Court Page: Users can return to the court details page to see their review along with other reviews.
+    * Other Courts: Users can be directed to a page listing other courts they may want to review or explore.
+    * Search Bar: At the top of the page, allow users to search for another court to review by name or location.
 
 ## Favorites
 
