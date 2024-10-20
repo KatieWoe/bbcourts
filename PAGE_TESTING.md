@@ -144,7 +144,8 @@ Our service has five main types of pages that we will need to design. First is a
     * My Favorites
 
 - **Page Description:**
-    * Users can find the courts they have saved on this page.
+    * Users can find the courts they have saved on this page and unsave a court if needed.
+![image](./wire_frames/favorite_wireframe.png)
 
 - **Parameters:** 
     * user_id: required to get the list of court_ids that the user marked as 'favourite'
@@ -158,5 +159,5 @@ Our service has five main types of pages that we will need to design. First is a
     
 - **Link Destinations:**
     * landing page: users can select the 'home' or similar button to go back to the landing page
-    * court: users can go to one of the favourited courts by clicking the card image in the favourites list
+    * court details page: users can go to one of the favourited courts by clicking the card image in the favourites list
     * search bar: users can access the search bar at the top of the page to use the regular court search functionality
