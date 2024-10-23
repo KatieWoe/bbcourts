@@ -27,3 +27,8 @@ Jonathan Hu: Last week, I spent the majority of my time researching how to use a
 Jaekyeong Lee: Last week, I made a wireframe for the 'My favourites' page that displays the basketball courts that the user has favourited. This week, I will create a skeleton html and a basic script to render the 'My Favourite' page, along with its design documentation.
 
 Toan Lam: I implemented a review system this week that allows users to submit and view feedback on their experiences. Each review includes a star rating, description, and the reviewer’s name and date.
+
+# Week 10/20
+
+## Individual Updates
+Kathryn Woessner: File for the fourth checkpoint made. Data started to populate. Due to a death in the family last week and next will be low productivity for me.
