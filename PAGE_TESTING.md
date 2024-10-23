@@ -20,6 +20,8 @@ Our service has five main types of pages that we will need to design. First is a
 
 - **Page Description:** This page will show the user a list of courts that match the user request given in the search bar.
 
+![image](./wire_frames/searchpage.png)
+
 * Search looks for matches in:
     Name
     Address
