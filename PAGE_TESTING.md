@@ -121,7 +121,7 @@ Our service has five main types of pages that we will need to design. First is a
 - **Link Destinations:** This page will link several pages. First, it will link to the Make a Review page and will need to pass the CourtID information to it so the resulting review attaches to the correct court. It will have a search bar that will lead to the Search Results page and will need to pass the info put into the search bar on to that page. It will have link in the nav bar to the Main Landing and won't need to pass any data.
 
 ## Make a Review
-
+![image](./wire_frames/reviewwireframe.png)
 - **Page Title:**
     * Make a Review for [Court Name]
 
@@ -130,6 +130,7 @@ Our service has five main types of pages that we will need to design. First is a
 
 - **Parameters:** 
     * court_id: This will identify which court the review is for, allowing the review to be attached to the correct court in the database.
+    * review_id: This will identify a specific review for a court, allowing the review to be stored properly in the database.
 - **Data Needed:**
     * Reviewer’s Username: The name or username of the person submitting the review.
     * Rating: A 5-star system where users can click to select how many stars to give the court.
