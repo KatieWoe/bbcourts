@@ -1,17 +1,50 @@
 Wire Frames: https://miro.com/app/board/uXjVLZRMTL4=/
 
-Pages: Main Landing, Search Results/Court Listings, Court Details, Make a Review/Raiting, Favorites Page
+Pages: Main Landing, Search Results, Court Details, Make a Review, Favorites Page
 
 Features
 
 Main Landing Page: (Toanp)
+* URL Route: 
+* Links to:
+   
+Search Results (Alex Chang / Katie Woessner):
+* URL Route: /search?search_entry
+* Links to:
+    Court Pages from results
+    Search Results from search bar
+    Landing Page from nav bar and logo
+    Favorites Page from nav bar
+* Search looks for matches in:
+    Name
+    Address
+* Sort by:
+    Rating
+    Alphabetic
+    Price
+    Location (State, City, etc.)
+    Rating
+* Results Show:
+    First Gallery Image
+    Name of Court
+    Average Rating
+    Address
+    In/Outdoors
+    Price
+    Hours of Operation today, Open or Closed
+* Advanced Filters (will implement depending on progress)
+    Court Quality Attributes (Net Present, ADA Accessible, etc.)
+    Hours of Operation, Open or Closed
+    In/Outdoors
 
-Court:
+Court Details:
 * URL Route: /<court_id>/
 * Links To:
     Review Form
     Search Page through search bar
     Outside link to google maps and weather
+    Landing Page from nav bar
+    Favorites Page from nav bar
 * Name of Court
 * Court ID
     Unique ID for each court
@@ -71,24 +104,12 @@ Make Review: (Jonathan):
     * Average rating out of 5 stars
     * Link to the specific court’s page for more information.
   
-Search Results:
-* URL Route: /search?search_entry
-* Links to:
-    Court Pages from results
-    Search Results from search bar
-* Search looks for matches in:
-    Name
-    Address
-* Sort by:
-    Rating
-    Alphabetic
-    Price
-* Results Show:
-    First Gallery Image
-    Name of Court
-    Average Rating
-    Address
-    In/Out Door
-    Price
-
 Favorites: (Jaekyeong Lee)
+* URL Route: /<user_id>/favorites
+* Links to:
+    * Landing page via Logo and nav bar
+    * Search Results via search bar
+    * Court Details via favorites listings
+* My Favorites:
+    * Displays a gallery of cards displaying courts that users have marked as favorited
+    * Users can view court details by clicking on the cards
