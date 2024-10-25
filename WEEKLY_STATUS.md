@@ -28,7 +28,13 @@ Jaekyeong Lee: Last week, I made a wireframe for the 'My favourites' page that d
 
 Toan Lam: I implemented a review system this week that allows users to submit and view feedback on their experiences. Each review includes a star rating, description, and the reviewer’s name and date.
 
+Alex Chang: Last week, I spent some time researching the Google Maps API (which we decided to use for our project) and which features we could implement in our project. This week, I will be working on a wireframe and documentation for the Search Results page.
+
 # Week 10/20
 
 ## Individual Updates
+![image](./Trello_Board/week10-20.png)
+
 Kathryn Woessner: File for the fourth checkpoint made. Data started to populate. Due to a death in the family last week and next will be low productivity for me.
+
+Alex Chang: Last week, I was busy with other commitments and did not make much progress on the task assigned. This week, I will work on completing the feature documentation and wireframe for the Search Results page in time for the submission and start thinking about how it will be implemented in HTML and CSS. 
