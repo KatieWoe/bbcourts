@@ -29,6 +29,8 @@ Our service has five main types of pages that we will need to design. First is a
     Rating
     Alphabetic
     Price
+    Location (State, City, etc.)
+    Rating
 * Results Show:
     First Gallery Image
     Name of Court
@@ -36,19 +38,53 @@ Our service has five main types of pages that we will need to design. First is a
     Address
     In/Out Door
     Price
+    Hours of Operation today, Open or Closed
 
 - **Parameters:** We will need the search input string given by the user to search for matches against name and address in the court table. The route will be `/search?search_entry`
 
-- **Data Needed:** We will search the court table for matches with the search input, and display the elements of the entries that match. The data needed from that table is listed here.
+- **Data Needed:** We will search the database containing court entries for matches with the search input, and display the elements of the entries that match. The data needed from that table is listed here.
 
 * CourtID
 * Name
+* Image
 * Rating
 * Address
 * In-Out Door
 * Price
+* Hours of Operation (Note: 'Today's' hours and whether the court is open or closed will be determined when the user queries the information and will be displayed dynamically. This info is not stored in the database)
 
-- **Link Destinations:** Clicking on a result will lead the user to the court details page for that result. We will need to pass the CourtID to that page. Users will be able to enter a new search, which will need the new search input. They will be able to return to the main landing page through the nav bar which will not need any info passed to it.
+- **Link Destinations:** Clicking on a result will lead the user to the court details page for that result. We will need to pass the CourtID to that page. Users will be able to enter a new search, which will need the new search input. They will be able to return to the main landing page through the nav bar or logo which will not need any info passed to it. They can also navigate to the Favorites page via the nav bar, which will need the <user_id> passed to access. The user can enter a new search query in the search bar, and clicking the search button will take them to a new search results page with the updated query passed.
+
+- **Tests:** We will need a series of tests to verify the rendering of the page. They are:
+
+    1. **Search Functionality:**
+       - Verify that entering a valid search query returns a list of courts matching the name or address.
+       - Ensure that an empty search query returns an appropriate message (e.g., "No results found").
+
+    2. **Sorting Options:**
+       - Test the sorting functionality by verifying that the results can be sorted by each criterion (Rating, Alphabetic, Price, Location) and that the order is correct.
+       - Check that the default sorting is set to the highest-rated courts.
+
+    3. **Data Display:**
+       - Confirm that each court result displays the correct information: First Gallery Image, Name, Average Rating, Address, In/Out Door status, Price, and Hours of Operation.
+       - Validate that today’s hours of operation are accurately determined and displayed based on the current date and time.
+
+    4. **Navigation:**
+       - Test that clicking on a court result redirects the user to the correct court details page with the appropriate CourtID passed in the URL.
+       - Ensure that navigation to the Favorites page passes the `<user_id>` correctly.
+       - Verify that the user can return to the main landing page via the nav bar or logo without any parameters.
+
+    5. **Responsiveness:**
+       - Check that the search results page displays correctly across different screen sizes and devices (desktop, tablet, mobile).
+       - Ensure that the layout adjusts appropriately and remains user-friendly.
+
+    6. **User Experience:**
+       - Validate that the search button is disabled or provides feedback when there is no input in the search bar.
+       - Check for loading indicators when results are being fetched to enhance user experience.
+
+    7. **Performance:**
+       - Measure the load time for the search results page to ensure it meets acceptable performance standards.
+       - Test the responsiveness of the page when searching for different queries to ensure quick rendering of results.
 
 ## Court Details
 
