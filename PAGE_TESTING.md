@@ -38,6 +38,55 @@ Our service has five main types of pages that we will need to design. First is a
   - **Trending Courts Page**: A link to the most popular courts.
   - **Maps Page**: Navigates to a visual map of courts nearby.
 
+### Tests:
+
+#### i. **Hero Section and Button Functionality:**
+
+- Verify that the hero section ("Get in the Game!") displays correctly with the associated description text.
+- Ensure that the “Find Court” button is visible and leads to the correct search results page when clicked.
+- Validate that the button redirects based on the search input or location.
+
+#### ii. **Featured Courts Display:**
+
+- Confirm that the correct featured courts (Most Viewed Courts) are retrieved and displayed on the landing page.
+- Verify that each court displays the correct information, including:
+  - Court Name
+  - Location (City, State)
+  - Rating (Stars)
+  - Main Image (Thumbnail)
+- Ensure that the images load correctly and do not have broken links.
+
+#### iii. **Navigation Links:**
+
+- Verify that the navigation bar links (Maps, Favorite Courts, Trending Courts) work correctly and lead to the appropriate pages.
+- Ensure that clicking on the logo redirects the user to the main landing page.
+- Confirm that clicking on a featured court card leads to the correct court details page.
+
+#### iv. **Search Functionality:**
+
+- Verify that entering a search term in the search bar and clicking "Find Court" redirects to the search results page.
+- Ensure the search bar accepts valid input and provides appropriate results based on the input string.
+
+#### v. **Responsiveness:**
+
+- Confirm that the landing page renders correctly on different screen sizes, including mobile, tablet, and desktop.
+- Ensure that the layout adjusts properly without cutting off essential elements.
+
+#### vi. **Performance:**
+
+- Measure the load time of the landing page to ensure it meets performance standards.
+- Check if images, buttons, and courts data load smoothly without noticeable delays.
+
+#### vii. **Personalization (Optional):**
+
+- If the user is logged in, verify that personalized features such as favorite courts appear.
+- Ensure the correct favorite courts are displayed for the user based on their saved data.
+
+#### viii. **Error Handling:**
+
+- Verify that appropriate error messages appear if the courts data fails to load.
+- Ensure that the page still renders basic content (hero section) even if there is a data retrieval failure.
+
 ## Search Results
 
 - **Page Title:** Search Results
