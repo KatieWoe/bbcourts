@@ -156,6 +156,26 @@ Our service has five main types of pages that we will need to design. First is a
 
 - **Link Destinations:** This page will link several pages. First, it will link to the Make a Review page and will need to pass the CourtID information to it so the resulting review attaches to the correct court. It will have a search bar that will lead to the Search Results page and will need to pass the info put into the search bar on to that page. It will have link in the nav bar to the Main Landing and won't need to pass any data.
 
+- **Tests:** We will need a series of tests to verify the rendering of the page. They are:
+
+    1. **Data Retrieval:**
+       - Verify that the correct court details are displayed based on the CourtID parameter.
+       - Ensure that all fields (Average Rating, Court Quality, Hours of Operation, etc.) are populated correctly from the database.
+
+    2. **Photo Gallery:**
+       - Confirm that the photo gallery displays images linked to the court.
+       - Ensure that images load correctly and that navigation through the gallery works.
+
+    3. **Comment Section:**
+       - Verify that user comments are displayed correctly.
+       - Check that users can submit new comments and that they appear on the page after submission.
+
+    4. **Weather Data:**
+       - Ensure that the current weather information is fetched accurately based on the court's address.
+
+    5. **Navigation:**
+       - Test that links to the Make a Review page, Search Results page, and Main Landing page work correctly.
+
 ## Make a Review
 ![image](./wire_frames/reviewwireframe.png)
 - **Page Title:**
@@ -176,6 +196,23 @@ Our service has five main types of pages that we will need to design. First is a
     * Court Page: Users can return to the court details page to see their review along with other reviews.
     * Other Courts: Users can be directed to a page listing other courts they may want to review or explore.
     * Search Bar: At the top of the page, allow users to search for another court to review by name or location.
+
+- **Tests:** We will need a series of tests to verify the functionality of the review page. They are:
+
+    1. **Review Submission:**
+       - Verify that users can submit a review and that it is correctly linked to the appropriate court.
+       - Ensure that the submission form captures all necessary fields (Username, Rating, Review Text, Date).
+
+    2. **Validation:**
+       - Test that all required fields must be filled out before submission.
+       - Check for appropriate error messages if validation fails.
+
+    3. **Data Display:**
+       - Confirm that submitted reviews are displayed correctly on the Court Details page.
+       - Ensure that the average rating is updated after a new review is submitted.
+
+    4. **Navigation:**
+       - Verify that links to return to the Court Details page and search for other courts function correctly.
 
 ## Favorites
 
@@ -200,3 +237,18 @@ Our service has five main types of pages that we will need to design. First is a
     * landing page: users can select the 'home' or similar button to go back to the landing page
     * court details page: users can go to one of the favourited courts by clicking the card image in the favourites list
     * search bar: users can access the search bar at the top of the page to use the regular court search functionality
+
+- **Tests:** We will need a series of tests to verify the functionality of the Favorites page. They are:
+
+    1. **Data Retrieval:**
+       - Verify that the correct list of favorite courts is displayed for the user based on the user_id.
+       - Ensure that all relevant details (court name, location, image) are shown correctly.
+
+    2. **Unfavorite Functionality:**
+       - Test that users can remove a court from their favorites list and that the change is reflected immediately.
+
+    3. **Navigation:**
+       - Confirm that links to the landing page and individual court details pages work as expected.
+
+    4. **Search Functionality:**
+       - Ensure that the search bar functions properly and allows users to search for other courts.
