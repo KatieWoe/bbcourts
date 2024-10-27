@@ -38,3 +38,9 @@ Alex Chang: Last week, I spent some time researching the Google Maps API (which 
 Kathryn Woessner: File for the fourth checkpoint made. Data started to populate. Due to a death in the family last week and next will be low productivity for me.
 
 Alex Chang: Last week, I was busy with other commitments and did not make much progress on the task assigned. This week, I will work on completing the feature documentation and wireframe for the Search Results page in time for the submission and start thinking about how it will be implemented in HTML and CSS. 
+
+# Week 10/27
+
+## Individual Updates
+
+Kathryn Woessner: Collaborated to finish the fourth checkpoint markdown file. This week I will focus on designing the SQL tables based on decissions made in the last two weeks.
