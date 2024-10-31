@@ -42,5 +42,6 @@ Alex Chang: Last week, I was busy with other commitments and did not make much p
 # Week 10/27
 
 ## Individual Updates
+![image](./Trello_Board/week10-27.png)
 
 Kathryn Woessner: Collaborated to finish the fourth checkpoint markdown file. This week I will focus on designing the SQL tables based on decissions made in the last two weeks.
