@@ -39,6 +39,8 @@ Kathryn Woessner: File for the fourth checkpoint made. Data started to populate.
 
 Alex Chang: Last week, I was busy with other commitments and did not make much progress on the task assigned. This week, I will work on completing the feature documentation and wireframe for the Search Results page in time for the submission and start thinking about how it will be implemented in HTML and CSS. 
 
+Jonathan Hu: Last week, I focused on primarily creating a wireframe for the reviews page on our website along with completing the feature doc for the page. This week I will spend some time working through the database needs. 
+
 # Week 10/27
 
 ## Individual Updates
