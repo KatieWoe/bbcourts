@@ -49,4 +49,12 @@ Jaekyeong Lee: Last week, I contributed to the page design document creation for
 ![image](./Trello_Board/week10-27.png)
 
 Kathryn Woessner: Collaborated to finish the fourth checkpoint markdown file. This week I will focus on designing the SQL tables based on decissions made in the last two weeks.
+
 Jaekyeong Lee: Last week, the lab on JavaScript was quite time-consuming so could not work much on the group project. I started drafting the SQL design document to share with the teammates which I will continue working on for the next 2 weeks.
+
+# Week 11/3
+
+## Individual Updates
+
+
+Kathryn Woessner: Started SQL_TESTING.md and outlined tables and entries that will be needed. This week I will write up the full information for the courts table.
