@@ -36,7 +36,7 @@
 * List of tests for verifying each table:
 
 
-# Table #4: `favorites`
+# Table #4: `favorites` -- Jaekyeong Lee
 * Name: 
 * Table Description: 
 * Fields:
@@ -56,7 +56,7 @@
 * List of tests for verifying each table:
 
 
-# Data Access Method #1
+# Data Access Method #1 -- Jaekyeong Lee
 * Name:
 * Description:
 * Parameters:
@@ -78,6 +78,24 @@
 * Parameters:
 * Return values:
 * List of tests for verifying each access method:
+
+
+# Data Access Method #4
+* Name:
+* Description:
+* Parameters:
+* Return values:
+* List of tests for verifying each access method:
+
+
+# Data Access Method #5
+* Name:
+* Description:
+* Parameters:
+* Return values:
+* List of tests for verifying each access method:
+
+...
 
 
 
