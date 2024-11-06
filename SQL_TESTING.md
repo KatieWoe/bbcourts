@@ -1,7 +1,8 @@
 # Table #1: `courts`
-* Table Description: 
+* Table Description: This table holds the information about a given basketball court, including average reviews. It will be accessed by the Landing page to display a random court, the Search Results to find entries that have a match in courtName or location to the search results and display the information of those matched courts, the Court Details page to display all of a court's details, the Make a Review page to provide a matching courtID to the court being reviewed and to update the avStar value after a review is finished, and the Favorites page to display the court info of courtID's that match a user's favorites.
 * Fields:
    * `courtID`: Primary Key, Unique int to identify a court
+   * `courtName`: varchar, gives a name for the court
    * `avStar`: Float holding the average star rating. Averages `star` values from Reviews with a matching `courtID`
    * `nets`: 0 or 1, Nets not present or present.
    * `level`: 0 or 1, Court doesn't or does have a level ground with no cracks.
@@ -12,6 +13,31 @@
    * `price`: varchar, gives price of admitance description
    * `location`: varchar, address of court
 * List of tests for verifying each table:
+    * Test adding good entry with all "false"
+        * nets, level, clean, ada, and inOut should all be tested with a value of 0 at least once, should succeed
+        * courtID should be int, courtName should be varchar, avStar should be calculated and either 0-5 or null, hours, price, and location should be varchar
+    * Test adding good entry with all "true"
+        * nets, level, clean, ada, and inOut should all be tested with a value of 1 at least once, should succeed
+        * courtID should be int, courtName should be varchar, avStar should be calculated and either 0-5 or null, hours, price, and location should be varchar
+    * Test adding wrong type or not constrained values for all elements/Test adding empty string and/or null for all elements
+        * courtID tested with non int and null values, should throw error
+        * courtName tested with empty string, non-varchar, and null values, should throw error
+        * nets, level, clean, ada, and inOut should all be tested with non int and non 0 or 1, should throw error
+        * nets, level, clean, ada, and inOut should all be tested with null, should succeed
+        * hours, price, and location should all be tested with non-varchar and null values, should throw error
+        * hours, price, and location should all be tested with empty string, should succeed
+    * Test that adding an entry in `reviews` with matching courtID updates avStar
+        * Add entries to reviews before court made, should throw error
+        * Add entries to reviews after court made, avStar should update (this will be done when entering review)
+    * Test good changes to each element
+        * Changes should be correct type, in constraints, and null if allowed, see good entry tests
+    * Test wrong type or not constrained values changes for all elements
+        * Changes should be wrong types, not constrained, and null if not allowed, see adding bad entry tests
+    * Test adding new entry with elements that are duplicated in previous entries
+        * Duplicate courtID should throw error, all other entries should succeed
+    * Test deleting an entry
+        * Should succeed
+    
 
 
 # Table #2: `users`
