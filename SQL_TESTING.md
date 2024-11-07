@@ -91,27 +91,34 @@
 
 
 # Data Access Method #2
-* Name:
-* Description:
-* Parameters:
-* Return values:
+* Name: createCourt
+* Description: Create a new entry in courts table.
+* Parameters: courtName(str), nets(0,1), level(0,1), clean(0,1), ada(0,1), inOut(0,1), hours(str), price(str), location(str)
+* Return values: courtID (a unique and randomized int that was assigned to the court)
 * List of tests for verifying each access method:
+    * For good inputs: Search for returned courtID and make sure inputs match result and avStar is null
+    * For bad inputs: Throw an error
 
 
 # Data Access Method #3
-* Name:
-* Description:
-* Parameters:
-* Return values:
+* Name: deleteCourt
+* Description: Delete an existing entry in courts table
+* Parameters: courtID(int)
+* Return values: None
 * List of tests for verifying each access method:
+    * For good inputs: Search for courtID should come back with no results
+    * For bad inputs or courtID does not exist: Throw an error
 
 
 # Data Access Method #4
-* Name:
-* Description:
-* Parameters:
-* Return values:
+* Name: getCourt
+* Description: Gets all the info in a courts entry so it can be displayed on page. How much of the returned data is used depends on what the function call is used for. For example, it can be used to access the loation info to get map and weather data if you only access the location element of the returned tuple.
+* Parameters: courtID(int)
+* Return values: courtName(str), avStar(float), nets(0,1), level(0,1), clean(0,1), ada(0,1), inOut(0,1), hours(str), price(str), location(str)
 * List of tests for verifying each access method:
+    * For existing court: returned values should match values gotten when you Search for that courtID in courts
+    * For bad input: throw error
+    * For non-existing court: throw error
 
 
 # Data Access Method #5
