@@ -26,9 +26,9 @@
         * nets, level, clean, ada, and inOut should all be tested with null, should succeed
         * hours, price, and location should all be tested with non-varchar and null values, should throw error
         * hours, price, and location should all be tested with empty string, should succeed
-    * Test that adding an entry in `reviews` with matching courtID updates avStar
-        * Add entries to reviews before court made, should throw error
-        * Add entries to reviews after court made, avStar should update (this will be done when entering review)
+    * Test that avStar is calculated correctly
+        * No reviews for a court should give a null avStar
+        * Add entries to reviews after court made, updating avStar should give correct average based on those reviews
     * Test good changes to each element
         * Changes should be correct type, in constraints, and null if allowed, see good entry tests
     * Test wrong type or not constrained values changes for all elements
