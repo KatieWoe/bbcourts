@@ -52,6 +52,8 @@ Kathryn Woessner: Collaborated to finish the fourth checkpoint markdown file. Th
 
 Jaekyeong Lee: Last week, the lab on JavaScript was quite time-consuming so could not work much on the group project. I started drafting the SQL design document to share with the teammates which I will continue working on for the next 2 weeks.
 
+Jonathan Hu: Last week, I spent time transitioning my database knowledge from Mongo to SQL since we have decided to use SQL instead. This week I plan on filling out the checkpoint 4 markdown file to help support completing the database information. 
+
 # Week 11/3
 
 ## Individual Updates
