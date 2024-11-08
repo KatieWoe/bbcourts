@@ -50,7 +50,7 @@
 * List of tests for verifying each table:
 
 
-# Table #3: `reviews`
+# Table #3: `reviews` -- Jonathan
 * Table Description: This table holds individual reviews submitted by users for basketball courts. It will be accessed by the Court Details page to display reviews for each court, the User Profile page to show reviews made by a user, and the Make a Review page to save user-generated reviews. The `star` field contributes to calculating the `avStar` in the `courts` table, updating the average rating for the corresponding court after each new review is added.
 * Fields:
    * `reviewID`: Primary Key, unique int to identify a review
@@ -89,15 +89,28 @@
 * List of tests for verifying each table:
 
 
-# Table #5: `photos` (?)
-* Name: 
-* Table Description: 
+# Table #5: `photos` -- Jonathan
+* Table Description: This table stores photos associated with each basketball court. It will be accessed by the Court Details page to display images of the court, providing the user's with an overview of what the court looks like. The `courtID` field links each photo to a specific court in the `courts` table.
 * Fields:
    * `photoID`: Primary Key, unique int to identify a picture
-   * `courtID`: int, courtID of court pictured, matches `courtID` in Courts
-   * `photo`: varchar, link to photo
-* List of tests for verifying each table:
+   * `courtID`: int, identifies the court being pictured, matches `courtID` in the `courts` table
+   * `photo`: varchar, holds a link or path to the photo
 
+* List of tests for verifying each table:
+    * **Test adding a valid entry**
+        * Valid entry should succeed with an integer `photoID`, integer `courtID`, and a valid `photo` link as varchar.
+    * **Test adding photo with all minimum values**
+        * `photo` is an empty string. Should succeed, as an empty `photo` link is allowed.
+    * **Test adding photo with all maximum values**
+        * `photo` reaches the maximum allowed varchar length. Should succeed if within varchar constraints.
+    * **Test adding invalid values**
+        * Adding non-integer or null values for `photoID` or `courtID` should throw an error.
+        * Adding a non-varchar type to `photo` should throw an error; null or empty string should succeed.
+    * **Test updating a photo entry**
+        * Modifying `photo` with a valid link or path should succeed.
+        * Changing `courtID` should maintain linkage to a valid court in the `courts` table.
+    * **Test deleting a photo entry**
+        * Deleting a photo entry should succeed, and the image should no longer display on the Court Details page if linked to a deleted court.
 
 # Data Access Method #1 -- Jaekyeong Lee
 * Name:
