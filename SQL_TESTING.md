@@ -51,15 +51,32 @@
 
 
 # Table #3: `reviews`
-* Name: 
-* Table Description: 
+* Table Description: This table holds individual reviews submitted by users for basketball courts. It will be accessed by the Court Details page to display reviews for each court, the User Profile page to show reviews made by a user, and the Make a Review page to save user-generated reviews. The `star` field contributes to calculating the `avStar` in the `courts` table, updating the average rating for the corresponding court after each new review is added.
 * Fields:
    * `reviewID`: Primary Key, unique int to identify a review
-   * `userID`: int, userID of review maker, matches `userID` in Users
-   * `courtID`: int, courtID of court reviewed, matches `courtID` in Courts
-   * `star`: float, 0-5 star rating given by the review
-   * `comment`: varchar, written review
+   * `userID`: int, identifies the user who made the review, matches `userID` in the `Users` table
+   * `courtID`: int, identifies the court being reviewed, matches `courtID` in the `courts` table
+   * `star`: Float, holds a 0-5 star rating given by the review
+   * `comment`: varchar, holds the written review content
+
 * List of tests for verifying each table:
+    * **Test adding a valid entry**
+        * Valid entry should succeed with an integer `reviewID`, `userID`, and `courtID`, a `star` rating between 0 and 5, and a varchar `comment`.
+    * **Test adding a review with all minimum values**
+        * `star` is 0, and `comment` is an empty string. Should succeed as 0 is within valid rating range, and an empty `comment` is allowed.
+    * **Test adding a review with all maximum values**
+        * `star` is 5, `comment` reaches the maximum allowed varchar length (based on system limits). Should succeed if within varchar constraints.
+    * **Test adding invalid values**
+        * Adding non-integer or null values for `reviewID`, `userID`, or `courtID` should throw an error.
+        * Adding a `star` rating outside the 0-5 range (e.g., -1, 6) should throw an error.
+        * Adding a non-varchar type to `comment` should throw an error; null or empty string should succeed.
+    * **Test updating a review**
+        * Modifying `star` or `comment` fields with valid data should succeed.
+        * Modifying `userID` or `courtID` should not affect the `courts` or `users` table integrity and should succeed if values exist in the `users` and `courts` tables.
+    * **Test deleting a review**
+        * Deleting a review should remove it from the table and trigger recalculation of `avStar` in the `courts` table if applicable.
+
+
 
 
 # Table #4: `favorites` -- Jaekyeong Lee
