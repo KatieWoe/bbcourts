@@ -122,7 +122,7 @@
         * Deleting a photo entry should succeed, and the image should no longer display on the Court Details page if linked to a deleted court.
 
 # Data Access Method #1 -- Jaekyeong Lee
-* Name: `getUserFavourites`
+* Name: `getUserFavorites`
 * Description: retrieves the list of courts favourited by a specified user from the `favorites` table. This method is intended to populate the 'Favorites' page, displaying favourited courts and associated star ratings for the user.
 * Parameters
   * `userID` (int): The unique identifier of the user logged in. Must match an existing `userID` in the `users` table.
