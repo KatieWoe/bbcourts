@@ -57,6 +57,7 @@ Jonathan Hu: Last week, I spent time transitioning my database layout from Mongo
 # Week 11/3
 
 ## Individual Updates
+![image](./Trello_Board/week11-3.png)
 
 Kathryn Woessner: Started SQL_TESTING.md and outlined tables and entries that will be needed. This week I will write up the full information for the courts table.
 
