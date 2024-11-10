@@ -1,4 +1,4 @@
-# Table #1: `courts`
+# Table #1: `courts` -- Katie
 * Table Description: This table holds the information about a given basketball court, including average reviews. It will be accessed by the Landing page to display a random court, the Search Results to find entries that have a match in courtName or location to the search results and display the information of those matched courts, the Court Details page to display all of a court's details, the Make a Review page to provide a matching courtID to the court being reviewed and to update the avStar value after a review is finished, and the Favorites page to display the court info of courtID's that match a user's favorites.
 * Fields:
    * `courtID`: Primary Key, Unique int to identify a court
@@ -120,7 +120,7 @@
 * List of tests for verifying each access method:
 
 
-# Data Access Method #2
+# Data Access Method #2 -- Katie
 * Name: createCourt
 * Description: Create a new entry in courts table.
 * Parameters: courtName(str), nets(0,1), level(0,1), clean(0,1), ada(0,1), inOut(0,1), hours(str), price(str), location(str)
@@ -130,7 +130,7 @@
     * For bad inputs: Throw an error
 
 
-# Data Access Method #3
+# Data Access Method #3 -- Katie
 * Name: deleteCourt
 * Description: Delete an existing entry in courts table
 * Parameters: courtID(int)
@@ -140,7 +140,7 @@
     * For bad inputs or courtID does not exist: Throw an error
 
 
-# Data Access Method #4
+# Data Access Method #4 -- Katie
 * Name: getCourt
 * Description: Gets all the info in a courts entry so it can be displayed on page. How much of the returned data is used depends on what the function call is used for. For example, it can be used to access the loation info to get map and weather data if you only access the location element of the returned tuple.
 * Parameters: courtID(int)
@@ -151,8 +151,8 @@
     * For non-existing court: throw error
 
 
-# Data Access Method #5
-* Name:
+# Data Access Method #5 -- Katie
+* Name: editCourt
 * Description:
 * Parameters:
 * Return values:

@@ -62,3 +62,9 @@ Jonathan Hu: Last week, I spent time transitioning my database layout from Mongo
 Kathryn Woessner: Started SQL_TESTING.md and outlined tables and entries that will be needed. This week I will write up the full information for the courts table.
 
 Jonathan Hu: This coming week I plan on completing the reviews table database layout and tests. 
+
+# Week 11/10
+
+## Individual Updates
+
+Kathryn Woessner: Designed courts database table and wrote design for some access methods. Next write up actual access method functions
