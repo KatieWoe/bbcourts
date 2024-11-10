@@ -80,13 +80,22 @@
 
 
 # Table #4: `favorites` -- Jaekyeong Lee
-* Name: 
-* Table Description: 
+* Table Description: The 'Favorites' page will query this table to display the courts favorited by the user. Each row in the table represents a court (identified by `courtID`) that a specific user (identified by `userID`) has favorited. The table also includes a review field to show the user's star rating for the court, if available.
 * Fields:
    * `userID`: linked primary key with `courtID`, int that matches `userID` in Users
    * `courtID`: linked primary key with `userID`, int that matches `courtID` in Courts
    * `review`: float or null, matches `star` from Reviews if user has reviewed this court
 * List of tests for verifying each table:
+  * Testing that (`userID`, `courtID`) is unique. The combination of userID and courtID should be unique in the table as a user can favourite each court only once.
+  * Testing that (`userID`, `courtID`) allows no null values
+  * Testing that `userID` matches a valid `userID` in the `users` table.
+  * Testing that `courtID` matches a valid `courtID` in the `courts` table
+  * Testing that `review` field accepts valid float values.
+  * Testing that `review` field accepts null values.
+  * Testing adding a favourite court without a review.
+  * Testing updating `review`. If a user adds a review for a court they’ve favourited, verify that the `review` field in `favourites` updates to reflect the new rating.
+  * Testing deleting a favourite
+  * Testing that querying favourited courts by userID returns the correct list of `courtID`s
 
 
 # Table #5: `photos` -- Jonathan
@@ -113,11 +122,22 @@
         * Deleting a photo entry should succeed, and the image should no longer display on the Court Details page if linked to a deleted court.
 
 # Data Access Method #1 -- Jaekyeong Lee
-* Name:
-* Description:
-* Parameters:
+* Name: `getUserFavourites`
+* Description: retrieves the list of courts favourited by a specified user from the `favorites` table. This method is intended to populate the 'Favorites' page, displaying favourited courts and associated star ratings for the user.
+* Parameters
+  * `userID` (int): The unique identifier of the user logged in. Must match an existing `userID` in the `users` table.
 * Return values:
+  * Returns a dictionary with
+    * key: courtID (int). The unique identifier of the favourited court.
+    * value: review (float or null). The star rating the user has given to the court, if available, otherwise, null.
+
+  * If the `userID` does not exist or if no favourites are found for the given user, it returns an empty dictionary.
 * List of tests for verifying each access method:
+  * Test retrieving favourites for a valid `userID` that has favourited courts.
+  * Test retrieving favourites for a valid `userID` that has not favourited any courts.
+  * Test retrieving favourites for a `userID` that does not exist in the Users table
+  * Test that the method handles entries with null review values correctly.
+  * Test retrieving favourites with rating.
 
 
 # Data Access Method #2 -- Katie
