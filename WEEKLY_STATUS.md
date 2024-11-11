@@ -68,3 +68,5 @@ Jonathan Hu: This coming week I plan on completing the reviews table database la
 ## Individual Updates
 
 Kathryn Woessner: Designed courts database table and wrote design for some access methods. Next write up actual access method functions
+
+Jonathan Hu: Last week I spent time completing the writeup for the Reviews and Photos tables in the SQL_Testing markdown. This week I plan on actually creating the database for our project. 
