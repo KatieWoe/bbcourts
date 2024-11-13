@@ -171,12 +171,33 @@
     * For non-existing court: throw error
 
 
-# Data Access Method #5 -- Katie
+# Data Access Method #5 -- Toan 
 * Name: editCourt
-* Description:
-* Parameters:
-* Return values:
-* List of tests for verifying each access method:
+* **Description**: Stores information on basketball courts, including details like location, amenities, and ratings. Used across: Landing Page, Search Results, Court Details Page, Make a Review Page, Favorites Page
+* **Fields**:
+   - `courtID`: **Primary Key**, unique int for each court.
+   - `courtName`: **varchar**, court's name.
+   - `avStar`: **Float**, average rating from related reviews.
+   - `nets`, `level`, `clean`, `ada`, `inOut`: **0 or 1**, represent amenities and features (e.g., ADA access).
+   - `hours`, `price`, `location`: **varchar**, court availability, admission price, and address.
+
+* **Tests**:
+   - **Valid Entries**:
+     - Add entries with all fields as 0 or 1. Ensure field types match and constraints hold.
+
+   - **Invalid Entries**:
+     - Test invalid `courtID` (non-int/null), `courtName` (empty string/non-varchar/null), and boolean fields with values other than 0 or 1. Ensure errors are thrown.
+     - Confirm `nets`, `level`, `clean`, `ada`, `inOut` accept null, and `hours`, `price`, `location` accept empty strings but not null.
+
+   - **`avStar` Calculation**:
+     - Ensure `avStar` is null with no reviews and updates correctly with added reviews.
+
+   - **Updating Fields**:
+     - Test valid updates to all fields; ensure changes apply. Confirm errors on invalid updates.
+
+   - **Duplicate and Delete**:
+     - Test duplicate `courtID` (error expected), other fields (allowed).
+     - Delete entry and confirm removal from search results.
 
 ...
 
