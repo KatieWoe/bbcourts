@@ -178,7 +178,6 @@
    - `courtID`: **Primary Key**, unique int for each court.
    - `courtName`: **varchar**, court's name.
    - `avStar`: **Float**, average rating from related reviews.
-   - `nets`, `level`, `clean`, `ada`, `inOut`: **0 or 1**, represent amenities and features (e.g., ADA access).
    - `hours`, `price`, `location`: **varchar**, court availability, admission price, and address.
 
 * **Tests**:
