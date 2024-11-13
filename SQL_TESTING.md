@@ -138,6 +138,20 @@
   * Test retrieving favourites for a `userID` that does not exist in the Users table
   * Test that the method handles entries with null review values correctly.
   * Test retrieving favourites with rating.
+  
+# Data Access Method #1.5
+* Name: `createUserFavorites`
+* Description: makes a new favourited by a specified user from the `favorites` table. This method is intended to create a new entry in the 'Favorites' page, displaying favourited courts and associated star ratings for the user.
+* Parameters
+  * `userID` (int): The unique identifier of the user logged in. Must match an existing `userID` in the `users` table.
+  * `courtID` (int): The id of the court being favorited. Must match an existing `courtID` in `courts` table.
+* Return values:
+  * Returns None
+
+* List of tests for verifying each access method:
+  * Test making favourites for a valid `userID` and `courtID`
+  * Test making favourites for a valid `userID` but not `courtID`, should throw error
+  * Test making favourites for a `userID` that does not exist in the Users table, should throw error
 
 
 # Data Access Method #2 -- Katie
@@ -197,9 +211,41 @@
    - **Duplicate and Delete**:
      - Test duplicate `courtID` (error expected), other fields (allowed).
      - Delete entry and confirm removal from search results.
+     
+# Data Access Method
+* Name: createUser
+* Description:
+* Parameters:
+* Return values:
+* List of tests for verifying each access method:
 
+# Data Access Method
+* Name: editUser
+* Description:
+* Parameters:
+* Return values:
+* List of tests for verifying each access method:
 
+# Data Access Method
+* Name: createReview
+* Description:
+* Parameters:
+* Return values:
+* List of tests for verifying each access method:
 
+# Data Access Method
+* Name: getReview
+* Description:
+* Parameters:
+* Return values:
+* List of tests for verifying each access method:
+
+# Data Access Method
+* Name: getPhotos
+* Description:
+* Parameters:
+* Return values:
+* List of tests for verifying each access method:
 
 
 # Questions to consider (To be removed before submission)
