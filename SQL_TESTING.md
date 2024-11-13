@@ -235,24 +235,38 @@
 
 # Data Access Method
 * Name: createReview
-* Description:
-* Parameters:
-* Return values:
+* Description: User creates a review for a court.
+* Parameters: userID (int), courtID (int), comment (str), star(int 1-5)
+* Return values: reviewID (int)
 * List of tests for verifying each access method:
+    * Valid entries for all parameters: should succeed
+    * Null, invalid types, empty string in comment, or ints outside range in star: should throw error
+    * userID or courtID does not exist: should throw error
+    * review for userID and courtID already exists: should replace old review entry
 
 # Data Access Method
 * Name: getReview
-* Description:
-* Parameters:
+* Description: Get info for a review so it can be displayed. Used to display comments on Court Display page, get all star ratings to calculate avStar, and to show a users reviews
+* Parameters: courtID (int)
 * Return values:
+    * Dictionary with:
+        * key: reviewID (int)
+        * value: tuple with star value in (0), review comment in (1), and userID in (2)
 * List of tests for verifying each access method:
+    * Valid courtID should return dictionary with matching reviews
+    * Invalid type on non-existing courtID should throw error
 
 # Data Access Method
 * Name: getPhotos
-* Description:
-* Parameters:
+* Description: Get the photos for a court.
+* Parameters: courtID (int)
 * Return values:
+    * Dictionary with:
+        * key: photoID (int)
+        * value: photo url
 * List of tests for verifying each access method:
+    * Valid courtID return dictionary with all matching photos
+    * Invalid type on non-existing courtID should throw error
 
 
 # Questions to consider (To be removed before submission)
