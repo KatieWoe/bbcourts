@@ -214,17 +214,24 @@
      
 # Data Access Method
 * Name: createUser
-* Description:
-* Parameters:
-* Return values:
+* Description: Add a new user to the `users` table.
+* Parameters: name(str, the username of the new user), password(str)
+* Return values: userID(int, randomized, the userID for the new user)
 * List of tests for verifying each access method:
+    * Valid strings for a unique name and password should create a new user those entries and a unique userID
+    * A name already being used should throw an error
+    * Non-string or empty string parameters should throw an error
 
 # Data Access Method
-* Name: editUser
-* Description:
-* Parameters:
-* Return values:
+* Name: checkUser
+* Description: When a user signs in check their name matches the password
+* Parameters: name(str), password(str)
+* Return values: userID(int)
 * List of tests for verifying each access method:
+    * Existing user with correct password: Should succeed and sign user in
+    * Existing user with incorrect password: Should throw error
+    * Non-existing user: Should throw error
+    * Invalid parameter types: Should throw error
 
 # Data Access Method
 * Name: createReview
