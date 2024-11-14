@@ -188,29 +188,24 @@
 # Data Access Method #5 -- Toan 
 * Name: editCourt
 * **Description**: Stores information on basketball courts, including details like location, amenities, and ratings. Used across: Landing Page, Search Results, Court Details Page, Make a Review Page, Favorites Page
-* **Fields**:
-   - `courtID`: **Primary Key**, unique int for each court.
-   - `courtName`: **varchar**, court's name.
-   - `avStar`: **Float**, average rating from related reviews.
-   - `hours`, `price`, `location`: **varchar**, court availability, admission price, and address.
-
-* **Tests**:
-   - **Valid Entries**:
-     - Add entries with all fields as 0 or 1. Ensure field types match and constraints hold.
-
-   - **Invalid Entries**:
-     - Test invalid `courtID` (non-int/null), `courtName` (empty string/non-varchar/null), and boolean fields with values other than 0 or 1. Ensure errors are thrown.
-     - Confirm `nets`, `level`, `clean`, `ada`, `inOut` accept null, and `hours`, `price`, `location` accept empty strings but not null.
-
-   - **`avStar` Calculation**:
-     - Ensure `avStar` is null with no reviews and updates correctly with added reviews.
-
-   - **Updating Fields**:
-     - Test valid updates to all fields; ensure changes apply. Confirm errors on invalid updates.
-
-   - **Duplicate and Delete**:
-     - Test duplicate `courtID` (error expected), other fields (allowed).
-     - Delete entry and confirm removal from search results.
+* **Parameters**:
+   - `courtID` (int): The unique court identifier is to be updated.
+   - Optional fields to update:
+       - `courtName` (str)
+       - `nets` (0 or 1)
+       - `level` (0 or 1)
+       - `clean` (0 or 1)
+       - `ada` (0 or 1)
+       - `inOut` (0 or 1)
+       - `hours` (str)
+       - `price` (str)
+       - `location` (str)
+* **Return values**: 
+   - `success` (bool): Returns `True` if the update is successful; `False` otherwise.
+* **List of tests**:
+   - **Valid update**: Provide valid values for fields; verify only specified fields are updated.
+   - **Invalid update**: Test incorrect types or out-of-range values (e.g., non-int `nets` or invalid `courtID`); ensure errors are thrown.
+   - **Partial update**: Test with only a subset of fields provided; confirm that only specified fields are changed, and others remain unaltered.
      
 # Data Access Method
 * Name: createUser
