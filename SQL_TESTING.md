@@ -202,10 +202,32 @@
        - `location` (str)
 * **Return values**: 
    - `success` (bool): Returns `True` if the update is successful; `False` otherwise.
-* **List of tests**:
-   - **Valid update**: Provide valid values for fields; verify only specified fields are updated.
-   - **Invalid update**: Test incorrect types or out-of-range values (e.g., non-int `nets` or invalid `courtID`); ensure errors are thrown.
-   - **Partial update**: Test with only a subset of fields provided; confirm that only specified fields are changed, and others remain unaltered.
+ * **List of Tests** (following TDD principles and FIRST testing guidelines):
+   - **Valid update**: Ensures correctness of updates.
+       - **Description**: Apply valid values to a subset or all fields.
+       - **Pre-condition**: Entry exists in `courts` table with given `courtID`.
+       - **Test steps**:
+           1. Call `editCourt` with valid parameters (e.g., `nets=1`, `clean=1`).
+           2. Verify that the specified fields are updated while others remain unchanged.
+       - **Expected result**: Returns `True`, and fields reflect updates.
+       - **Post-condition**: Entry remains valid within database constraints.
+   
+   - **Invalid update**: Ensures appropriate error handling.
+       - **Description**: Test with incorrect types or values outside expected ranges (e.g., non-integer `nets` or invalid `courtID`).
+       - **Pre-condition**: `courtID` either exists with valid entries or does not exist.
+       - **Test steps**:
+           1. Attempt `editCourt` with invalid values (e.g., `nets="invalid"`, `courtID=None`).
+       - **Expected result**: Returns `False` and throws appropriate error.
+       - **Post-condition**: No changes applied to any entry.
+   
+   - **Partial update**: Ensures flexibility and modularity.
+       - **Description**: Test by providing only a subset of fields to update.
+       - **Pre-condition**: Entry with `courtID` exists with valid fields.
+       - **Test steps**:
+           1. Call `editCourt` with only a subset of fields (e.g., `clean=1`, `ada=1`).
+           2. Verify that only the specified fields are updated, leaving others unchanged.
+       - **Expected result**: Returns `True`, and only specified fields are modified.
+       - **Post-condition**: Updated entry maintains database constraints.
      
 # Data Access Method
 * Name: createUser
