@@ -202,32 +202,35 @@
        - `location` (str)
 * **Return values**: 
    - `success` (bool): Returns `True` if the update is successful; `False` otherwise.
- * **List of Tests** (following TDD principles and FIRST testing guidelines):
-   - **Valid update**: Ensures correctness of updates.
-       - **Description**: Apply valid values to a subset or all fields.
-       - **Pre-condition**: Entry exists in `courts` table with given `courtID`.
-       - **Test steps**:
-           1. Call `editCourt` with valid parameters (e.g., `nets=1`, `clean=1`).
-           2. Verify that the specified fields are updated while others remain unchanged.
-       - **Expected result**: Returns `True`, and fields reflect updates.
-       - **Post-condition**: Entry remains valid within database constraints.
-   
-   - **Invalid update**: Ensures appropriate error handling.
-       - **Description**: Test with incorrect types or values outside expected ranges (e.g., non-integer `nets` or invalid `courtID`).
-       - **Pre-condition**: `courtID` either exists with valid entries or does not exist.
-       - **Test steps**:
-           1. Attempt `editCourt` with invalid values (e.g., `nets="invalid"`, `courtID=None`).
-       - **Expected result**: Returns `False` and throws appropriate error.
-       - **Post-condition**: No changes applied to any entry.
-   
-   - **Partial update**: Ensures flexibility and modularity.
-       - **Description**: Test by providing only a subset of fields to update.
-       - **Pre-condition**: Entry with `courtID` exists with valid fields.
-       - **Test steps**:
+ * **List of Tests**:
+
+   - **1. Valid Update Test**:
+       - **Objective**: Verify that `editCourt` correctly updates specified fields for a valid `courtID`.
+       - **Setup**: Ensure the target court entry exists with baseline data.
+       - **Test Steps**:
+           1. Call `editCourt` with valid values for fields to be updated.
+           2. Query the `courts` table using `courtID` to confirm updates.
+       - **Expected Outcome**: Only specified fields reflect changes; all other fields remain as before.
+       - **Teardown**: Revert the updated fields to baseline data.
+
+   - **2. Invalid Update Test**:
+       - **Objective**: Ensure invalid `courtID` or field values return `False` and do not alter the database.
+       - **Setup**: Ensure a valid court entry exists.
+       - **Test Steps**:
+           1. Attempt `editCourt` with an invalid `courtID` (e.g., non-existent ID) and observe the return value.
+           2. Attempt `editCourt` with incorrect types (e.g., non-integer for `nets`) or values outside allowed ranges (e.g., `nets=2`).
+           3. Query the `courts` table to verify no changes were made.
+       - **Expected Outcome**: Returns `False`; no data changes are applied.
+       - **Teardown**: No changes to revert as the database state remains unchanged.
+
+   - **3. Partial Update Test**:
+       - **Objective**: Confirm that only provided fields are updated, leaving other fields unchanged.
+       - **Setup**: Ensure an entry with all fields initialized.
+       - **Test Steps**:
            1. Call `editCourt` with only a subset of fields (e.g., `clean=1`, `ada=1`).
-           2. Verify that only the specified fields are updated, leaving others unchanged.
-       - **Expected result**: Returns `True`, and only specified fields are modified.
-       - **Post-condition**: Updated entry maintains database constraints.
+           2. Query `courts` using `courtID` to confirm that only specified fields were modified.
+       - **Expected Outcome**: Only specified fields reflect changes; all other fields remain unchanged.
+       - **Teardown**: Revert updated fields to their original state.
      
 # Data Access Method
 * Name: createUser
