@@ -49,8 +49,8 @@ def insert_test_data(connection):
         cursor.execute("""
             INSERT INTO photos (courtID, photo)
             VALUES
-            (1, 'link_to_photo_1.jpg'),
-            (2, 'link_to_photo_2.jpg');
+            (1, 'image_test/IMG_1776.jpg'),
+            (2, 'image_test/IMG_2302.jpg');
         """)
 
         connection.commit()
