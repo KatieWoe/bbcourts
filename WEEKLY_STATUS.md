@@ -54,6 +54,8 @@ Jaekyeong Lee: Last week, the lab on JavaScript was quite time-consuming so coul
 
 Jonathan Hu: Last week, I spent time transitioning my database layout from Mongo to SQL since we have decided to use SQL instead. This week I plan on filling out the checkpoint 4 markdown file to help support completing the database information. 
 
+Alex Chang: Last week I worked on the feature documentation for the Search Results page. This week I will focus on the SQL design document, and start thinking about how to implement the backend of the website in Flask.
+
 # Week 11/3
 
 ## Individual Updates
@@ -63,12 +65,18 @@ Kathryn Woessner: Started SQL_TESTING.md and outlined tables and entries that wi
 
 Jonathan Hu: This coming week I plan on completing the reviews table database layout and tests. 
 
+Alex Chang: This week I continued work on the SQL design document and researching the Flask implementation.
+
+
 # Week 11/10
 
 ## Individual Updates
+![image](./Trello_Board/week11-10.png)
 
 Kathryn Woessner: Designed courts database table and wrote design for some access methods. Next write up actual access method functions
 
 Jonathan Hu: Last week I spent time completing the writeup for the Reviews and Photos tables in the SQL_Testing markdown. This week I plan on actually creating the database for our project. 
 
 Toan Lam: I finished the last Data Access Method for the edit page. Next, I will code the review page based on our design and plans. 
+
+Alex Chang: This week I finalized work on the SQL design document. Next I will start working on writing a Flask app that we can use to host our site on Render.

@@ -40,14 +40,22 @@
     
 
 
-# Table #2: `users`
-* Name: 
-* Table Description: 
+# Table #2: `users` -- Alex
+* Table Description: This table holds all information related to users of the website. It will be used to save information on user reviews, and favorited courts for each user. The website will have a login page where users enter their credentials. The login page will also have a user signup prompt, where user records will be generated and saved into this table. Once a user is logged in, they can view which courts they have reviewed in the Favorites page, as well as which courts they have favorited in the same page. Within the Court Details page, users will have access to the review function via the "Submit your rating" section, where they can assign a star rating and submit a review. Once they hit the submit button, they will be taken to the Make a Review page, where they can submit reviews for each court. The `userID` key is referenced in the `reviews` and `favorites` table to allow the application to determine which reviews belong to which user and display this information in the relevant sections of the website. 
 * Fields:
    * `userID`: Primary Key, unique int to identify a user
    * `name`: varchar, user name of user
    * `password`: varchar, user password hashed
 * List of tests for verifying each table:
+    * Testing valid entry on signup: The username (`name`) should be unique, and the `password` will have to satisfy a set of requirements to ensure security.
+    * Testing primary key: The primary key `userID` should satisfy all of the requirements for a primary key, including uniqueness, non-nullness, stability, and simplicity.
+    * Testing invalid entries on signup:
+        * Non-unique username: `name` should be unique to each user. We must test whether the `name` that a user chooses as their username is not already taken.
+        * Invalid password: `password` should meet our set of requirements for security. We will validate the password to check if it meets our criteria (ex. length > 12 characters, combination of uppercase, lowercase, numbers, special characters)
+    * Testing valid entries on login: When a user logs in with their credentials, we must test whether their username and password exist in our database, and verify that matching credentials will yield a successful login.
+    * Testing invalid entries on login: If the user attempts to log in with an invalid `name` or `password`, we must test that a check against the database yields the correct result (denial of login), and test that the correct prompt is returned to the user.
+    * Testing review functionality: We must test that a successfully logged in user can submit reviews, and view/edit their reviews in the Court listings and Favorites pages
+    * Testing favorites functionality: We must test that a successfully logged in user can favorite a court, and that the favorited courts appear in both the Court listings (as a heart), and the Favorites page
 
 
 # Table #3: `reviews` -- Jonathan
@@ -153,6 +161,19 @@
   * Test making favourites for a valid `userID` but not `courtID`, should throw error
   * Test making favourites for a `userID` that does not exist in the Users table, should throw error
 
+# Data Access Method #1.6 -- Alex
+* Name: `deleteUserFavorites`
+* Description: Removes a favorited court when user chooses to remove (from court listing page or Favorites page)
+* Parameters
+  * `userID` (int): The unique identifier of the user logged in. Must match an existing `userID` in the `users` table.
+  * `courtID` (int): The id of the court being favorited. Must match an existing `courtID` in `courts` table.
+* Return values:
+  * Returns None
+
+* List of tests for verifying each access method:
+  * Test removing favourites for a valid `userID` and `courtID`
+  * Test removing favourites for a valid `userID` but not `courtID`, should throw error
+  * Test removing favourites for a `userID` that does not exist in the Users table, should throw error
 
 # Data Access Method #2 -- Katie
 * Name: createCourt
@@ -288,6 +309,19 @@
     * Valid courtID return dictionary with all matching photos
     * Invalid type on non-existing courtID should throw error
 
+# Data Access Method -- Alex
+* Name: getUserReview
+* Description: Fetch all reviews for a particular user (to display in Favorites)
+* Parameters: userID (int)
+* Return values:
+    * List of:
+        * Dictionary with: 
+            * key: reviewID (int)
+            * value: tuple with star value in (0), review comment in (1), and userID in (2)
+* List of tests for verifying each access method:
+    * Valid userID should return list of matching reviews
+    * Invalid userID should throw error
+    * Valid userID with no reviews should return nothing
 
 # Questions to consider (To be removed before submission)
 * What are the constraints for those table fields?
