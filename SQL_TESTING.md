@@ -1,4 +1,4 @@
-# Table #1: `courts` -- Katie
+# Table #1: `courts` 
 * Table Description: This table holds the information about a given basketball court, including average reviews. It will be accessed by the Landing page to display a random court, the Search Results to find entries that have a match in courtName or location to the search results and display the information of those matched courts, the Court Details page to display all of a court's details, the Make a Review page to provide a matching courtID to the court being reviewed and to update the avStar value after a review is finished, and the Favorites page to display the court info of courtID's that match a user's favorites.
 * Fields:
    * `courtID`: Primary Key, Unique int to identify a court
@@ -40,7 +40,7 @@
     
 
 
-# Table #2: `users` -- Alex
+# Table #2: `users` 
 * Table Description: This table holds all information related to users of the website. It will be used to save information on user reviews, and favorited courts for each user. The website will have a login page where users enter their credentials. The login page will also have a user signup prompt, where user records will be generated and saved into this table. Once a user is logged in, they can view which courts they have reviewed in the Favorites page, as well as which courts they have favorited in the same page. Within the Court Details page, users will have access to the review function via the "Submit your rating" section, where they can assign a star rating and submit a review. Once they hit the submit button, they will be taken to the Make a Review page, where they can submit reviews for each court. The `userID` key is referenced in the `reviews` and `favorites` table to allow the application to determine which reviews belong to which user and display this information in the relevant sections of the website. 
 * Fields:
    * `userID`: Primary Key, unique int to identify a user
@@ -58,7 +58,7 @@
     * Testing favorites functionality: We must test that a successfully logged in user can favorite a court, and that the favorited courts appear in both the Court listings (as a heart), and the Favorites page
 
 
-# Table #3: `reviews` -- Jonathan
+# Table #3: `reviews` 
 * Table Description: This table holds individual reviews submitted by users for basketball courts. It will be accessed by the Court Details page to display reviews for each court, the User Profile page to show reviews made by a user, and the Make a Review page to save user-generated reviews. The `star` field contributes to calculating the `avStar` in the `courts` table, updating the average rating for the corresponding court after each new review is added.
 * Fields:
    * `reviewID`: Primary Key, unique int to identify a review
@@ -87,7 +87,7 @@
 
 
 
-# Table #4: `favorites` -- Jaekyeong Lee
+# Table #4: `favorites` 
 * Table Description: The 'Favorites' page will query this table to display the courts favorited by the user. Each row in the table represents a court (identified by `courtID`) that a specific user (identified by `userID`) has favorited. The table also includes a review field to show the user's star rating for the court, if available.
 * Fields:
    * `userID`: linked primary key with `courtID`, int that matches `userID` in Users
@@ -106,7 +106,7 @@
   * Testing that querying favourited courts by userID returns the correct list of `courtID`s
 
 
-# Table #5: `photos` -- Jonathan
+# Table #5: `photos` 
 * Table Description: This table stores photos associated with each basketball court. It will be accessed by the Court Details page to display images of the court, providing the user's with an overview of what the court looks like. The `courtID` field links each photo to a specific court in the `courts` table.
 * Fields:
    * `photoID`: Primary Key, unique int to identify a picture
@@ -129,7 +129,7 @@
     * **Test deleting a photo entry**
         * Deleting a photo entry should succeed, and the image should no longer display on the Court Details page if linked to a deleted court.
 
-# Data Access Method #1 -- Jaekyeong Lee
+# Data Access Method #1 
 * Name: `getUserFavorites`
 * Description: retrieves the list of courts favourited by a specified user from the `favorites` table. This method is intended to populate the 'Favorites' page, displaying favourited courts and associated star ratings for the user.
 * Parameters
@@ -147,7 +147,7 @@
   * Test that the method handles entries with null review values correctly.
   * Test retrieving favourites with rating.
   
-# Data Access Method #1.5
+# Data Access Method #2
 * Name: `createUserFavorites`
 * Description: makes a new favourited by a specified user from the `favorites` table. This method is intended to create a new entry in the 'Favorites' page, displaying favourited courts and associated star ratings for the user.
 * Parameters
@@ -161,7 +161,7 @@
   * Test making favourites for a valid `userID` but not `courtID`, should throw error
   * Test making favourites for a `userID` that does not exist in the Users table, should throw error
 
-# Data Access Method #1.6 -- Alex
+# Data Access Method #3
 * Name: `deleteUserFavorites`
 * Description: Removes a favorited court when user chooses to remove (from court listing page or Favorites page)
 * Parameters
@@ -175,7 +175,7 @@
   * Test removing favourites for a valid `userID` but not `courtID`, should throw error
   * Test removing favourites for a `userID` that does not exist in the Users table, should throw error
 
-# Data Access Method #2 -- Katie
+# Data Access Method #4
 * Name: createCourt
 * Description: Create a new entry in courts table.
 * Parameters: courtName(str), nets(0,1), level(0,1), clean(0,1), ada(0,1), inOut(0,1), hours(str), price(str), location(str)
@@ -185,7 +185,7 @@
     * For bad inputs: Throw an error
 
 
-# Data Access Method #3 -- Katie
+# Data Access Method #5
 * Name: deleteCourt
 * Description: Delete an existing entry in courts table
 * Parameters: courtID(int)
@@ -195,7 +195,7 @@
     * For bad inputs or courtID does not exist: Throw an error
 
 
-# Data Access Method #4 -- Katie
+# Data Access Method #6
 * Name: getCourt
 * Description: Gets all the info in a courts entry so it can be displayed on page. How much of the returned data is used depends on what the function call is used for. For example, it can be used to access the loation info to get map and weather data if you only access the location element of the returned tuple.
 * Parameters: courtID(int)
@@ -206,7 +206,7 @@
     * For non-existing court: throw error
 
 
-# Data Access Method #5 -- Toan 
+# Data Access Method #7
 * Name: editCourt
 * **Description**: Stores information on basketball courts, including details like location, amenities, and ratings. Used across: Landing Page, Search Results, Court Details Page, Make a Review Page, Favorites Page
 * **Parameters**:
@@ -253,7 +253,7 @@
        - **Expected Outcome**: Only specified fields reflect changes; all other fields remain unchanged.
        - **Teardown**: Revert updated fields to their original state.
      
-# Data Access Method
+# Data Access Method #8
 * Name: createUser
 * Description: Add a new user to the `users` table.
 * Parameters: name(str, the username of the new user), password(str)
@@ -263,7 +263,7 @@
     * A name already being used should throw an error
     * Non-string or empty string parameters should throw an error
 
-# Data Access Method
+# Data Access Method #9
 * Name: checkUser
 * Description: When a user signs in check their name matches the password
 * Parameters: name(str), password(str)
@@ -274,7 +274,7 @@
     * Non-existing user: Should throw error
     * Invalid parameter types: Should throw error
 
-# Data Access Method
+# Data Access Method #10
 * Name: createReview
 * Description: User creates a review for a court.
 * Parameters: userID (int), courtID (int), comment (str), star(int 1-5)
@@ -285,7 +285,7 @@
     * userID or courtID does not exist: should throw error
     * review for userID and courtID already exists: should replace old review entry
 
-# Data Access Method
+# Data Access Method #11
 * Name: getReview
 * Description: Get info for a review so it can be displayed. Used to display comments on Court Display page, get all star ratings to calculate avStar, and to show a users reviews
 * Parameters: courtID (int)
@@ -297,7 +297,7 @@
     * Valid courtID should return dictionary with matching reviews
     * Invalid type on non-existing courtID should throw error
 
-# Data Access Method
+# Data Access Method #12
 * Name: getPhotos
 * Description: Get the photos for a court.
 * Parameters: courtID (int)
@@ -309,7 +309,7 @@
     * Valid courtID return dictionary with all matching photos
     * Invalid type on non-existing courtID should throw error
 
-# Data Access Method -- Alex
+# Data Access Method #13
 * Name: getUserReview
 * Description: Fetch all reviews for a particular user (to display in Favorites)
 * Parameters: userID (int)
@@ -322,11 +322,3 @@
     * Valid userID should return list of matching reviews
     * Invalid userID should throw error
     * Valid userID with no reviews should return nothing
-
-# Questions to consider (To be removed before submission)
-* What are the constraints for those table fields?
-* What are the relationships between tables?
-* What are the functions that will be created to access the database?
-* What are the tests to make sure those access routines work?
-* Which pages will need to access the database information?
-* What are the tests to make sure the pages access the correct data in the database?
