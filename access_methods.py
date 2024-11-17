@@ -21,7 +21,7 @@ def createCourt(connection, courtName, nets, level, clean, ada, inOut, hours, pr
     connection.close()
     return maybe_id
 
-def deleteCourt(courtID_del):
+def deleteCourt(connection, courtID_del):
     cur = connection.cursor()
     cur.execute('''
     DELETE FROM courts WHERE courtID=courtID_del;
@@ -30,7 +30,7 @@ def deleteCourt(courtID_del):
     connection.close()
     return
 
-def getCourt(courtID_get):
+def getCourt(connection, courtID_get):
     cur = connection.cursor()
     cur.execute('''
     SELECT * FROM courts WHERE courtID=courtID_get;
