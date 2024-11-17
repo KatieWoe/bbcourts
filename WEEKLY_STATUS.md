@@ -80,3 +80,9 @@ Jonathan Hu: Last week I spent time completing the writeup for the Reviews and P
 Toan Lam: I finished the last Data Access Method for the edit page. Next, I will code the review page based on our design and plans. 
 
 Alex Chang: This week I finalized work on the SQL design document. Next I will start working on writing a Flask app that we can use to host our site on Render.
+
+# Week 11/17
+
+## Individual Updates
+
+Kathryn Woessner: Wrote access methods for creating, deleting, and getting a court. Will write more access methods described in SQL Testing doc.
