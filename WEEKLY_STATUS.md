@@ -85,4 +85,6 @@ Alex Chang: This week I finalized work on the SQL design document. Next I will s
 
 ## Individual Updates
 
+![image](./Trello_Board/week11-17.png)
+
 Kathryn Woessner: Wrote access methods for creating, deleting, and getting a court. Will write more access methods described in SQL Testing doc.
