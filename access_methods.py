@@ -15,8 +15,8 @@ def createCourt(connection, courtName, nets, level, clean, ada, inOut, hours, pr
         maybe_id = random.randint(10000, 99999)
     
     cur.execute('''
-    INSERT INTO courts(maybe_id, courtName, NULL, nets, level, clean, ada, inOut, hours, price, location);
-    ''')
+    INSERT INTO courts(?, ?, ?, NULL, ?, ?, ?, ?, ?, ?, ?);
+    ''', (maybe_id, courtName, nets, level, clean, ada, inOut, hours, price, location))
     connection.commit()
     connection.close()
     return maybe_id
@@ -24,8 +24,8 @@ def createCourt(connection, courtName, nets, level, clean, ada, inOut, hours, pr
 def deleteCourt(connection, courtID_del):
     cur = connection.cursor()
     cur.execute('''
-    DELETE FROM courts WHERE courtID=courtID_del;
-    ''')
+    DELETE FROM courts WHERE courtID=?;
+    ''', (courtID_del))
     connection.commit()
     connection.close()
     return
@@ -33,8 +33,8 @@ def deleteCourt(connection, courtID_del):
 def getCourt(connection, courtID_get):
     cur = connection.cursor()
     cur.execute('''
-    SELECT * FROM courts WHERE courtID=courtID_get;
-    ''')
+    SELECT * FROM courts WHERE courtID=?;
+    ''', (courtID_get))
     court_tup = cur.fetchall()
     court = court_tup[0]
     connection.commit()
