@@ -88,3 +88,5 @@ Alex Chang: This week I finalized work on the SQL design document. Next I will s
 ![image](./Trello_Board/week11-17.png)
 
 Kathryn Woessner: Wrote access methods for creating, deleting, and getting a court. Will write more access methods described in SQL Testing doc.
+
+Jonathan Hu: Last week I completed the code which initializes our database along with creating a test script to ensure the tables were storing data properly. This week, I intend to add the database to our hosting site and run tests to ensure it is accessible remotely. 
