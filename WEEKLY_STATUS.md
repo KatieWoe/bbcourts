@@ -67,6 +67,8 @@ Jonathan Hu: This coming week I plan on completing the reviews table database la
 
 Alex Chang: This week I continued work on the SQL design document and researching the Flask implementation.
 
+Jaekyeong Lee: Last week I couldn't spend much time on the group project as I mostly focused on the course material and on finishing the individual lab. Next week I will start filling up the SQL database design document.
+
 
 # Week 11/10
 
@@ -81,6 +83,8 @@ Toan Lam: I finished the last Data Access Method for the edit page. Next, I will
 
 Alex Chang: This week I finalized work on the SQL design document. Next I will start working on writing a Flask app that we can use to host our site on Render.
 
+Jaekyeong Lee: I contributed to the write-up of the SQL design document for the project milestone, focusing on the details about `favorite` table. This week I will continue to finalise the document.
+
 # Week 11/17
 
 ## Individual Updates
@@ -89,4 +93,6 @@ Alex Chang: This week I finalized work on the SQL design document. Next I will s
 
 Kathryn Woessner: Wrote access methods for creating, deleting, and getting a court. Will write more access methods described in SQL Testing doc.
 
-Jonathan Hu: Last week I completed the code which initializes our database along with creating a test script to ensure the tables were storing data properly. This week, I intend to add the database to our hosting site and run tests to ensure it is accessible remotely. 
+Jonathan Hu: Last week I completed the code which initializes our database along with creating a test script to ensure the tables were storing data properly. This week, I intend to add the database to our hosting site and run tests to ensure it is accessible remotely.
+
+Jaekyeong Lee: Last week I finalised my portion of the SQL design document (`favorite` table and related functions) for the project milestone. I will start creating the frontend pages for the landing page and court listing page.
