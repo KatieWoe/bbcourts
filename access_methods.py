@@ -40,3 +40,19 @@ def getCourt(connection, courtID_get):
     connection.commit()
     connection.close()
     return court
+
+def calcAvStar(connection, courtID_calc):
+    cur = connection.cursor()
+    cur.execute('''
+    SELECT star FROM reviews WHERE courtID=?;
+    ''', (courtID_calc))
+    
+    stars_tup = cur.fetchall()
+    stars = []
+    for row in stars_tup:
+        stars.append(row[0])
+    avStar = sum(stars) / len(stars)
+    #May want to also edit courts entry to include this new value
+    connection.commit()
+    connection.close()
+    return avStar
