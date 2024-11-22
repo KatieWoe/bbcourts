@@ -56,3 +56,33 @@ def calcAvStar(connection, courtID_calc):
     connection.commit()
     connection.close()
     return avStar
+
+def editCourt(connection, courtID_edit, courtName, avStar, nets, level, clean, ada, inOut, hours, price, location):
+    cur = connection.cursor()
+    cur.execute('''
+    UPDATE courts SET courtName=?, avStar=?, nets=?, level=?, clean=?, ada=?, inOut=?, hours=?, price=?, location=? WHERE courtID=?;
+    ''', (courtName, avStar, nets, level, clean, ada, inOut, hours, price, location, courtID_edit))
+    connection.commit()
+    connection.close()
+    return
+
+def findCourts(connection, search_term):
+    cur = connection.cursor()
+    cur.execute('''
+    SELECT courtID FROM courts WHERE courtName LIKE ?;
+    ''', (search_term))
+    names_tup = cur.fetchall()
+    names = []
+    for row in names_tup:
+        names.append(row[0])
+    cur.execute('''
+    SELECT courtID FROM courts WHERE location LIKE ?;
+    ''', (search_term))
+    loc_tup = cur.fetchall()
+    locs = []
+    for row in loc_tup:
+        locs.append(row[0])
+    bothlists = list(set(names) | set(locs))
+    connection.commit()
+    connection.close()
+    return bothlists
