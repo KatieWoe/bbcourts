@@ -2,6 +2,9 @@ import psycopg2
 from random import randint
 
 def createCourt(connection, courtName, nets, level, clean, ada, inOut, hours, price, location):
+    """
+    Input the parameters into a new court, generate a new iD, and return the ID. Average star starts as null.
+    """
     cur = connection.cursor()
     cur.execute('''
     SELECT courtID FROM courts;
@@ -22,6 +25,9 @@ def createCourt(connection, courtName, nets, level, clean, ada, inOut, hours, pr
     return maybe_id
 
 def deleteCourt(connection, courtID_del):
+    """
+    Delete the court with the id given.
+    """
     cur = connection.cursor()
     cur.execute('''
     DELETE FROM courts WHERE courtID=?;
@@ -31,6 +37,9 @@ def deleteCourt(connection, courtID_del):
     return
 
 def getCourt(connection, courtID_get):
+    """
+    Select everything from the court with the given id. Returns a tupple with all elements.
+    """
     cur = connection.cursor()
     cur.execute('''
     SELECT * FROM courts WHERE courtID=?;
@@ -42,6 +51,9 @@ def getCourt(connection, courtID_get):
     return court
 
 def calcAvStar(connection, courtID_calc):
+    """
+    Get the star rating from reviews for the court given. Calculate the average and return the average.
+    """
     cur = connection.cursor()
     cur.execute('''
     SELECT star FROM reviews WHERE courtID=?;
@@ -58,6 +70,9 @@ def calcAvStar(connection, courtID_calc):
     return avStar
 
 def editCourt(connection, courtID_edit, courtName, avStar, nets, level, clean, ada, inOut, hours, price, location):
+    """
+    Edit the court with the ID given so that all the parameters are now used.
+    """
     cur = connection.cursor()
     cur.execute('''
     UPDATE courts SET courtName=?, avStar=?, nets=?, level=?, clean=?, ada=?, inOut=?, hours=?, price=?, location=? WHERE courtID=?;
@@ -67,6 +82,9 @@ def editCourt(connection, courtID_edit, courtName, avStar, nets, level, clean, a
     return
 
 def findCourts(connection, search_term):
+    """
+    Search the courts table in both the name and location atributes and return a list of IDs that pulled up matches.
+    """
     cur = connection.cursor()
     cur.execute('''
     SELECT courtID FROM courts WHERE courtName LIKE ?;
