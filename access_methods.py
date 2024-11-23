@@ -104,3 +104,26 @@ def findCourts(connection, search_term):
     connection.commit()
     connection.close()
     return bothlists
+
+def createReview(connection, userID, courtID, comment, star):
+    """
+    Create a review with a comment and a star review. Creates a random unique id. Returns that id.
+    """
+    cur = connection.cursor()
+    cur.execute('''
+    SELECT reviewID FROM reviews;
+    ''')
+    ids_tup = cur.fetchall()
+    ids = []
+    for row in ids_tup:
+        ids.append(row[0])
+    maybe_id = random.randint(10000, 99999)
+    while maybe_id in ids:
+        maybe_id = random.randint(10000, 99999)
+    
+    cur.execute('''
+    INSERT INTO reviews(?, ?, ?, ?, ?);
+    ''',(maybe_id, userID, courtID, star, comment))
+    connection.commit()
+    connection.close()
+    return maybe_id
