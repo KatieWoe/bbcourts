@@ -143,3 +143,19 @@ def getReviews(connection, courtID):
     connection.commit()
     connection.close()
     return reviews
+
+def getUserReviews(connection, userID):
+    """
+    Get the reviews made by a given user. Return a dictionary with the key being the review ids, and the values a list of the other elements.
+    """
+    cur = connection.cursor()
+    cur.execute('''
+    SELECT * FROM reviews WHERE userID=?;
+    ''', (userID))
+    rev_tup = cur.fetchall()
+    reviews = {}
+    for row in rev_tup:
+        reviews[row[0]] = [row[1], row[2], row[3], row[4]]
+    connection.commit()
+    connection.close()
+    return reviews
