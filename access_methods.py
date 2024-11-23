@@ -127,3 +127,19 @@ def createReview(connection, userID, courtID, comment, star):
     connection.commit()
     connection.close()
     return maybe_id
+
+def getReviews(connection, courtID):
+    """
+    Get the reviews or a given court. Returns a dictionary with the key being the review ids, and the values a list of the other elements.
+    """
+    cur = connection.cursor()
+    cur.execute('''
+    SELECT * FROM reviews WHERE courtID=?;
+    ''', (courtID))
+    rev_tup = cur.fetchall()
+    reviews = {}
+    for row in rev_tup:
+        reviews[row[0]] = [row[1], row[2], row[3], row[4]]
+    connection.commit()
+    connection.close()
+    return reviews
