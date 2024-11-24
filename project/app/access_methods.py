@@ -15,7 +15,7 @@ def createCourt(cursor, courtName, nets, level, clean, ada, inOut, hours, price,
     court_id = cursor.fetchone()[0]
     return court_id
 
-'''
+"""
 def createCourt(courtName, nets, level, clean, ada, inOut, hours, price, location):
     connection = psycopg2.connect(DATABASE_URL)
     try:
@@ -33,7 +33,7 @@ def createCourt(courtName, nets, level, clean, ada, inOut, hours, price, locatio
         raise e
     finally:
         connection.close()
-'''
+"""
             
 def getCourt(cursor, courtID_get):
     """
