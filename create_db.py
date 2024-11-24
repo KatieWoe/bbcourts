@@ -1,10 +1,13 @@
 import psycopg2
-from psycopg2 import sql
+from psycopg2 import OperationalError, DatabaseError
 
-def create_tables(connection):
+# Database URL
+DATABASE_URL = "postgresql://jjjohnywaffles_k8io_user:vaeBbrGmOq2g6GVR7zttI2g2bsf7Gh8f@dpg-ct1nsddumphs738rb1f0-a.oregon-postgres.render.com/jjjohnywaffles_k8io"
+
+def create_tables():
     commands = [
         """
-        CREATE TABLE courts (
+        CREATE TABLE IF NOT EXISTS courts (
             courtID SERIAL PRIMARY KEY,
             courtName VARCHAR NOT NULL,
             avStar FLOAT DEFAULT NULL,
@@ -19,14 +22,14 @@ def create_tables(connection):
         )
         """,
         """
-        CREATE TABLE users (
+        CREATE TABLE IF NOT EXISTS users (
             userID SERIAL PRIMARY KEY,
             name VARCHAR UNIQUE NOT NULL,
             password VARCHAR NOT NULL
         )
         """,
         """
-        CREATE TABLE reviews (
+        CREATE TABLE IF NOT EXISTS reviews (
             reviewID SERIAL PRIMARY KEY,
             userID INTEGER NOT NULL REFERENCES users(userID),
             courtID INTEGER NOT NULL REFERENCES courts(courtID),
@@ -35,7 +38,7 @@ def create_tables(connection):
         )
         """,
         """
-        CREATE TABLE favorites (
+        CREATE TABLE IF NOT EXISTS favorites (
             userID INTEGER NOT NULL REFERENCES users(userID),
             courtID INTEGER NOT NULL REFERENCES courts(courtID),
             review FLOAT DEFAULT NULL,
@@ -43,34 +46,28 @@ def create_tables(connection):
         )
         """,
         """
-        CREATE TABLE photos (
+        CREATE TABLE IF NOT EXISTS photos (
             photoID SERIAL PRIMARY KEY,
             courtID INTEGER NOT NULL REFERENCES courts(courtID),
             photo VARCHAR NOT NULL
         )
         """
     ]
-    
-    with connection.cursor() as cursor:
-        for command in commands:
-            cursor.execute(command)
-        connection.commit()
-        print("Tables created successfully!")
-
-# REQUIRES URL AT THIS POINT
-        
-if __name__ == "__main__":
-    DATABASE_URL = "URL REQUIRED"
-    
+    conn = None
     try:
-        # Connect to the PostgreSQL server
-        connection = psycopg2.connect(DATABASE_URL)
-        print("Connected to the database successfully!")
-        
-        # Create tables
-        create_tables(connection)
-    except Exception as e:
+        # Connect to the database
+        conn = psycopg2.connect(DATABASE_URL)
+        cur = conn.cursor()
+        # Execute each command
+        for command in commands:
+            cur.execute(command)
+        conn.commit()
+        print("Tables created successfully!")
+    except (OperationalError, DatabaseError) as e:
         print(f"Error: {e}")
     finally:
-        if connection:
-            connection.close()
+        if conn:
+            conn.close()
+
+if __name__ == "__main__":
+    create_tables()
