@@ -1,10 +1,14 @@
 import psycopg2
 import random
 
+DATABASE_URL = "postgresql://jjjohnywaffles_k8io_user:vaeBbrGmOq2g6GVR7zttI2g2bsf7Gh8f@dpg-ct1nsddumphs738rb1f0-a.oregon-postgres.render.com/jjjohnywaffles_k8io"
+
+
 def createCourt(connection, courtName, nets, level, clean, ada, inOut, hours, price, location):
     """
     Input the parameters into a new court, generate a new iD, and return the ID. Average star starts as null.
     """
+    connection = psycopg2.connect("postgresql://jjjohnywaffles_k8io_user:vaeBbrGmOq2g6GVR7zttI2g2bsf7Gh8f@dpg-ct1nsddumphs738rb1f0-a.oregon-postgres.render.com/jjjohnywaffles_k8io")
     cur = connection.cursor()
     """
     cur.execute('''
@@ -32,6 +36,7 @@ def deleteCourt(connection, courtID_del):
     """
     Delete the court with the id given.
     """
+    connection = psycopg2.connect("postgresql://jjjohnywaffles_k8io_user:vaeBbrGmOq2g6GVR7zttI2g2bsf7Gh8f@dpg-ct1nsddumphs738rb1f0-a.oregon-postgres.render.com/jjjohnywaffles_k8io")
     cur = connection.cursor()
     cur.execute('''
     DELETE FROM courts WHERE courtID=?;
@@ -44,6 +49,7 @@ def getCourt(connection, courtID_get):
     """
     Select everything from the court with the given id. Returns a tupple with all elements.
     """
+    connection = psycopg2.connect("postgresql://jjjohnywaffles_k8io_user:vaeBbrGmOq2g6GVR7zttI2g2bsf7Gh8f@dpg-ct1nsddumphs738rb1f0-a.oregon-postgres.render.com/jjjohnywaffles_k8io")
     cur = connection.cursor()
     cur.execute('''
     SELECT * FROM courts WHERE courtID=?;
@@ -58,6 +64,7 @@ def calcAvStar(connection, courtID_calc):
     """
     Get the star rating from reviews for the court given. Calculate the average and return the average.
     """
+    connection = psycopg2.connect("postgresql://jjjohnywaffles_k8io_user:vaeBbrGmOq2g6GVR7zttI2g2bsf7Gh8f@dpg-ct1nsddumphs738rb1f0-a.oregon-postgres.render.com/jjjohnywaffles_k8io")
     cur = connection.cursor()
     cur.execute('''
     SELECT star FROM reviews WHERE courtID=?;
@@ -77,6 +84,7 @@ def editCourt(connection, courtID_edit, courtName, avStar, nets, level, clean, a
     """
     Edit the court with the ID given so that all the parameters are now used.
     """
+    connection = psycopg2.connect("postgresql://jjjohnywaffles_k8io_user:vaeBbrGmOq2g6GVR7zttI2g2bsf7Gh8f@dpg-ct1nsddumphs738rb1f0-a.oregon-postgres.render.com/jjjohnywaffles_k8io")
     cur = connection.cursor()
     cur.execute('''
     UPDATE courts SET courtName=?, avStar=?, nets=?, level=?, clean=?, ada=?, inOut=?, hours=?, price=?, location=? WHERE courtID=?;
@@ -89,6 +97,7 @@ def findCourts(connection, search_term):
     """
     Search the courts table in both the name and location atributes and return a list of IDs that pulled up matches.
     """
+    connection = psycopg2.connect("postgresql://jjjohnywaffles_k8io_user:vaeBbrGmOq2g6GVR7zttI2g2bsf7Gh8f@dpg-ct1nsddumphs738rb1f0-a.oregon-postgres.render.com/jjjohnywaffles_k8io")
     cur = connection.cursor()
     cur.execute('''
     SELECT courtID FROM courts WHERE courtName LIKE ?;
@@ -113,6 +122,7 @@ def createReview(connection, userID, courtID, comment, star):
     """
     Create a review with a comment and a star review. Creates a random unique id. Returns that id.
     """
+    connection = psycopg2.connect("postgresql://jjjohnywaffles_k8io_user:vaeBbrGmOq2g6GVR7zttI2g2bsf7Gh8f@dpg-ct1nsddumphs738rb1f0-a.oregon-postgres.render.com/jjjohnywaffles_k8io")
     cur = connection.cursor()
     
     """
@@ -141,6 +151,7 @@ def getReviews(connection, courtID):
     """
     Get the reviews or a given court. Returns a dictionary with the key being the review ids, and the values a list of the other elements.
     """
+    connection = psycopg2.connect("postgresql://jjjohnywaffles_k8io_user:vaeBbrGmOq2g6GVR7zttI2g2bsf7Gh8f@dpg-ct1nsddumphs738rb1f0-a.oregon-postgres.render.com/jjjohnywaffles_k8io")
     cur = connection.cursor()
     cur.execute('''
     SELECT * FROM reviews WHERE courtID=?;
@@ -157,6 +168,7 @@ def getUserReviews(connection, userID):
     """
     Get the reviews made by a given user. Return a dictionary with the key being the review ids, and the values a list of the other elements.
     """
+    connection = psycopg2.connect("postgresql://jjjohnywaffles_k8io_user:vaeBbrGmOq2g6GVR7zttI2g2bsf7Gh8f@dpg-ct1nsddumphs738rb1f0-a.oregon-postgres.render.com/jjjohnywaffles_k8io")
     cur = connection.cursor()
     cur.execute('''
     SELECT * FROM reviews WHERE userID=?;
