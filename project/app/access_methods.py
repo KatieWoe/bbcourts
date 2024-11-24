@@ -1,11 +1,12 @@
 import psycopg2
-from random import randint
+import random
 
 def createCourt(connection, courtName, nets, level, clean, ada, inOut, hours, price, location):
     """
     Input the parameters into a new court, generate a new iD, and return the ID. Average star starts as null.
     """
     cur = connection.cursor()
+    """
     cur.execute('''
     SELECT courtID FROM courts;
     ''')
@@ -16,13 +17,16 @@ def createCourt(connection, courtName, nets, level, clean, ada, inOut, hours, pr
     maybe_id = random.randint(10000, 99999)
     while maybe_id in ids:
         maybe_id = random.randint(10000, 99999)
+    """
     
     cur.execute('''
-    INSERT INTO courts(?, ?, ?, NULL, ?, ?, ?, ?, ?, ?, ?);
-    ''', (maybe_id, courtName, nets, level, clean, ada, inOut, hours, price, location))
+    INSERT INTO courts VALUES (?, NULL, ?, ?, ?, ?, ?, ?, ?, ?) RETURNING courtID;
+    ''', (courtName, nets, level, clean, ada, inOut, hours, price, location))
+    id_of_new_row = cur.fetchone()[0]
+    
     connection.commit()
     connection.close()
-    return maybe_id
+    return id_of_new_row
 
 def deleteCourt(connection, courtID_del):
     """
@@ -110,6 +114,8 @@ def createReview(connection, userID, courtID, comment, star):
     Create a review with a comment and a star review. Creates a random unique id. Returns that id.
     """
     cur = connection.cursor()
+    
+    """
     cur.execute('''
     SELECT reviewID FROM reviews;
     ''')
@@ -120,13 +126,16 @@ def createReview(connection, userID, courtID, comment, star):
     maybe_id = random.randint(10000, 99999)
     while maybe_id in ids:
         maybe_id = random.randint(10000, 99999)
+    """
     
     cur.execute('''
-    INSERT INTO reviews(?, ?, ?, ?, ?);
-    ''',(maybe_id, userID, courtID, star, comment))
+    INSERT INTO reviews VALUES (?, ?, ?, ?) RETURNING reviewID;
+    ''',(userID, courtID, star, comment))
+    id_of_new_row = cur.fetchone()[0]
+    
     connection.commit()
     connection.close()
-    return maybe_id
+    return id_of_new_row
 
 def getReviews(connection, courtID):
     """
