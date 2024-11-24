@@ -144,7 +144,7 @@ def getUserReviews(cursor, userID):
     Get the reviews made by a given user. Return a dictionary with the key being the review ids, and the values a list of the other elements.
     """
     cursor.execute('''
-    SELECT * FROM reviews WHERE userID=?;
+    SELECT * FROM reviews WHERE userID = %s;
     ''', (userID))
     rev_tup = cur.fetchall()
     reviews = {}
