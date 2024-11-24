@@ -55,70 +55,56 @@ def deleteCourt(cursor, courtID_del):
 
 
 
-def calcAvStar(connection, courtID_calc):
+def calcAvStar(cursor, courtID_calc):
     """
     Get the star rating from reviews for the court given. Calculate the average and return the average.
     """
-    connection = psycopg2.connect("postgresql://jjjohnywaffles_k8io_user:vaeBbrGmOq2g6GVR7zttI2g2bsf7Gh8f@dpg-ct1nsddumphs738rb1f0-a.oregon-postgres.render.com/jjjohnywaffles_k8io")
-    cur = connection.cursor()
-    cur.execute('''
-    SELECT star FROM reviews WHERE courtID=?;
-    ''', (courtID_calc))
+    cursor.execute('''
+    SELECT star FROM reviews WHERE courtID = %s;
+    ''', (courtID_calc,))
     
-    stars_tup = cur.fetchall()
+    stars_tup = cursor.fetchall()
     stars = []
     for row in stars_tup:
         stars.append(row[0])
     avStar = sum(stars) / len(stars)
     #May want to also edit courts entry to include this new value
-    connection.commit()
-    connection.close()
     return avStar
 
-def editCourt(connection, courtID_edit, courtName, avStar, nets, level, clean, ada, inOut, hours, price, location):
+def editCourt(cursor, courtID_edit, courtName, avStar, nets, level, clean, ada, inOut, hours, price, location):
     """
     Edit the court with the ID given so that all the parameters are now used.
     """
-    connection = psycopg2.connect(DATABSE_URL)
-    cur = connection.cursor()
-    cur.execute('''
-    UPDATE courts SET courtName=?, avStar=?, nets=?, level=?, clean=?, ada=?, inOut=?, hours=?, price=?, location=? WHERE courtID=?;
+    cursor.execute('''
+    UPDATE courts SET courtName=%s, avStar=%s, nets=%s, level=%s, clean=%s, ada=%s, inOut=%s, hours=%s, price=%s, location=%s WHERE courtID=%s;
     ''', (courtName, avStar, nets, level, clean, ada, inOut, hours, price, location, courtID_edit))
-    connection.commit()
-    connection.close()
     return
 
-def findCourts(connection, search_term):
+def findCourts(cursor, search_term):
     """
     Search the courts table in both the name and location atributes and return a list of IDs that pulled up matches.
     """
-    connection = psycopg2.connect(DATABSE_URL)
-    cur = connection.cursor()
-    cur.execute('''
-    SELECT courtID FROM courts WHERE courtName LIKE ?;
+    cursor.execute('''
+    SELECT courtID FROM courts WHERE courtName LIKE %s;
     ''', (search_term))
-    names_tup = cur.fetchall()
+    names_tup = cursor.fetchall()
     names = []
     for row in names_tup:
         names.append(row[0])
-    cur.execute('''
-    SELECT courtID FROM courts WHERE location LIKE ?;
+    cursor.execute('''
+    SELECT courtID FROM courts WHERE location LIKE %s;
     ''', (search_term))
     loc_tup = cur.fetchall()
     locs = []
     for row in loc_tup:
         locs.append(row[0])
     bothlists = list(set(names) | set(locs))
-    connection.commit()
-    connection.close()
     return bothlists
 
-def createReview(connection, userID, courtID, comment, star):
+def createReview(cursor, userID, courtID, comment, star):
     """
     Create a review with a comment and a star review. Creates a random unique id. Returns that id.
     """
-    connection = psycopg2.connect(DATABSE_URL)
-    cur = connection.cursor()
     
     """
     cur.execute('''
@@ -133,47 +119,37 @@ def createReview(connection, userID, courtID, comment, star):
         maybe_id = random.randint(10000, 99999)
     """
     
-    cur.execute('''
-    INSERT INTO reviews VALUES (?, ?, ?, ?) RETURNING reviewID;
+    cursor.execute('''
+    INSERT INTO reviews (userID, courtID, star, comment) VALUES (%s, %s, %s, %s) RETURNING reviewID;
     ''',(userID, courtID, star, comment))
     id_of_new_row = cur.fetchone()[0]
     
-    connection.commit()
-    connection.close()
     return id_of_new_row
 
-def getReviews(connection, courtID):
+def getReviews(cursor, courtID):
     """
     Get the reviews or a given court. Returns a dictionary with the key being the review ids, and the values a list of the other elements.
     """
-    connection = psycopg2.connect(DATABSE_URL)
-    cur = connection.cursor()
-    cur.execute('''
-    SELECT * FROM reviews WHERE courtID=?;
+    cursor.execute('''
+    SELECT * FROM reviews WHERE courtID = %s;
     ''', (courtID))
     rev_tup = cur.fetchall()
     reviews = {}
     for row in rev_tup:
         reviews[row[0]] = [row[1], row[2], row[3], row[4]]
-    connection.commit()
-    connection.close()
     return reviews
 
-def getUserReviews(connection, userID):
+def getUserReviews(cursor, userID):
     """
     Get the reviews made by a given user. Return a dictionary with the key being the review ids, and the values a list of the other elements.
     """
-    connection = psycopg2.connect(DATABSE_URL)
-    cur = connection.cursor()
-    cur.execute('''
+    cursor.execute('''
     SELECT * FROM reviews WHERE userID=?;
     ''', (userID))
     rev_tup = cur.fetchall()
     reviews = {}
     for row in rev_tup:
         reviews[row[0]] = [row[1], row[2], row[3], row[4]]
-    connection.commit()
-    connection.close()
     return reviews
 
 
