@@ -218,7 +218,41 @@ if __name__ == "__main__":
             assert court_details == expected_result, f"Test failed: {court_details} != {expected_result}"
             print("getCourt test passed successfully.")
             
-            '''
+            # Testing Edit Court
+            # Call the editCourt function
+            test_court2 = {
+                "courtName": "New Court",
+                "star": 5.0,
+                "nets": 0,
+                "level": 0,
+                "clean": 0,
+                "ada": 0,
+                "inOut": 1,
+                "hours": "Always",
+                "price": "$5",
+                "location": "123 Somewher Street",
+            }
+            print("\nTesting editCourt:")
+            editCourt(cursor, court_id, test_court2["courtName"], test_court2["star"], test_court2["nets"], test_court2["level"], test_court2["clean"], test_court2["ada"], test_court2["inOut"], test_court2["hours"], test_court2["price"], test_court2["location"])
+            print(f"Court edited with ID: {court_id}")
+            
+            court_details2 = getCourt(cursor, court_id)
+            expected_result2 = (
+                court_id,
+                test_court2["courtName"],
+                test_court2["star"],  # added a star value
+                test_court2["nets"],
+                test_court2["level"],
+                test_court2["clean"],
+                test_court2["ada"],
+                test_court2["inOut"],
+                test_court2["hours"],
+                test_court2["price"],
+                test_court2["location"],
+            )
+            assert court_details2 == expected_result2, f"Test failed: {court_details2} != {expected_result2}"
+            print("editCourt test passed successfully.")
+            
             # TESTING DELETE
             # Call the deleteCourt function
             print("\nTesting deleteCourt:")
@@ -230,7 +264,7 @@ if __name__ == "__main__":
             deleted_court = cursor.fetchone()
             assert deleted_court is None, f"Test failed: Court with ID {court_id} still exists."
             print("deleteCourt test passed successfully.")
-            '''
+            
             
         connection.commit()
 
