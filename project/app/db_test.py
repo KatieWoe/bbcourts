@@ -93,7 +93,7 @@ def delete_all_data(connection):
 # REQUIRES URL :D
         
 if __name__ == "__main__":
-    DATABASE_URL = "REQUIRES URL"
+    DATABASE_URL = "postgresql://jjjohnywaffles_k8io_user:vaeBbrGmOq2g6GVR7zttI2g2bsf7Gh8f@dpg-ct1nsddumphs738rb1f0-a.oregon-postgres.render.com/jjjohnywaffles_k8io"
 
     try:
         # Connect to the PostgreSQL server
