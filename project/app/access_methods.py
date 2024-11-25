@@ -101,7 +101,7 @@ def findCourts(cursor, search_term):
     bothlists = list(set(names) | set(locs))
     return bothlists
 
-def createReview(cursor, userID, courtID, comment, star):
+def createReview(cursor, userID, courtID, star, comment):
     """
     Create a review with a comment and a star review. Creates a random unique id. Returns that id.
     """
@@ -273,6 +273,56 @@ if __name__ == "__main__":
             deleted_court = cursor.fetchone()
             assert deleted_court is None, f"Test failed: Court with ID {court_id} still exists."
             print("deleteCourt test passed successfully.")
+            
+            # TESTING REVIEWS
+            # Create 3 reviews
+            test_review_1 = {
+                "userID": 1, 
+                "courtID": 2, 
+                "star": 5.0, 
+                "review": "test review"
+            }
+            test_review_2 = {
+                "userID": 2, 
+                "courtID": 2, 
+                "star": 4.0, 
+                "review": "another test"
+            }
+            test_review_3 = {
+                "userID": 1, 
+                "courtID": 1, 
+                "star": 3.0, 
+                "review": "just meh"
+            }
+            
+            print("\nTesting createReview:")
+            review1id = createReview(cursor, test_review_1["userID"], test_review_1["courtID"], test_review_1["star"], test_review_1["review"])
+            print(f"Review created with ID: {review1id}")
+            review2id = createReview(cursor, test_review_2["userID"], test_review_2["courtID"], test_review_2["star"], test_review_2["review"])
+            print(f"Review created with ID: {review2id}")
+            review3id = createReview(cursor, test_review_3["userID"], test_review_3["courtID"], test_review_3["star"], test_review_3["review"])
+            print(f"Review created with ID: {review3id}")
+            
+            # Delete Reviews
+            print("\nTesting deleteReview:")
+            deleteReview(cursor, review1id)
+            print(f"Review with ID {review1id} deleted successfully.")
+            deleteReview(cursor, review2id)
+            print(f"Review with ID {review2id} deleted successfully.")
+            deleteReview(cursor, review3id)
+            print(f"Review with ID {review3id} deleted successfully.")
+            
+            # Verify the reviews no longer exists
+            cursor.execute("SELECT * FROM courts WHERE reviewID = %s;", (review1id,))
+            deleted_review1 = cursor.fetchone()
+            assert deleted_review1 is None, f"Test failed: Review with ID {review1id} still exists."
+            cursor.execute("SELECT * FROM courts WHERE reviewID = %s;", (review2id,))
+            deleted_review2 = cursor.fetchone()
+            assert deleted_review2 is None, f"Test failed: Review with ID {review2id} still exists."
+            cursor.execute("SELECT * FROM courts WHERE reviewID = %s;", (review3id,))
+            deleted_review3 = cursor.fetchone()
+            assert deleted_review3 is None, f"Test failed: Review with ID {review3id} still exists."
+            print("deleteReview test passed successfully.")
             
             
         connection.commit()
