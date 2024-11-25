@@ -152,6 +152,15 @@ def getUserReviews(cursor, userID):
         reviews[row[0]] = [row[1], row[2], row[3], row[4]]
     return reviews
 
+def deleteReview(cursor, reviewID_del):
+    """
+    Delete a review using the reviewID)
+    """
+    cursor.execute('''
+        DELETE FROM reviews WHERE reviewID = %s;
+    ''', (reviewID_del,))
+    return
+
 
 if __name__ == "__main__":
     """
