@@ -84,17 +84,17 @@ def findCourts(cursor, search_term):
     """
     Search the courts table in both the name and location atributes and return a list of IDs that pulled up matches.
     """
-    cursor.execute('''
-    SELECT courtID FROM courts WHERE courtName LIKE %s;
-    ''', (search_term))
+    cursor.execute(f"""
+    SELECT courtID FROM courts WHERE courtName LIKE '%{search_term}%';
+    """)
     names_tup = cursor.fetchall()
     names = []
     for row in names_tup:
         names.append(row[0])
-    cursor.execute('''
-    SELECT courtID FROM courts WHERE location LIKE %s;
-    ''', (search_term))
-    loc_tup = cur.fetchall()
+    cursor.execute(f"""
+    SELECT courtID FROM courts WHERE location LIKE '%{search_term}%';
+    """)
+    loc_tup = cursor.fetchall()
     locs = []
     for row in loc_tup:
         locs.append(row[0])
@@ -282,7 +282,7 @@ if __name__ == "__main__":
                 "inOut": 1,
                 "hours": "Always",
                 "price": "$5",
-                "location": "123 Somewher Street",
+                "location": "123 Somewhere Street",
             }
             print("\nTesting editCourt:")
             editCourt(cursor, court_id, test_court2["courtName"], test_court2["star"], test_court2["nets"], test_court2["level"], test_court2["clean"], test_court2["ada"], test_court2["inOut"], test_court2["hours"], test_court2["price"], test_court2["location"])
@@ -305,6 +305,11 @@ if __name__ == "__main__":
             assert court_details2 == expected_result2, f"Test failed: {court_details2} != {expected_result2}"
             print("editCourt test passed successfully.")
             
+            # Testing Search
+            print("\nTesting findCourts:")
+            search_results = findCourts(cursor, "Somewhere")
+            assert court_id in search_results, f"Test failed: {court_id} not in {search_results}"
+            print("findCourts passed successfully")
             
             
             # TESTING REVIEWS
