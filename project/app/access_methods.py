@@ -161,6 +161,49 @@ def deleteReview(cursor, reviewID_del):
     ''', (reviewID_del,))
     return
 
+# CreateUser Method
+def createUser(cursor, name, password):
+    """
+    Inserts a new user into the database.
+    Returns the userID of the created user.
+    """
+    try:
+        cursor.execute('''
+            INSERT INTO users (name, password)
+            VALUES (%s, %s)
+            RETURNING userID;
+        ''', (name, password))
+        user_id = cursor.fetchone()[0]
+        return user_id
+    except psycopg2.IntegrityError as e:
+        raise ValueError(f"User with name '{name}' already exists.") from e
+
+# Checks to see User
+def checkUser(cursor, name, password):
+    """
+    Checks if a user exists with the given name and password.
+    Returns the userID if the user exists, otherwise None.
+    """
+    cursor.execute('''
+        SELECT userID FROM users
+        WHERE name = %s AND password = %s;
+    ''', (name, password))
+    result = cursor.fetchone()
+    return result[0] if result else None       
+
+# Adding Photo
+def addPhoto(cursor, courtID, photo_path):
+    """
+    Adds a photo to the photos table for a specific court.
+    Returns the photoID of the newly added photo.
+    """
+    cursor.execute('''
+        INSERT INTO photos (courtID, photo)
+        VALUES (%s, %s)
+        RETURNING photoID;
+    ''', (courtID, photo_path))
+    photo_id = cursor.fetchone()[0]
+    return photo_id
 
 if __name__ == "__main__":
     """
