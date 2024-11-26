@@ -145,7 +145,7 @@ def getUserReviews(cursor, userID):
     """
     cursor.execute('''
     SELECT * FROM reviews WHERE userID = %s;
-    ''', (userID))
+    ''', (userID,))
     rev_tup = cursor.fetchall()
     reviews = {}
     for row in rev_tup:
@@ -335,17 +335,23 @@ if __name__ == "__main__":
             print(f"Review created with ID: {review2id}")
             print("createReview passed successfully")
             
-            #Testing Average Star
+            # Testing Average Star
             print("\nTesting calcAvStar:")
             test_average = calcAvStar(cursor, court_id)
             assert test_average == 4.5, f"Test failed: {test_average} != 4.5"
             print("calcAvStar passed successfully")
             
-            #Testing Get Review
+            # Testing Get Review
             print("\nTesting getReviews:")
             court_reviews = getReviews(cursor, court_id)
             assert court_reviews[review1id] == [test_review_1["userID"], test_review_1["courtID"], test_review_1["star"], test_review_1["review"]], f"Test failed: Review {review1id} wrong"
             print("getReviews passed successfully")
+            
+            # Testing Get Users Review
+            print("\nTesting getUserReviews:")
+            court_reviews = getUserReviews(cursor, 11)
+            assert court_reviews[review2id] == [test_review_2["userID"], test_review_2["courtID"], test_review_2["star"], test_review_2["review"]], f"Test failed: Review {review2id} wrong"
+            print("getUserReviews passed successfully")
             
             # Delete Reviews
             print("\nTesting deleteReview:")
