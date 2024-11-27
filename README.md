@@ -18,6 +18,18 @@
 
 ### Weekly Team Meeting: Sundays, 12PM, MST
 
+### Links
+- [Weekly Status](research/docs/WEEKLY_STATUS.md)
+- [Page Testing](research/docs/PAGE_TESTING.md)
+- [SQL Testing](research/docs/SQL_TESTING.md)
+- Final Report
+- Presentation Files
+- Demo Video
+- [Source Code](project/app)
+- Test cases
+- Source Documentation
+- Public Deployment
+
 ## Vision Statement
 Our vision is to create a comprehensive and user-driven platform where basketball enthusiasts can find and share detailed information about the best courts in their area. Whether you’re looking for a clean and accessible court, or simply the court which is closest to your location, **[CourtFinder](https://github.com/KatieWoe/bbcourts)** will be able to provide everything you need to make an informed decision for your next hoop session.
 

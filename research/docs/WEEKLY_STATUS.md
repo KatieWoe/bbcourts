@@ -98,3 +98,11 @@ Jonathan Hu: Last week I completed the code which initializes our database along
 Jaekyeong Lee: Last week I finalised my portion of the SQL design document (`favorite` table and related functions) for the project milestone. I will start creating the frontend pages for the landing page and court listing page.
 
 Alex Chang: This week I will continue focusing on implementing the backend of the app, starting with a Flask app to handle the routes for displaying pages and some of the basic access methods to the database.
+
+# Week 11/24
+
+## Individual Updates
+
+![image](./Trello_Board/week11-24.png)
+
+Kathryn Woessner: Wrote access methods and began writing tests. Will finish writing methods, tests, and debuging methods.
