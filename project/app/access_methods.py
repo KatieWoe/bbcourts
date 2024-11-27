@@ -189,7 +189,35 @@ def checkUser(cursor, name, password):
         WHERE name = %s AND password = %s;
     ''', (name, password))
     result = cursor.fetchone()
-    return result[0] if result else None       
+    return result[0] if result else None      
+
+def createUserFavorite(cursor, userID, courtID):
+    """
+    Create a Favorite entry for the court belonging to the user. If the user has reviewed it, it records the star value. No return.
+    """
+    reviews = getUserReviews(cursor, userID)
+    reviews_by_court = {}
+    for key in reviews:
+        reviews_by_court[reviews[key][2]] = reviews[key][3]
+    if courtID in reviews:
+        cursor.execute('''
+        INSERT INTO favorites (userID, courtID, review) VALUES (%s, %s, %s)
+        ''', (userID, courtID, reviews_by_court[courtID]))
+    else:
+        cursor.execute('''
+        INSERT INTO favorites (userID, courtID) VALUES (%s, %s)
+        ''', (userID, courtID))
+    return
+
+def editUserFavorite(cursor, userID, courtID, star):
+    """
+    Edit a users favorite entry to include a star value if they reviewed after favoriting.
+    """
+    cursor.execute('''
+    UPDATE favorites SET review=%s WHERE courtID=%s AND userID=%s;
+    ''', (star, courtID, userID))
+    return
+    
 
 # Adding Photo
 def addPhoto(cursor, courtID, photo_path):
