@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <script src="https://cdn.tailwindcss.com"></script>
+        <script>
+            tailwind.config = {
+                theme: {
+                    extend: {
+                        colors: {
+                            //clifford: '#da373d',
+                        }
+                    }
+                }
+            }
+          </script>
+        <title>Title</title>
+    </head>
+    <body>
+        
+        <nav class="flex items-center justify-between flex-wrap bg-orange-700 p-6">
+    <!-- Logo -->
+    <div class="flex items-center flex-shrink-0 text-white mr-6">
+        <span class="font-semibold text-xl tracking-tight">CourtFinder</span>
+    </div>
+    
+    <!-- Mobile menu button -->
+    <div class="block lg:hidden">
+        <button class="flex items-center px-3 py-2 border rounded text-orange-400 border-orange-200 hover:text-white hover:border-white">
+            <svg class="fill-current h-3 w-3" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                <title>Menu</title>
+                <path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z" />
+            </svg>
+        </button>
+    </div>
+    
+    <!-- Navigation items and search bar -->
+    <div class="w-full flex-grow lg:flex lg:items-center lg:justify-between">
+        <!-- Left Navigation Links -->
+        <div class="text-sm lg:flex lg:items-center">
+            <a href="#responsive-header" class="block mt-4 lg:inline-block lg:mt-0 text-orange-400 hover:text-white mr-4">
+                About
+            </a>
+        </div>
+        
+        <!-- Centered Search Form -->
+        <div class="flex justify-center w-full lg:w-auto">
+            <form class="flex items-center border-b border-white py-2">
+                <input class="appearance-none bg-transparent border-none w-full text-white mr-3 py-1 px- leading-tight focus:outline-none" 
+                    type="text" placeholder="City, area, postcode" aria-label="Search">
+                <button class="flex-shrink-0 bg-orange-500 hover:bg-orange-700 border-orange-500 hover:border-orange-700 text-sm border-4 text-white py-1 px-2 rounded" 
+                    type="button">
+                    Search
+                </button>
+            </form>
+        </div>
+        
+        <!-- Right Navigation Links -->
+        <div class="flex justify-end">
+            <a href="#" class="inline-block text-sm px-4 py-2 leading-none border rounded text-white border-white hover:border-transparent hover:text-white hover:bg-orange-700 mt-4 lg:mt-0">
+                My account
+            </a>
+        </div>
+    </div>
+</nav>
+
+        
+        <div>
+            
+
+<!--
+  This example requires some changes to your config:
+  
+  ```
+  // tailwind.config.js
+  module.exports = {
+    // ...
+    theme: {
+      extend: {
+        gridTemplateRows: {
+          '[auto,auto,1fr]': 'auto auto 1fr',
+        },
+      },
+    },
+  }
+  ```
+-->
+<div class="bg-white">
+    <div class="pt-6">
+      <nav aria-label="Breadcrumb">
+        <ol role="list" class="flex items-center max-w-2xl px-4 mx-auto space-x-2 sm:px-6 lg:max-w-7xl lg:px-8">
+          <li>
+            <div class="flex items-center">
+              <a href="#" class="mr-2 text-sm font-medium text-gray-900">Home</a>
+              <svg width="16" height="20" viewBox="0 0 16 20" fill="currentColor" aria-hidden="true" class="w-4 h-5 text-gray-300">
+                <path d="M5.697 4.34L8.98 16.532h1.327L7.025 4.341H5.697z" />
+              </svg>
+            </div>
+          </li>
+          <li>
+            <div class="flex items-center">
+              <a href="#" class="mr-2 text-sm font-medium text-gray-900">Courts</a>
+              <svg width="16" height="20" viewBox="0 0 16 20" fill="currentColor" aria-hidden="true" class="w-4 h-5 text-gray-300">
+                <path d="M5.697 4.34L8.98 16.532h1.327L7.025 4.341H5.697z" />
+              </svg>
+            </div>
+          </li>
+  
+          <li class="text-sm">
+            <a href="#" aria-current="page" class="font-medium text-gray-500 hover:text-gray-600">Courts Details</a>
+          </li>
+        </ol>
+      </nav>
+  
+      <!-- Image gallery -->
+      <div class="max-w-2xl mx-auto mt-6 sm:px-6 lg:grid lg:max-w-7xl lg:grid-cols-3 lg:gap-x-8 lg:px-8">
+        <img src="https://images.unsplash.com/photo-1654398705562-d126e941ad74?q=80&w=1827&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Two each of gray, white, and black shirts laying flat." class="hidden aspect-[3/4] size-full rounded-lg object-cover lg:block">
+        <div class="hidden lg:grid lg:grid-cols-1 lg:gap-y-8">
+          <img src="https://plus.unsplash.com/premium_photo-1685366445883-709973744248?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Model wearing plain black basic tee." class="aspect-[3/2] size-full rounded-lg object-cover">
+          <img src="https://images.unsplash.com/photo-1600102784284-d20ee72e533c?q=80&w=1740&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Model wearing plain gray basic tee." class="aspect-[3/2] size-full rounded-lg object-cover">
+        </div>
+        <img src="https://images.unsplash.com/photo-1559692048-79a3f837883d?q=80&w=1935&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Model wearing plain white basic tee." class="aspect-[4/5] size-full object-cover sm:rounded-lg lg:aspect-[3/4]">
+      </div>
+  
+      <!-- Product info -->
+      <div class="mx-auto max-w-2xl px-4 pb-16 pt-10 sm:px-6 lg:grid lg:max-w-7xl lg:grid-cols-3 lg:grid-rows-[auto,auto,1fr] lg:gap-x-8 lg:px-8 lg:pb-24 lg:pt-16">
+        <div class="lg:col-span-2 lg:border-r lg:border-gray-200 lg:pr-8">
+          <h1 class="text-2xl font-bold tracking-tight text-gray-900 sm:text-3xl">Liberty Young</h1>
+        </div>
+  
+        <!-- Options -->
+        <div class="mt-4 lg:row-span-3 lg:mt-0">
+          <h2 class="sr-only">Court Information</h2>
+  
+          <!-- Reviews -->
+          <div class="mt-6">
+            <h3 class="bg-orange-500 sr-only">Reviews</h3>
+            <div class="flex items-center">
+              <div class="flex items-center">
+                <!-- Active: "text-gray-900", Default: "text-gray-200" -->
+                <svg class="text-gray-900 size-5 shrink-0" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" data-slot="icon">
+                  <path fill-rule="evenodd" d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401Z" clip-rule="evenodd" />
+                </svg>
+                <svg class="text-gray-900 size-5 shrink-0" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" data-slot="icon">
+                  <path fill-rule="evenodd" d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401Z" clip-rule="evenodd" />
+                </svg>
+                <svg class="text-gray-900 size-5 shrink-0" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" data-slot="icon">
+                  <path fill-rule="evenodd" d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401Z" clip-rule="evenodd" />
+                </svg>
+                <svg class="text-gray-900 size-5 shrink-0" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" data-slot="icon">
+                  <path fill-rule="evenodd" d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401Z" clip-rule="evenodd" />
+                </svg>
+                <svg class="text-gray-200 size-5 shrink-0" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" data-slot="icon">
+                  <path fill-rule="evenodd" d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401Z" clip-rule="evenodd" />
+                </svg>
+              </div>
+              <p class="sr-only">4 out of 5 stars</p>
+              <a href="#" class="ml-3 text-sm font-medium text-indigo-600 hover:text-indigo-500">117 reviews</a>
+            </div>
+          </div>
+  
+          <form class="mt-10">
+            
+  
+            <!-- Sizes -->
+            <!-- Court Options -->
+            <div class="mt-10">
+              <div class="flex items-center justify-between">
+                <h3 class="text-sm font-medium text-gray-900">Court Features</h3>
+              </div>
+            
+              <div class="grid grid-cols-2 gap-4 mt-4">
+                <!-- Feature: ADA Accessible -->
+                <div class="flex items-center text-sm text-gray-900">
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="m21 7.5-9-5.25L3 7.5m18 0-9 5.25m9-5.25v9l-9 5.25M3 7.5l9 5.25M3 7.5v9l9 5.25m0-9v9" />
+                  </svg>
+                  
+                  <span class="ml-2">Asphalt</span>
+                </div>
+                
+                <!-- Feature: Lighted Court -->
+                <div class="flex items-center text-sm text-gray-900">
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 18v-5.25m0 0a6.01 6.01 0 0 0 1.5-.189m-1.5.189a6.01 6.01 0 0 1-1.5-.189m3.75 7.478a12.06 12.06 0 0 1-4.5 0m3.75 2.383a14.406 14.406 0 0 1-3 0M14.25 18v-.192c0-.983.658-1.823 1.508-2.316a7.5 7.5 0 1 0-7.517 0c.85.493 1.509 1.333 1.509 2.316V18" />
+                  </svg>
+                  
+                  <span class="ml-2">Lighted</span>
+                </div>
+            
+                <!-- Feature: Free -->
+                <div class="flex items-center text-sm text-gray-900">
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M6.633 10.25c.806 0 1.533-.446 2.031-1.08a9.041 9.041 0 0 1 2.861-2.4c.723-.384 1.35-.956 1.653-1.715a4.498 4.498 0 0 0 .322-1.672V2.75a.75.75 0 0 1 .75-.75 2.25 2.25 0 0 1 2.25 2.25c0 1.152-.26 2.243-.723 3.218-.266.558.107 1.282.725 1.282m0 0h3.126c1.026 0 1.945.694 2.054 1.715.045.422.068.85.068 1.285a11.95 11.95 0 0 1-2.649 7.521c-.388.482-.987.729-1.605.729H13.48c-.483 0-.964-.078-1.423-.23l-3.114-1.04a4.501 4.501 0 0 0-1.423-.23H5.904m10.598-9.75H14.25M5.904 18.5c.083.205.173.405.27.602.197.4-.078.898-.523.898h-.908c-.889 0-1.713-.518-1.972-1.368a12 12 0 0 1-.521-3.507c0-1.553.295-3.036.831-4.398C3.387 9.953 4.167 9.5 5 9.5h1.053c.472 0 .745.556.5.96a8.958 8.958 0 0 0-1.302 4.665c0 1.194.232 2.333.654 3.375Z" />
+                  </svg>
+                  
+                  
+                  <span class="ml-2">Free to Use</span>
+                </div>
+            
+                <!-- Feature: Weather -->
+                <div class="flex items-center text-sm text-gray-900">
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v2.25m6.364.386-1.591 1.591M21 12h-2.25m-.386 6.364-1.591-1.591M12 18.75V21m-4.773-4.227-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0Z" />
+                  </svg>
+                  
+                  <span class="ml-2">Current Weather: Sunny</span>
+                </div>
+              </div>
+            </div>
+            
+
+  
+            <button type="submit" class="flex items-center justify-center w-full px-8 py-3 mt-10 text-base font-medium text-white bg-orange-600 border border-transparent rounded-md hover:bg-orange-700 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2">Review</button>
+          </form>
+        </div>
+
+        
+  
+        <div class="py-10 lg:col-span-2 lg:col-start-1 lg:border-r lg:border-gray-200 lg:pb-16 lg:pr-8 lg:pt-6">
+          <!-- Description and details -->
+          <div>
+            <h3 class="sr-only">Description</h3>
+  
+            <div class="space-y-6">
+              <p class="text-base text-gray-900">Liberty Young Park is a vibrant community hub known for its well-maintained basketball courts and family-friendly amenities. Nestled in a peaceful neighborhood, the park boasts two full-sized outdoor courts with freshly painted lines and sturdy hoops. The courts are surrounded by tall trees, providing shade for players and spectators alike.</p>
+              <p class="text-base text-gray-900">The courts are equipped with adjustable hoops, perfect for players of all ages and skill levels. The smooth surface offers a great playing experience with minimal cracks or wear.</p>
+              <p class="text-base text-gray-900">In addition to basketball, Liberty Young Park features picnic tables, a playground, and walking paths, making it an ideal spot for a full day of recreation. Liberty Young Park has something for everyone, whether you're here for a quick pickup game, a casual shootaround, or to unwind in the serene setting.</p>
+            </div>
+          </div>
+  
+          <div class="mt-10">
+            <h3 class="text-sm font-medium text-gray-900">Highlights</h3>
+  
+            <div class="mt-4">
+              <ul role="list" class="pl-4 space-y-2 text-sm list-disc">
+                <li class="text-gray-400"><span class="text-gray-600">Courts are cleaned and maintained weekly</span></li>
+                <li class="text-gray-400"><span class="text-gray-600">Surrounded by lush greenery for a serene experience</span></li>
+                <li class="text-gray-400"><span class="text-gray-600">Equipped with high-quality, durable hoops and nets</span></li>
+                <li class="text-gray-400"><span class="text-gray-600">Paved with smooth, crack-free surfaces for optimal gameplay</span></li>
+              </ul>
+            </div>
+            
+          </div>
+  
+          
+        </div>
+      </div>
+
+      <div class="bg-white">
+        <div class="max-w-2xl px-4 py-16 mx-auto sm:px-6 sm:py-24 lg:grid lg:max-w-7xl lg:grid-cols-12 lg:gap-x-8 lg:px-8 lg:py-32">
+          <div class="lg:col-span-4">
+            <h2 class="text-2xl font-bold tracking-tight text-gray-900">Baller Reviews</h2>
+      
+            <div class="flex items-center mt-3">
+              <div>
+                <div class="flex items-center">
+                  <!-- Active: "text-yellow-400", Default: "text-gray-300" -->
+                  <svg class="text-yellow-400 size-5 shrink-0" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" data-slot="icon">
+                    <path fill-rule="evenodd" d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401Z" clip-rule="evenodd" />
+                  </svg>
+                  <svg class="text-yellow-400 size-5 shrink-0" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" data-slot="icon">
+                    <path fill-rule="evenodd" d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401Z" clip-rule="evenodd" />
+                  </svg>
+                  <svg class="text-yellow-400 size-5 shrink-0" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" data-slot="icon">
+                    <path fill-rule="evenodd" d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401Z" clip-rule="evenodd" />
+                  </svg>
+                  <svg class="text-yellow-400 size-5 shrink-0" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" data-slot="icon">
+                    <path fill-rule="evenodd" d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401Z" clip-rule="evenodd" />
+                  </svg>
+                  <svg class="text-gray-300 size-5 shrink-0" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" data-slot="icon">
+                    <path fill-rule="evenodd" d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401Z" clip-rule="evenodd" />
+                  </svg>
+                </div>
+                <p class="sr-only">4 out of 5 stars</p>
+              </div>
+              <p class="ml-2 text-sm text-gray-900">Based on 1624 reviews</p>
+            </div>
+      
+            <div class="mt-6">
+              <h3 class="sr-only">Review data</h3>
+      
+              <dl class="space-y-3">
+                <div class="flex items-center text-sm">
+                  <dt class="flex items-center flex-1">
+                    <p class="w-3 font-medium text-gray-900">5<span class="sr-only"> star reviews</span></p>
+                    <div aria-hidden="true" class="flex items-center flex-1 ml-1">
+                      <svg class="text-yellow-400 size-5 shrink-0" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" data-slot="icon">
+                        <path fill-rule="evenodd" d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401Z" clip-rule="evenodd" />
+                      </svg>
+      
+                      <div class="relative flex-1 ml-3">
+                        <div class="h-3 bg-gray-100 border border-gray-200 rounded-full"></div>
+                        <div style="width: calc(1019 / 1624 * 100%)" class="absolute inset-y-0 bg-yellow-400 border border-yellow-400 rounded-full"></div>
+                      </div>
+                    </div>
+                  </dt>
+                  <dd class="w-10 ml-3 text-sm text-right text-gray-900 tabular-nums">63%</dd>
+                </div>
+                <div class="flex items-center text-sm">
+                  <dt class="flex items-center flex-1">
+                    <p class="w-3 font-medium text-gray-900">4<span class="sr-only"> star reviews</span></p>
+                    <div aria-hidden="true" class="flex items-center flex-1 ml-1">
+                      <svg class="text-yellow-400 size-5 shrink-0" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" data-slot="icon">
+                        <path fill-rule="evenodd" d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401Z" clip-rule="evenodd" />
+                      </svg>
+      
+                      <div class="relative flex-1 ml-3">
+                        <div class="h-3 bg-gray-100 border border-gray-200 rounded-full"></div>
+                        <div style="width: calc(162 / 1624 * 100%)" class="absolute inset-y-0 bg-yellow-400 border border-yellow-400 rounded-full"></div>
+                      </div>
+                    </div>
+                  </dt>
+                  <dd class="w-10 ml-3 text-sm text-right text-gray-900 tabular-nums">10%</dd>
+                </div>
+                <div class="flex items-center text-sm">
+                  <dt class="flex items-center flex-1">
+                    <p class="w-3 font-medium text-gray-900">3<span class="sr-only"> star reviews</span></p>
+                    <div aria-hidden="true" class="flex items-center flex-1 ml-1">
+                      <svg class="text-yellow-400 size-5 shrink-0" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" data-slot="icon">
+                        <path fill-rule="evenodd" d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401Z" clip-rule="evenodd" />
+                      </svg>
+      
+                      <div class="relative flex-1 ml-3">
+                        <div class="h-3 bg-gray-100 border border-gray-200 rounded-full"></div>
+                        <div style="width: calc(97 / 1624 * 100%)" class="absolute inset-y-0 bg-yellow-400 border border-yellow-400 rounded-full"></div>
+                      </div>
+                    </div>
+                  </dt>
+                  <dd class="w-10 ml-3 text-sm text-right text-gray-900 tabular-nums">6%</dd>
+                </div>
+                <div class="flex items-center text-sm">
+                  <dt class="flex items-center flex-1">
+                    <p class="w-3 font-medium text-gray-900">2<span class="sr-only"> star reviews</span></p>
+                    <div aria-hidden="true" class="flex items-center flex-1 ml-1">
+                      <svg class="text-yellow-400 size-5 shrink-0" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" data-slot="icon">
+                        <path fill-rule="evenodd" d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401Z" clip-rule="evenodd" />
+                      </svg>
+      
+                      <div class="relative flex-1 ml-3">
+                        <div class="h-3 bg-gray-100 border border-gray-200 rounded-full"></div>
+                        <div style="width: calc(199 / 1624 * 100%)" class="absolute inset-y-0 bg-yellow-400 border border-yellow-400 rounded-full"></div>
+                      </div>
+                    </div>
+                  </dt>
+                  <dd class="w-10 ml-3 text-sm text-right text-gray-900 tabular-nums">12%</dd>
+                </div>
+                <div class="flex items-center text-sm">
+                  <dt class="flex items-center flex-1">
+                    <p class="w-3 font-medium text-gray-900">1<span class="sr-only"> star reviews</span></p>
+                    <div aria-hidden="true" class="flex items-center flex-1 ml-1">
+                      <svg class="text-yellow-400 size-5 shrink-0" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" data-slot="icon">
+                        <path fill-rule="evenodd" d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401Z" clip-rule="evenodd" />
+                      </svg>
+      
+                      <div class="relative flex-1 ml-3">
+                        <div class="h-3 bg-gray-100 border border-gray-200 rounded-full"></div>
+                        <div style="width: calc(147 / 1624 * 100%)" class="absolute inset-y-0 bg-yellow-400 border border-yellow-400 rounded-full"></div>
+                      </div>
+                    </div>
+                  </dt>
+                  <dd class="w-10 ml-3 text-sm text-right text-gray-900 tabular-nums">9%</dd>
+                </div>
+              </dl>
+            </div>
+      
+            <div class="mt-10">
+              <h3 class="text-lg font-medium text-gray-900">Share your thoughts</h3>
+              <p class="mt-1 text-sm text-gray-600">If you’ve been here before, tell the others players all about it.</p>
+      
+              <a href="#" class="inline-flex items-center justify-center w-full px-8 py-2 mt-6 text-sm font-medium text-gray-900 bg-white border border-gray-300 rounded-md hover:bg-gray-50 sm:w-auto lg:w-full">Write a review</a>
+            </div>
+          </div>
+      
+          <div class="mt-16 lg:col-span-7 lg:col-start-6 lg:mt-0">
+            <h3 class="sr-only">Recent reviews</h3>
+      
+            <div class="flow-root">
+              <div class="-my-12 divide-y divide-gray-200">
+                <div class="py-12">
+                  <div class="flex items-center">
+                    <img src="https://images.unsplash.com/photo-1502685104226-ee32379fefbe?ixlib=rb-=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=8&w=256&h=256&q=80" alt="Emily Selman." class="rounded-full size-12">
+                    <div class="ml-4">
+                      <h4 class="text-sm font-bold text-gray-900">Emily Selman</h4>
+                      <div class="flex items-center mt-1">
+                        <!-- Active: "text-yellow-400", Default: "text-gray-300" -->
+                        <svg class="text-yellow-400 size-5 shrink-0" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" data-slot="icon">
+                          <path fill-rule="evenodd" d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401Z" clip-rule="evenodd" />
+                        </svg>
+                        <svg class="text-yellow-400 size-5 shrink-0" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" data-slot="icon">
+                          <path fill-rule="evenodd" d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401Z" clip-rule="evenodd" />
+                        </svg>
+                        <svg class="text-yellow-400 size-5 shrink-0" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" data-slot="icon">
+                          <path fill-rule="evenodd" d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401Z" clip-rule="evenodd" />
+                        </svg>
+                        <svg class="text-yellow-400 size-5 shrink-0" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" data-slot="icon">
+                          <path fill-rule="evenodd" d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401Z" clip-rule="evenodd" />
+                        </svg>
+                        <svg class="text-yellow-400 size-5 shrink-0" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" data-slot="icon">
+                          <path fill-rule="evenodd" d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401Z" clip-rule="evenodd" />
+                        </svg>
+                      </div>
+                      <p class="sr-only">5 out of 5 stars</p>
+                    </div>
+                  </div>
+      
+                  <div class="mt-4 space-y-6 text-base italic text-gray-600">
+                    <p>Liberty Young Park offers a fantastic basketball experience with well-maintained courts. The full-sized, outdoor courts have clean, sturdy nets and a smooth surface for games. It’s great for casual pick-up games or more competitive play, with plenty of space. The park is peaceful, shaded, and even has ADA access, making it accessible to everyone. Highly recommend for a quick game or a fun afternoon!</p>
+                  </div>
+                </div>
+      
+                <!-- More reviews... -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+    </div>
+
+
+    
+  </div>
+  
+
+
+        </div>
+    </body>
+</html>
