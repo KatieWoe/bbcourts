@@ -196,18 +196,33 @@ def createUserFavorite(cursor, userID, courtID):
     Create a Favorite entry for the court belonging to the user. If the user has reviewed it, it records the star value. No return.
     """
     reviews = getUserReviews(cursor, userID)
-    reviews_by_court = {}
+    review_for_court = None
     for key in reviews:
-        reviews_by_court[reviews[key][2]] = reviews[key][3]
-    if courtID in reviews:
+        if reviews[key][2] != None:
+            review_for_court = reviews[key][2]
+    if review_for_court != None:
         cursor.execute('''
         INSERT INTO favorites (userID, courtID, review) VALUES (%s, %s, %s)
-        ''', (userID, courtID, reviews_by_court[courtID]))
+        ''', (userID, courtID, review_for_court))
     else:
         cursor.execute('''
         INSERT INTO favorites (userID, courtID) VALUES (%s, %s)
         ''', (userID, courtID))
     return
+
+def getUserFavorites(cursor, userID):
+    """
+    Get the users favorites based on id. Return as dictionary with key as courtID and star as the value.
+    """
+    cursor.execute('''
+    SELECT * FROM favorites WHERE userID = %s;
+    ''', (userID,))
+    fav_tup = cursor.fetchall()
+    favorites = {}
+    for row in fav_tup:
+        favorites[row[1]] = row[2]
+    return favorites
+    
 
 def editUserFavorite(cursor, userID, courtID, star):
     """
@@ -445,12 +460,21 @@ if __name__ == "__main__":
             assert court_reviews[review2id] == [test_review_2["userID"], test_review_2["courtID"], test_review_2["star"], test_review_2["review"]], f"Test failed: Review {review2id} wrong"
             print("getUserReviews passed successfully")
             
+            #Test Create and Get Favorites
+            print("\nTesting createUserFavorite:")
+            createUserFavorite(cursor, 9, court_id)
+            print("User Favorite Created")
+            userFave = getUserFavorites(cursor, 9)
+            assert userFave[court_id] == 5.0, f"Test failed: User Favorite for User9 and {court_id} is {userFave[court_id]} instead of 5.0"
+            print("create and get UserFavorite passed successfully")
+            
             # Delete Reviews
             print("\nTesting deleteReview:")
             deleteReview(cursor, review1id)
             print(f"Review with ID {review1id} deleted successfully.")
             deleteReview(cursor, review2id)
             print(f"Review with ID {review2id} deleted successfully.")
+            
             
             # Verify the reviews no longer exists
             cursor.execute("SELECT * FROM reviews WHERE reviewID = %s;", (review1id,))
@@ -460,6 +484,28 @@ if __name__ == "__main__":
             deleted_review2 = cursor.fetchone()
             assert deleted_review2 is None, f"Test failed: Review with ID {review2id} still exists."
             print("deleteReview test passed successfully.")
+            
+            
+            # Test no star favorite get
+            print("\nTesting getUserFavorite with no star:")
+            createUserFavorite(cursor, 12, court_id)
+            print("User Favorite Created No Star")
+            userFave2 = getUserFavorites(cursor, 12)
+            assert userFave2[court_id] == None, f"Test failed: User Favorite for User12 and {court_id} is {userFave2[court_id]} instead of None"
+            print("getUserFavorites passes with null star")
+            
+            # Test Delete Favorite
+            print("\nTesting deleteUserFavorite:")
+            deleteUserFavorite(cursor, 9, court_id)
+            print("Favorite Deleted Successfully")
+            cursor.execute("SELECT * FROM favorites WHERE userID = 9 AND courtID = %s;", (court_id,))
+            deleted_fave = cursor.fetchone()
+            assert deleted_fave is None, "Test failed: Favorite still exists."
+            deleteUserFavorite(cursor, 12, court_id)
+            print("Favorite Deleted Successfully")
+            cursor.execute("SELECT * FROM favorites WHERE userID = 12 AND courtID = %s;", (court_id,))
+            deleted_fave2 = cursor.fetchone()
+            assert deleted_fave2 is None, "Test failed: Favorite still exists."
             
             
             # TESTING DELETE Court
