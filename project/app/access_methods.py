@@ -242,6 +242,61 @@ def addPhoto(cursor, courtID, photo_path):
     photo_id = cursor.fetchone()[0]
     return photo_id
 
+# Getting a Specific User
+def getUser(cursor, userID):
+    """
+    Retrieves a user by their userID.
+    Returns a tuple containing the user's details (userID, name, password).
+    """
+    cursor.execute('''
+        SELECT * FROM users
+        WHERE userID = %s;
+    ''', (userID,))
+    user = cursor.fetchone()
+    return user
+
+# Getting photo
+def getPhotos(cursor, courtID=None):
+    """
+    Retrieves photos.
+    If courtID is provided, retrieves photos for that court.
+    Otherwise, retrieves all photos in the database.
+    Returns a list of tuples containing photoID and photo paths.
+    """
+    if courtID:
+        cursor.execute('''
+            SELECT photoID, photo FROM photos
+            WHERE courtID = %s;
+        ''', (courtID,))
+    else:
+        cursor.execute('''
+            SELECT photoID, photo FROM photos;
+        ''')
+    photos = cursor.fetchall()
+    return photos
+
+# Deleting User
+def deleteUser(cursor, userID):
+    """
+    Deletes a user by their userID.
+    """
+    cursor.execute('''
+        DELETE FROM users
+        WHERE userID = %s;
+    ''', (userID,))
+    print(f"User with ID {userID} deleted successfully.")
+
+# Deleting Photo
+def deletePhoto(cursor, photoID):
+    """
+    Deletes a photo by its photoID.
+    """
+    cursor.execute('''
+        DELETE FROM photos
+        WHERE photoID = %s;
+    ''', (photoID,))
+    print(f"Photo with ID {photoID} deleted successfully.")
+
 if __name__ == "__main__":
     """
     Main function to test functions.
