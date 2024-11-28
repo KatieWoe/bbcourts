@@ -15,6 +15,10 @@ def index():
 def about():
     return render_template('about.html')
 
+@app.route('/listing')
+def listing():
+    return render_template('listing.html')
+
 @app.route('/courts/<int:court_id>')
 def court_details(court_id):
     # Dummy data for the court
@@ -43,6 +47,12 @@ def court_details(court_id):
 
     # Return the rendered template for dynamic viewing
     return rendered_html
+
+@app.errorhandler(404)
+def page_not_found(e):
+    return render_template('404.html'), 404
+
+
 
 if __name__ == '__main__':
     app.run(debug=True)
