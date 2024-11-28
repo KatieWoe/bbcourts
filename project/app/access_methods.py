@@ -492,6 +492,10 @@ if __name__ == "__main__":
             print("User Favorite Created No Star")
             userFave2 = getUserFavorites(cursor, 12)
             assert userFave2[court_id] == None, f"Test failed: User Favorite for User12 and {court_id} is {userFave2[court_id]} instead of None"
+            createUserFavorite(cursor, 11, court_id)
+            print("User Favorite Created No Star")
+            userFave3 = getUserFavorites(cursor, 11)
+            assert userFave3[court_id] == None, f"Test failed: User Favorite for User11 and {court_id} is {userFave3[court_id]} instead of None"
             print("getUserFavorites passes with null star")
             
             # Test Delete Favorite
@@ -506,6 +510,11 @@ if __name__ == "__main__":
             cursor.execute("SELECT * FROM favorites WHERE userID = 12 AND courtID = %s;", (court_id,))
             deleted_fave2 = cursor.fetchone()
             assert deleted_fave2 is None, "Test failed: Favorite still exists."
+            deleteUserFavorite(cursor, 11, court_id)
+            print("Favorite Deleted Successfully")
+            cursor.execute("SELECT * FROM favorites WHERE userID = 11 AND courtID = %s;", (court_id,))
+            deleted_fave3 = cursor.fetchone()
+            assert deleted_fave3 is None, "Test failed: Favorite still exists."
             
             
             # TESTING DELETE Court
