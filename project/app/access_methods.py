@@ -217,6 +217,15 @@ def editUserFavorite(cursor, userID, courtID, star):
     UPDATE favorites SET review=%s WHERE courtID=%s AND userID=%s;
     ''', (star, courtID, userID))
     return
+
+def deleteUserFavorite(cursor, userID, courtID):
+    """
+    Delete a users favorite based on the userid and courtid.
+    """
+    cursor.execute('''
+        DELETE FROM favorites WHERE userID = %s AND courtID = %s;
+    ''', (userID, courtID))
+    return
     
 
 # Adding Photo
