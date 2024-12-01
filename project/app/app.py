@@ -48,6 +48,19 @@ def court_details(court_id):
     # Return the rendered template for dynamic viewing
     return rendered_html
 
+
+@app.route('/reviews/<int:court_id>')
+def reviews(court_id):
+
+    court = {
+        "id": court_id,
+        "name": f"Sample Court {court_id}"
+    }
+
+    # Render the review page template
+    return render_template('review_page.html', court=court, reviews=reviews)
+
+
 @app.errorhandler(404)
 def page_not_found(e):
     return render_template('404.html'), 404
