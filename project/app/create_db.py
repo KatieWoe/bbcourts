@@ -19,7 +19,7 @@ def create_tables():
             hours VARCHAR NOT NULL,
             price VARCHAR NOT NULL,
             location VARCHAR NOT NULL,
-            description VARCHAR NOT NULL
+            description TEXT NOT NULL
         )
         """,
         """
