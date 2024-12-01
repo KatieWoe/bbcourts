@@ -3,15 +3,15 @@ import random
 
 DATABASE_URL = "postgresql://jjjohnywaffles_k8io_user:vaeBbrGmOq2g6GVR7zttI2g2bsf7Gh8f@dpg-ct1nsddumphs738rb1f0-a.oregon-postgres.render.com/jjjohnywaffles_k8io"
 
-def createCourt(cursor, courtName, nets, level, clean, ada, inOut, hours, price, location):
+def createCourt(cursor, courtName, nets, level, clean, ada, inOut, hours, price, location, description):
     """
     Inserts a new court into the database and returns its ID.
     """
     cursor.execute('''
-        INSERT INTO courts (courtName, avStar, nets, level, clean, ada, inOut, hours, price, location)
-        VALUES (%s, NULL, %s, %s, %s, %s, %s, %s, %s, %s)
+        INSERT INTO courts (courtName, avStar, nets, level, clean, ada, inOut, hours, price, location, description)
+        VALUES (%s, NULL, %s, %s, %s, %s, %s, %s, %s, %s, %s)
         RETURNING courtID;
-    ''', (courtName, nets, level, clean, ada, inOut, hours, price, location))
+    ''', (courtName, nets, level, clean, ada, inOut, hours, price, location, description))
     court_id = cursor.fetchone()[0]
     return court_id
 
@@ -21,10 +21,10 @@ def createCourt(courtName, nets, level, clean, ada, inOut, hours, price, locatio
     try:
         with connection.cursor() as cursor:
             cursor.execute('''
-                INSERT INTO courts (courtName, avStar, nets, level, clean, ada, inOut, hours, price, location)
-                VALUES (%s, NULL, %s, %s, %s, %s, %s, %s, %s, %s)
+                INSERT INTO courts (courtName, avStar, nets, level, clean, ada, inOut, hours, price, location, description)
+                VALUES (%s, NULL, %s, %s, %s, %s, %s, %s, %s, %s, %s)
                 RETURNING courtID;
-            ''', (courtName, nets, level, clean, ada, inOut, hours, price, location))
+            ''', (courtName, nets, level, clean, ada, inOut, hours, price, location, description))
             court_id = cursor.fetchone()[0]
         connection.commit()
         return court_id
@@ -71,13 +71,13 @@ def calcAvStar(cursor, courtID_calc):
     #May want to also edit courts entry to include this new value
     return avStar
 
-def editCourt(cursor, courtID_edit, courtName, avStar, nets, level, clean, ada, inOut, hours, price, location):
+def editCourt(cursor, courtID_edit, courtName, avStar, nets, level, clean, ada, inOut, hours, price, location, description):
     """
     Edit the court with the ID given so that all the parameters are now used.
     """
     cursor.execute('''
-    UPDATE courts SET courtName=%s, avStar=%s, nets=%s, level=%s, clean=%s, ada=%s, inOut=%s, hours=%s, price=%s, location=%s WHERE courtID=%s;
-    ''', (courtName, avStar, nets, level, clean, ada, inOut, hours, price, location, courtID_edit))
+    UPDATE courts SET courtName=%s, avStar=%s, nets=%s, level=%s, clean=%s, ada=%s, inOut=%s, hours=%s, price=%s, location=%s, description=%s WHERE courtID=%s;
+    ''', (courtName, avStar, nets, level, clean, ada, inOut, hours, price, location, description, courtID_edit))
     return
 
 def findCourts(cursor, search_term):
@@ -335,6 +335,7 @@ if __name__ == "__main__":
                 "hours": "9 AM - 9 PM",
                 "price": "Free",
                 "location": "123 Test Street",
+                "description": "test description"
             }
 
             # Call the createCourt function
@@ -350,6 +351,7 @@ if __name__ == "__main__":
                 test_court["hours"],
                 test_court["price"],
                 test_court["location"],
+                test_court["description"]
             )
             print(f"Court created with ID: {court_id}")
             
@@ -373,6 +375,7 @@ if __name__ == "__main__":
                 test_court["hours"],
                 test_court["price"],
                 test_court["location"],
+                test_court["description"]
             )
             assert court_details == expected_result, f"Test failed: {court_details} != {expected_result}"
             print("getCourt test passed successfully.")
@@ -390,9 +393,10 @@ if __name__ == "__main__":
                 "hours": "Always",
                 "price": "$5",
                 "location": "123 Somewhere Street",
+                "description": "other describe"
             }
             print("\nTesting editCourt:")
-            editCourt(cursor, court_id, test_court2["courtName"], test_court2["star"], test_court2["nets"], test_court2["level"], test_court2["clean"], test_court2["ada"], test_court2["inOut"], test_court2["hours"], test_court2["price"], test_court2["location"])
+            editCourt(cursor, court_id, test_court2["courtName"], test_court2["star"], test_court2["nets"], test_court2["level"], test_court2["clean"], test_court2["ada"], test_court2["inOut"], test_court2["hours"], test_court2["price"], test_court2["location"], test_court2["description"])
             print(f"Court edited with ID: {court_id}")
             
             court_details2 = getCourt(cursor, court_id)
@@ -408,6 +412,7 @@ if __name__ == "__main__":
                 test_court2["hours"],
                 test_court2["price"],
                 test_court2["location"],
+                test_court2["description"]
             )
             assert court_details2 == expected_result2, f"Test failed: {court_details2} != {expected_result2}"
             print("editCourt test passed successfully.")

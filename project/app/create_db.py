@@ -18,7 +18,8 @@ def create_tables():
             inOut INTEGER CHECK (inOut IN (0, 1)),
             hours VARCHAR NOT NULL,
             price VARCHAR NOT NULL,
-            location VARCHAR NOT NULL
+            location VARCHAR NOT NULL,
+            description VARCHAR NOT NULL
         )
         """,
         """
