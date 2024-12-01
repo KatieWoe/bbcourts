@@ -106,3 +106,5 @@ Alex Chang: This week I will continue focusing on implementing the backend of th
 ![image](./Trello_Board/week11-24.png)
 
 Kathryn Woessner: Wrote access methods and began writing tests. Will finish writing methods, tests, and debuging methods.
+
+Jonathan Hu: Last week I implemented the code needed to initialize our database along with a testing script to verify the integrity of the data within the database. This week I created the database using Render's PostgreSQL database and created access methods to access data within the database when needed. 
