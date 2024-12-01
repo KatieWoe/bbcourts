@@ -1,111 +1,117 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1.0"/>
-        <script src="https://cdn.tailwindcss.com"></script>
-        <title>CourtFinder - Find the best basketball courts in your area</title>
-    </head>
-    <body class="h-screen text-white bg-gray-800">
+<head>
+    <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <title>CourtFinder - Find the best basketball courts in your area</title>
+    <style>
+        /* Optional: Smooth transition for menu */
+        .menu-transition {
+            transition: max-height 0.3s ease-in-out;
+        }
+        [x-cloak] {
+            display: none;
+        }
+    </style>
+</head>
+<body class="h-screen text-white bg-gray-800">
 
-    <div class="flex flex-col min-h-screen">
-        <header class="bg-gray-800">
-            <div class="px-2 mx-auto max-w-7xl sm:px-4 lg:divide-y lg:divide-gray-700 lg:px-8">
-              <div class="relative flex justify-between h-16">
+<div class="flex flex-col min-h-screen">
+    <!-- Header -->
+    <header class="bg-gray-800">
+        <div class="px-2 mx-auto max-w-7xl sm:px-4 lg:divide-y lg:divide-gray-700 lg:px-8">
+            <div class="relative flex justify-between h-16">
                 <div class="relative z-10 flex items-center px-2 lg:px-0">
                     <div class="flex items-center justify-center w-10 h-10 bg-white rounded-full">
                         <img class="w-auto h-8" src="https://media.publit.io/file/basketball-svgrepo-com.svg" alt="Your Company">
-                    </div>
+                    </div> 
                 </div>
                 <div class="relative z-0 flex items-center justify-center flex-1 px-2 sm:absolute sm:inset-0">
-                  <div class="grid w-full grid-cols-1 sm:max-w-xs">
-                    <input type="search" name="search" aria-label="Search" class="col-start-1 row-start-1 block w-full rounded-md bg-gray-700 py-1.5 pl-10 pr-3 text-base text-white outline-none placeholder:text-gray-400 focus:bg-white focus:text-gray-900 focus:placeholder:text-gray-400 sm:text-sm/6" placeholder="Search">
-                    <svg class="self-center col-start-1 row-start-1 ml-3 text-gray-400 pointer-events-none size-5" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" data-slot="icon">
-                      <path fill-rule="evenodd" d="M9 3.5a5.5 5.5 0 1 0 0 11 5.5 5.5 0 0 0 0-11ZM2 9a7 7 0 1 1 12.452 4.391l3.328 3.329a.75.75 0 1 1-1.06 1.06l-3.329-3.328A7 7 0 0 1 2 9Z" clip-rule="evenodd" />
-                    </svg>
-                  </div>
+                    <div class="grid w-full grid-cols-1 sm:max-w-xs">
+                        <input type="search" name="search" aria-label="Search" class="col-start-1 row-start-1 block w-full rounded-md bg-gray-700 py-1.5 pl-10 pr-3 text-base text-white outline-none placeholder:text-gray-400 focus:bg-white focus:text-gray-900 focus:placeholder:text-gray-400 sm:text-sm/6" placeholder="Search">
+                        <svg class="self-center col-start-1 row-start-1 ml-3 text-gray-400 pointer-events-none size-5" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" data-slot="icon">
+                            <path fill-rule="evenodd" d="M9 3.5a5.5 5.5 0 1 0 0 11 5.5 5.5 0 0 0 0-11ZM2 9a7 7 0 1 1 12.452 4.391l3.328 3.329a.75.75 0 1 1-1.06 1.06l-3.329-3.328A7 7 0 0 1 2 9Z" clip-rule="evenodd" />
+                        </svg>
+                    </div>
                 </div>
                 <div class="relative z-10 flex items-center lg:hidden">
-                  <!-- Mobile menu button -->
-                  <button type="button" class="relative inline-flex items-center justify-center p-2 text-gray-400 rounded-md hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white" aria-controls="mobile-menu" aria-expanded="false">
-                    <span class="absolute -inset-0.5"></span>
-                    <span class="sr-only">Open menu</span>
-                    <!--
-                      Icon when menu is closed.
-          
-                      Menu open: "hidden", Menu closed: "block"
-                    -->
-                    <svg class="block size-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon">
-                      <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
-                    </svg>
-                    <!--
-                      Icon when menu is open.
-          
-                      Menu open: "block", Menu closed: "hidden"
-                    -->
-                    <svg class="hidden size-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon">
-                      <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
-                    </svg>
-                  </button>
+                    <!-- Mobile menu button -->
+                    <button id="hamburger" class="relative inline-flex items-center justify-center p-2 text-gray-400 rounded-md hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white">
+                        <span class="absolute -inset-0.5"></span>
+                        <span class="sr-only">Open menu</span>
+                        <svg id="hamburger-icon" class="block size-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+                        </svg>
+                        <svg id="close-icon" class="hidden size-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
+                        </svg>
+                    </button>
                 </div>
                 <div class="hidden lg:relative lg:z-10 lg:ml-4 lg:flex lg:items-center lg:space-x-4">
                     <!-- Login Button -->
-                    <button 
-                        type="button" 
-                        class="px-4 py-2 text-sm font-medium text-white bg-gray-800 rounded-md hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
+                    <button class="px-4 py-2 text-sm font-medium text-white bg-gray-800 rounded-md hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
                         Login
                     </button>
-                
+
                     <!-- Create Account Button -->
-                    <button 
-                        type="button" 
-                        class="px-4 py-2 text-sm font-medium text-gray-800 bg-white rounded-md hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-800 focus:ring-offset-2 focus:ring-offset-white">
+                    <button class="px-4 py-2 text-sm font-medium text-gray-800 bg-white rounded-md hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-800 focus:ring-offset-2 focus:ring-offset-white">
                         Create an Account
                     </button>
                 </div>
-              </div>
-              <nav class="hidden lg:flex lg:space-x-8 lg:py-2" aria-label="Global">
-                <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
-                <a href="#" class="inline-flex items-center px-3 py-2 text-sm font-medium text-white bg-gray-900 rounded-md" aria-current="page">Dashboard</a>
-                <a href="#" class="inline-flex items-center px-3 py-2 text-sm font-medium text-gray-300 rounded-md hover:bg-gray-700 hover:text-white">Team</a>
-                <a href="#" class="inline-flex items-center px-3 py-2 text-sm font-medium text-gray-300 rounded-md hover:bg-gray-700 hover:text-white">Projects</a>
-                <a href="#" class="inline-flex items-center px-3 py-2 text-sm font-medium text-gray-300 rounded-md hover:bg-gray-700 hover:text-white">Calendar</a>
-              </nav>
             </div>
-            <nav class="lg:hidden" aria-label="Global" id="mobile-menu">
-                <div class="px-2 pt-2 pb-3 space-y-1">
-                    <a href="#" class="block px-3 py-2 text-base font-medium text-white bg-gray-900 rounded-md">About</a>
-                    <a href="#" class="block px-3 py-2 text-base font-medium text-gray-300 rounded-md hover:bg-gray-700 hover:text-white">Filter by City</a>
-                    <a href="#" class="block px-3 py-2 text-base font-medium text-gray-300 rounded-md hover:bg-gray-700 hover:text-white">Top Rated Courts</a>
+        </div>
+    </header>
 
-                    
-                    <div class="pt-4 pb-3 border-t border-gray-700">
-                      
-                        <div class="px-2 mt-3 space-y-1">
-                          <a href="#" class="block px-3 py-2 text-base font-medium text-gray-400 rounded-md hover:bg-gray-700 hover:text-white">Sign In</a>
-                          <a href="#" class="block px-3 py-2 text-base font-medium text-gray-400 rounded-md hover:bg-gray-700 hover:text-white">Create an Account</a>
-                        </div>
-                      </div>
-                </div>
-            </nav>
-        </header>
-        
-        <!-- Main Content -->
-        <main class="flex-1">
-            <div class="relative px-4 py-8 sm:px-6 lg:px-8">
-                {% block content %}
-                {% endblock %}
-            </div>
-        </main>
+    <!-- Mobile Menu -->
+    <nav id="mobile-menu" class="hidden lg:hidden">
+        <div class="px-2 pt-2 pb-3 space-y-1">
+            <a href="#" class="block px-3 py-2 text-base font-medium text-gray-300 rounded-md hover:bg-gray-700">About</a>
+            <a href="#" class="block px-3 py-2 text-base font-medium text-gray-300 rounded-md hover:bg-gray-700 hover:text-white">Filter by City</a>
+            <a href="#" class="block px-3 py-2 text-base font-medium text-gray-300 rounded-md hover:bg-gray-700 hover:text-white">Top Rated Courts</a>
+        </div>
+    </nav>
 
-        <!-- Footer -->
-        <footer class="bg-gray-900">
-            <div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
-                <div class="py-10 border-t border-gray-800">
-                    <p class="text-sm text-gray-400">Copyright &copy; 2024 CourtFinder</p>
-                </div>
+    
+    <!-- Main Content -->
+    <main class="flex-1">
+        <div class="relative px-4 py-8 sm:px-6 lg:px-8">
+            {% block content %}
+            {% endblock %}
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900">
+        <div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
+            <div class="py-10 border-t border-gray-800">
+                <p class="text-sm text-gray-400">Copyright &copy; 2024 CourtFinder</p>
             </div>
-        </footer>
-    </div>
-        
-    </body>
+        </div>
+    </footer>
+</div>
+
+<!-- JavaScript -->
+<script>
+    const hamburger = document.getElementById('hamburger');
+    const hamburgerIcon = document.getElementById('hamburger-icon');
+    const closeIcon = document.getElementById('close-icon');
+    const mobileMenu = document.getElementById('mobile-menu');
+
+    hamburger.addEventListener('click', () => {
+        if (mobileMenu.classList.contains('hidden')) {
+            mobileMenu.classList.remove('hidden');
+            mobileMenu.style.maxHeight = mobileMenu.scrollHeight + 'px';
+            hamburgerIcon.classList.add('hidden');
+            closeIcon.classList.remove('hidden');
+        } else {
+            mobileMenu.style.maxHeight = '0';
+            hamburgerIcon.classList.remove('hidden');
+            closeIcon.classList.add('hidden');
+            setTimeout(() => mobileMenu.classList.add('hidden'), 300); // Match transition duration
+        }
+    });
+</script>
+
+</body>
 </html>
