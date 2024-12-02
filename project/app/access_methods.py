@@ -3,16 +3,23 @@ import random
 
 DATABASE_URL = "postgresql://jjjohnywaffles_k8io_user:vaeBbrGmOq2g6GVR7zttI2g2bsf7Gh8f@dpg-ct1nsddumphs738rb1f0-a.oregon-postgres.render.com/jjjohnywaffles_k8io"
 
-def createCourt(cursor, courtName, nets, level, clean, ada, inOut, hours, price, location, description):
+def createCourt(courtName, nets, level, clean, ada, inOut, hours, price, location, description):
     """
     Inserts a new court into the database and returns its ID.
     """
+    connection = psycopg2.connect(DATABASE_URL)
+    cursor = connection.cursor()
+    
     cursor.execute('''
         INSERT INTO courts (courtName, avStar, nets, level, clean, ada, inOut, hours, price, location, description)
         VALUES (%s, NULL, %s, %s, %s, %s, %s, %s, %s, %s, %s)
         RETURNING courtID;
     ''', (courtName, nets, level, clean, ada, inOut, hours, price, location, description))
     court_id = cursor.fetchone()[0]
+    
+    connection.commit()
+    connection.close()
+    
     return court_id
 
 """
@@ -35,30 +42,46 @@ def createCourt(courtName, nets, level, clean, ada, inOut, hours, price, locatio
         connection.close()
 """
             
-def getCourt(cursor, courtID_get):
+def getCourt(courtID_get):
     """
     Retrieve all details of a court by its ID. Returns a tuple with all court elements.
     """
+    connection = psycopg2.connect(DATABASE_URL)
+    cursor = connection.cursor()
+    
     cursor.execute('''
         SELECT * FROM courts WHERE courtID = %s;
     ''', (courtID_get,))
     court = cursor.fetchone()  # Fetch one row directly
+    
+    connection.commit()
+    connection.close()
+    
     return court
 
-def deleteCourt(cursor, courtID_del):
+def deleteCourt(courtID_del):
     """
     Deletes the court with the specified ID from the database.
     """
+    connection = psycopg2.connect(DATABASE_URL)
+    cursor = connection.cursor()
+    
     cursor.execute('''
         DELETE FROM courts WHERE courtID = %s;
     ''', (courtID_del,))
+    
+    connection.commit()
+    connection.close()
 
 
 
-def calcAvStar(cursor, courtID_calc):
+def calcAvStar(courtID_calc):
     """
     Get the star rating from reviews for the court given. Calculate the average and return the average.
     """
+    connection = psycopg2.connect(DATABASE_URL)
+    cursor = connection.cursor()
+    
     cursor.execute('''
     SELECT star FROM reviews WHERE courtID = %s;
     ''', (courtID_calc,))
@@ -69,21 +92,35 @@ def calcAvStar(cursor, courtID_calc):
         stars.append(row[0])
     avStar = sum(stars) / len(stars)
     #May want to also edit courts entry to include this new value
+    
+    connection.commit()
+    connection.close()
+    
     return avStar
 
-def editCourt(cursor, courtID_edit, courtName, avStar, nets, level, clean, ada, inOut, hours, price, location, description):
+def editCourt(courtID_edit, courtName, avStar, nets, level, clean, ada, inOut, hours, price, location, description):
     """
     Edit the court with the ID given so that all the parameters are now used.
     """
+    connection = psycopg2.connect(DATABASE_URL)
+    cursor = connection.cursor()
+    
     cursor.execute('''
     UPDATE courts SET courtName=%s, avStar=%s, nets=%s, level=%s, clean=%s, ada=%s, inOut=%s, hours=%s, price=%s, location=%s, description=%s WHERE courtID=%s;
     ''', (courtName, avStar, nets, level, clean, ada, inOut, hours, price, location, description, courtID_edit))
+    
+    connection.commit()
+    connection.close()
+    
     return
 
-def findCourts(cursor, search_term):
+def findCourts(search_term):
     """
     Search the courts table in both the name and location atributes and return a list of IDs that pulled up matches.
     """
+    connection = psycopg2.connect(DATABASE_URL)
+    cursor = connection.cursor()
+    
     cursor.execute(f"""
     SELECT courtID FROM courts WHERE courtName LIKE '%{search_term}%';
     """)
@@ -99,9 +136,13 @@ def findCourts(cursor, search_term):
     for row in loc_tup:
         locs.append(row[0])
     bothlists = list(set(names) | set(locs))
+    
+    connection.commit()
+    connection.close()
+    
     return bothlists
 
-def createReview(cursor, userID, courtID, star, comment):
+def createReview(userID, courtID, star, comment):
     """
     Create a review with a comment and a star review. Creates a random unique id. Returns that id.
     """
@@ -118,18 +159,26 @@ def createReview(cursor, userID, courtID, star, comment):
     while maybe_id in ids:
         maybe_id = random.randint(10000, 99999)
     """
+    connection = psycopg2.connect(DATABASE_URL)
+    cursor = connection.cursor()
     
     cursor.execute('''
     INSERT INTO reviews (userID, courtID, star, comment) VALUES (%s, %s, %s, %s) RETURNING reviewID;
     ''',(userID, courtID, star, comment))
     id_of_new_row = cursor.fetchone()[0]
     
+    connection.commit()
+    connection.close()
+    
     return id_of_new_row
 
-def getReviews(cursor, courtID):
+def getReviews(courtID):
     """
     Get the reviews or a given court. Returns a dictionary with the key being the review ids, and the values a list of the other elements.
     """
+    connection = psycopg2.connect(DATABASE_URL)
+    cursor = connection.cursor()
+    
     cursor.execute('''
     SELECT * FROM reviews WHERE courtID = %s;
     ''', (courtID,))
@@ -137,12 +186,19 @@ def getReviews(cursor, courtID):
     reviews = {}
     for row in rev_tup:
         reviews[row[0]] = [row[1], row[2], row[3], row[4]]
+        
+    connection.commit()
+    connection.close()
+    
     return reviews
 
-def getUserReviews(cursor, userID):
+def getUserReviews(userID):
     """
     Get the reviews made by a given user. Return a dictionary with the key being the review ids, and the values a list of the other elements.
     """
+    connection = psycopg2.connect(DATABASE_URL)
+    cursor = connection.cursor()
+    
     cursor.execute('''
     SELECT * FROM reviews WHERE userID = %s;
     ''', (userID,))
@@ -150,23 +206,37 @@ def getUserReviews(cursor, userID):
     reviews = {}
     for row in rev_tup:
         reviews[row[0]] = [row[1], row[2], row[3], row[4]]
+    
+    connection.commit()
+    connection.close()
+    
     return reviews
 
-def deleteReview(cursor, reviewID_del):
+def deleteReview(reviewID_del):
     """
     Delete a review using the reviewID)
     """
+    connection = psycopg2.connect(DATABASE_URL)
+    cursor = connection.cursor()
+    
     cursor.execute('''
         DELETE FROM reviews WHERE reviewID = %s;
     ''', (reviewID_del,))
+    
+    connection.commit()
+    connection.close()
+    
     return
 
 # CreateUser Method
-def createUser(cursor, name, password):
+def createUser(name, password):
     """
     Inserts a new user into the database.
     Returns the userID of the created user.
     """
+    connection = psycopg2.connect(DATABASE_URL)
+    cursor = connection.cursor()
+    
     try:
         cursor.execute('''
             INSERT INTO users (name, password)
@@ -177,24 +247,37 @@ def createUser(cursor, name, password):
         return user_id
     except psycopg2.IntegrityError as e:
         raise ValueError(f"User with name '{name}' already exists.") from e
+    
+    connection.commit()
+    connection.close()
 
 # Checks to see User
-def checkUser(cursor, name, password):
+def checkUser(name, password):
     """
     Checks if a user exists with the given name and password.
     Returns the userID if the user exists, otherwise None.
     """
+    connection = psycopg2.connect(DATABASE_URL)
+    cursor = connection.cursor()
+    
     cursor.execute('''
         SELECT userID FROM users
         WHERE name = %s AND password = %s;
     ''', (name, password))
     result = cursor.fetchone()
+    
+    connection.commit()
+    connection.close()
+    
     return result[0] if result else None      
 
-def createUserFavorite(cursor, userID, courtID):
+def createUserFavorite(userID, courtID):
     """
     Create a Favorite entry for the court belonging to the user. If the user has reviewed it, it records the star value. No return.
     """
+    connection = psycopg2.connect(DATABASE_URL)
+    cursor = connection.cursor()
+    
     reviews = getUserReviews(cursor, userID)
     review_for_court = None
     for key in reviews:
@@ -208,12 +291,19 @@ def createUserFavorite(cursor, userID, courtID):
         cursor.execute('''
         INSERT INTO favorites (userID, courtID) VALUES (%s, %s)
         ''', (userID, courtID))
+    
+    connection.commit()
+    connection.close()
+    
     return
 
-def getUserFavorites(cursor, userID):
+def getUserFavorites(userID):
     """
     Get the users favorites based on id. Return as dictionary with key as courtID and star as the value.
     """
+    connection = psycopg2.connect(DATABASE_URL)
+    cursor = connection.cursor()
+    
     cursor.execute('''
     SELECT * FROM favorites WHERE userID = %s;
     ''', (userID,))
@@ -221,40 +311,65 @@ def getUserFavorites(cursor, userID):
     favorites = {}
     for row in fav_tup:
         favorites[row[1]] = row[2]
+    
+    connection.commit()
+    connection.close()
+    
     return favorites
     
 
-def editUserFavorite(cursor, userID, courtID, star):
+def editUserFavorite(userID, courtID, star):
     """
     Edit a users favorite entry to include a star value if they reviewed after favoriting.
     """
+    connection = psycopg2.connect(DATABASE_URL)
+    cursor = connection.cursor()
+    
     cursor.execute('''
     UPDATE favorites SET review=%s WHERE courtID=%s AND userID=%s;
     ''', (star, courtID, userID))
+    
+    connection.commit()
+    connection.close()
+    
     return
 
-def deleteUserFavorite(cursor, userID, courtID):
+def deleteUserFavorite(userID, courtID):
     """
     Delete a users favorite based on the userid and courtid.
     """
+    connection = psycopg2.connect(DATABASE_URL)
+    cursor = connection.cursor()
+    
     cursor.execute('''
         DELETE FROM favorites WHERE userID = %s AND courtID = %s;
     ''', (userID, courtID))
+    
+    connection.commit()
+    connection.close()
+    
     return
     
 
 # Adding Photo
-def addPhoto(cursor, courtID, photo_path):
+def addPhoto(courtID, photo_path):
     """
     Adds a photo to the photos table for a specific court.
     Returns the photoID of the newly added photo.
     """
+    connection = psycopg2.connect(DATABASE_URL)
+    cursor = connection.cursor()
+    
     cursor.execute('''
         INSERT INTO photos (courtID, photo)
         VALUES (%s, %s)
         RETURNING photoID;
     ''', (courtID, photo_path))
     photo_id = cursor.fetchone()[0]
+    
+    connection.commit()
+    connection.close()
+    
     return photo_id
 
 # Getting a Specific User
@@ -263,21 +378,31 @@ def getUser(cursor, userID):
     Retrieves a user by their userID.
     Returns a tuple containing the user's details (userID, name, password).
     """
+    connection = psycopg2.connect(DATABASE_URL)
+    cursor = connection.cursor()
+    
     cursor.execute('''
         SELECT * FROM users
         WHERE userID = %s;
     ''', (userID,))
     user = cursor.fetchone()
+    
+    connection.commit()
+    connection.close()
+    
     return user
 
 # Getting photo
-def getPhotos(cursor, courtID=None):
+def getPhotos(courtID=None):
     """
     Retrieves photos.
     If courtID is provided, retrieves photos for that court.
     Otherwise, retrieves all photos in the database.
     Returns a list of tuples containing photoID and photo paths.
     """
+    connection = psycopg2.connect(DATABASE_URL)
+    cursor = connection.cursor()
+    
     if courtID:
         cursor.execute('''
             SELECT photoID, photo FROM photos
@@ -288,29 +413,45 @@ def getPhotos(cursor, courtID=None):
             SELECT photoID, photo FROM photos;
         ''')
     photos = cursor.fetchall()
+    
+    connection.commit()
+    connection.close()
+    
     return photos
 
 # Deleting User
-def deleteUser(cursor, userID):
+def deleteUser(userID):
     """
     Deletes a user by their userID.
     """
+    connection = psycopg2.connect(DATABASE_URL)
+    cursor = connection.cursor()
+    
     cursor.execute('''
         DELETE FROM users
         WHERE userID = %s;
     ''', (userID,))
     print(f"User with ID {userID} deleted successfully.")
+    
+    connection.commit()
+    connection.close()
 
 # Deleting Photo
-def deletePhoto(cursor, photoID):
+def deletePhoto(photoID):
     """
     Deletes a photo by its photoID.
     """
+    connection = psycopg2.connect(DATABASE_URL)
+    cursor = connection.cursor()
+    
     cursor.execute('''
         DELETE FROM photos
         WHERE photoID = %s;
     ''', (photoID,))
     print(f"Photo with ID {photoID} deleted successfully.")
+    
+    connection.commit()
+    connection.close()
 
 if __name__ == "__main__":
     """
@@ -341,7 +482,6 @@ if __name__ == "__main__":
             # Call the createCourt function
             print("\nTesting createCourt:")
             court_id = createCourt(
-                cursor,
                 test_court["courtName"],
                 test_court["nets"],
                 test_court["level"],
@@ -359,7 +499,7 @@ if __name__ == "__main__":
             # TESTING GETCOURT
             # Call the getCourt function
             print("\nTesting getCourt:")
-            court_details = getCourt(cursor, court_id)
+            court_details = getCourt(court_id)
             print(f"Retrieved court: {court_details}")
 
             # Verify the retrieved court matches the input
@@ -396,10 +536,10 @@ if __name__ == "__main__":
                 "description": "other describe"
             }
             print("\nTesting editCourt:")
-            editCourt(cursor, court_id, test_court2["courtName"], test_court2["star"], test_court2["nets"], test_court2["level"], test_court2["clean"], test_court2["ada"], test_court2["inOut"], test_court2["hours"], test_court2["price"], test_court2["location"], test_court2["description"])
+            editCourt(court_id, test_court2["courtName"], test_court2["star"], test_court2["nets"], test_court2["level"], test_court2["clean"], test_court2["ada"], test_court2["inOut"], test_court2["hours"], test_court2["price"], test_court2["location"], test_court2["description"])
             print(f"Court edited with ID: {court_id}")
             
-            court_details2 = getCourt(cursor, court_id)
+            court_details2 = getCourt(court_id)
             expected_result2 = (
                 court_id,
                 test_court2["courtName"],
@@ -419,7 +559,7 @@ if __name__ == "__main__":
             
             # Testing Search
             print("\nTesting findCourts:")
-            search_results = findCourts(cursor, "Somewhere")
+            search_results = findCourts("Somewhere")
             assert court_id in search_results, f"Test failed: {court_id} not in {search_results}"
             print("findCourts passed successfully")
             
@@ -441,43 +581,43 @@ if __name__ == "__main__":
             
             
             print("\nTesting createReview:")
-            review1id = createReview(cursor, test_review_1["userID"], test_review_1["courtID"], test_review_1["star"], test_review_1["review"])
+            review1id = createReview(test_review_1["userID"], test_review_1["courtID"], test_review_1["star"], test_review_1["review"])
             print(f"Review created with ID: {review1id}")
-            review2id = createReview(cursor, test_review_2["userID"], test_review_2["courtID"], test_review_2["star"], test_review_2["review"])
+            review2id = createReview(test_review_2["userID"], test_review_2["courtID"], test_review_2["star"], test_review_2["review"])
             print(f"Review created with ID: {review2id}")
             print("createReview passed successfully")
             
             # Testing Average Star
             print("\nTesting calcAvStar:")
-            test_average = calcAvStar(cursor, court_id)
+            test_average = calcAvStar(court_id)
             assert test_average == 4.5, f"Test failed: {test_average} != 4.5"
             print("calcAvStar passed successfully")
             
             # Testing Get Review
             print("\nTesting getReviews:")
-            court_reviews = getReviews(cursor, court_id)
+            court_reviews = getReviews(court_id)
             assert court_reviews[review1id] == [test_review_1["userID"], test_review_1["courtID"], test_review_1["star"], test_review_1["review"]], f"Test failed: Review {review1id} wrong"
             print("getReviews passed successfully")
             
             # Testing Get Users Review
             print("\nTesting getUserReviews:")
-            court_reviews = getUserReviews(cursor, 11)
+            court_reviews = getUserReviews(11)
             assert court_reviews[review2id] == [test_review_2["userID"], test_review_2["courtID"], test_review_2["star"], test_review_2["review"]], f"Test failed: Review {review2id} wrong"
             print("getUserReviews passed successfully")
             
             #Test Create and Get Favorites
             print("\nTesting createUserFavorite:")
-            createUserFavorite(cursor, 9, court_id)
+            createUserFavorite(9, court_id)
             print("User Favorite Created")
-            userFave = getUserFavorites(cursor, 9)
+            userFave = getUserFavorites(9)
             assert userFave[court_id] == 5.0, f"Test failed: User Favorite for User9 and {court_id} is {userFave[court_id]} instead of 5.0"
             print("create and get UserFavorite passed successfully")
             
             # Delete Reviews
             print("\nTesting deleteReview:")
-            deleteReview(cursor, review1id)
+            deleteReview(review1id)
             print(f"Review with ID {review1id} deleted successfully.")
-            deleteReview(cursor, review2id)
+            deleteReview(review2id)
             print(f"Review with ID {review2id} deleted successfully.")
             
             
@@ -493,29 +633,29 @@ if __name__ == "__main__":
             
             # Test no star favorite get
             print("\nTesting getUserFavorite with no star:")
-            createUserFavorite(cursor, 12, court_id)
+            createUserFavorite(12, court_id)
             print("User Favorite Created No Star")
-            userFave2 = getUserFavorites(cursor, 12)
+            userFave2 = getUserFavorites(12)
             assert userFave2[court_id] == None, f"Test failed: User Favorite for User12 and {court_id} is {userFave2[court_id]} instead of None"
-            createUserFavorite(cursor, 11, court_id)
+            createUserFavorite(11, court_id)
             print("User Favorite Created No Star")
-            userFave3 = getUserFavorites(cursor, 11)
+            userFave3 = getUserFavorites(11)
             assert userFave3[court_id] == None, f"Test failed: User Favorite for User11 and {court_id} is {userFave3[court_id]} instead of None"
             print("getUserFavorites passes with null star")
             
             # Test Delete Favorite
             print("\nTesting deleteUserFavorite:")
-            deleteUserFavorite(cursor, 9, court_id)
+            deleteUserFavorite(9, court_id)
             print("Favorite Deleted Successfully")
             cursor.execute("SELECT * FROM favorites WHERE userID = 9 AND courtID = %s;", (court_id,))
             deleted_fave = cursor.fetchone()
             assert deleted_fave is None, "Test failed: Favorite still exists."
-            deleteUserFavorite(cursor, 12, court_id)
+            deleteUserFavorite(12, court_id)
             print("Favorite Deleted Successfully")
             cursor.execute("SELECT * FROM favorites WHERE userID = 12 AND courtID = %s;", (court_id,))
             deleted_fave2 = cursor.fetchone()
             assert deleted_fave2 is None, "Test failed: Favorite still exists."
-            deleteUserFavorite(cursor, 11, court_id)
+            deleteUserFavorite(11, court_id)
             print("Favorite Deleted Successfully")
             cursor.execute("SELECT * FROM favorites WHERE userID = 11 AND courtID = %s;", (court_id,))
             deleted_fave3 = cursor.fetchone()
@@ -525,7 +665,7 @@ if __name__ == "__main__":
             # TESTING DELETE Court
             # Call the deleteCourt function
             print("\nTesting deleteCourt:")
-            deleteCourt(cursor, court_id)
+            deleteCourt(court_id)
             print(f"Court with ID {court_id} deleted successfully.")
 
             # Verify the court no longer exists
