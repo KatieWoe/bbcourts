@@ -278,10 +278,19 @@ def createUserFavorite(userID, courtID):
     connection = psycopg2.connect(DATABASE_URL)
     cursor = connection.cursor()
     
-    reviews = getUserReviews(userID)
+    #reviews = getUserReviews(userID)
+    
+    cursor.execute('''
+    SELECT * FROM reviews WHERE userID = %s;
+    ''', (userID,))
+    rev_tup = cursor.fetchall()
+    reviews = {}
+    for row in rev_tup:
+        reviews[row[0]] = [row[1], row[2], row[3], row[4]]
+    
     review_for_court = None
     for key in reviews:
-        if reviews[key][2] != None:
+        if reviews[key][1] == courtID:
             review_for_court = reviews[key][2]
     if review_for_court != None:
         cursor.execute('''
@@ -601,8 +610,8 @@ if __name__ == "__main__":
             
             # Testing Get Users Review
             print("\nTesting getUserReviews:")
-            court_reviews = getUserReviews(15)
-            assert court_reviews[review2id] == [test_review_2["userID"], test_review_2["courtID"], test_review_2["star"], test_review_2["review"]], f"Test failed: Review {review2id} wrong"
+            court_reviews = getUserReviews(14)
+            assert court_reviews[review1id] == [test_review_1["userID"], test_review_1["courtID"], test_review_1["star"], test_review_1["review"]], f"Test failed: Review {review1id} wrong"
             print("getUserReviews passed successfully")
             
             #Test Create and Get Favorites
@@ -637,11 +646,11 @@ if __name__ == "__main__":
             print("User Favorite Created No Star")
             userFave2 = getUserFavorites(16)
             assert userFave2[court_id] == None, f"Test failed: User Favorite for User12 and {court_id} is {userFave2[court_id]} instead of None"
-            #createUserFavorite(15, court_id)
-            #print("User Favorite Created No Star")
-            #userFave3 = getUserFavorites(15)
-            #assert userFave3[court_id] == None, f"Test failed: User Favorite for User11 and {court_id} is {userFave3[court_id]} instead of None"
-            #print("getUserFavorites passes with null star")
+            createUserFavorite(15, court_id)
+            print("User Favorite Created No Star")
+            userFave3 = getUserFavorites(15)
+            assert userFave3[court_id] == None, f"Test failed: User Favorite for User11 and {court_id} is {userFave3[court_id]} instead of None"
+            print("getUserFavorites passes with null star")
             
             # Test Delete Favorite
             print("\nTesting deleteUserFavorite:")
@@ -655,7 +664,7 @@ if __name__ == "__main__":
             cursor.execute("SELECT * FROM favorites WHERE userID = 16 AND courtID = %s;", (court_id,))
             deleted_fave2 = cursor.fetchone()
             assert deleted_fave2 is None, "Test failed: Favorite still exists."
-            deleteUserFavorite(11, court_id)
+            deleteUserFavorite(15, court_id)
             print("Favorite Deleted Successfully")
             cursor.execute("SELECT * FROM favorites WHERE userID = 15 AND courtID = %s;", (court_id,))
             deleted_fave3 = cursor.fetchone()
