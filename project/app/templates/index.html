@@ -1,23 +1,30 @@
 {% extends "base.html" %}
+
 {% block content %}
+<div class="relative w-full h-screen">
+    <!-- Background Image -->
+    <div class="absolute inset-0 overflow-hidden rounded-md">
+        <img src="https://images.unsplash.com/photo-1486882430381-e76d701e0a3e?q=80&w=1740&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" 
+             class="object-cover w-full h-full" 
+             alt="Basketball Court Background">
+    </div>
 
-<div>
-    <main>
-        <!-- Hero section -->
-        <!-- Decorative image and overlay -->
-        <div aria-hidden="true" class="absolute inset-0 overflow-hidden">
-            <img src="https://images.unsplash.com/photo-1654398705562-d126e941ad74?q=80&w=2250&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="" class="size-full object-cover">
-        </div>
-        <div aria-hidden="true" class="absolute inset-0 bg-gray-900 opacity-50"></div>
+    <!-- Overlay -->
+    <div class="absolute inset-0 bg-gray-900 opacity-50"></div>
 
-        <div class="relative mx-auto flex max-w-3xl flex-col items-center px-6 py-32 text-center sm:py-64 lg:px-0">
-            <div class="backdrop-blur-sm backdrop-filter">
-                <h1 class="text-4xl font-bold tracking-tight text-white lg:text-6xl">Find the Perfect Court for Your Next Hoop Session</h1>
-                <p class="mt-4 text-xl text-white">Discover the best basketball courts near you with CourtFinder—your go-to platform for finding clean, accessible, and user-recommended courts in your area. Whether you’re looking for a top-tier court or the closest spot for a quick game, we’ve got you covered.</p>
-                <a href="#" class="mt-8 inline-block rounded-md border border-transparent bg-white px-8 py-3 text-base font-medium text-gray-900 hover:bg-gray-100">How it works</a>
-            </div>
+    <!-- Content -->
+    <div class="relative z-10 flex items-center justify-center h-full px-4 text-center sm:px-6 lg:px-8">
+        <div class="max-w-3xl backdrop-blur-sm backdrop-filter">
+            <h1 class="mb-4 text-4xl font-bold tracking-tight text-white lg:text-6xl">
+                Find the Perfect Court for Your Next Hoop Session
+            </h1>
+            <p class="mb-8 text-lg text-white">
+                Discover the best basketball courts near you with CourtFinder---your go-to platform for finding clean, accessible, and user-recommended courts in your area. Whether you're looking for a top-tier court or the closest spot for a quick game, we've got you covered.
+            </p>
+            <a href="#" class="inline-block px-8 py-3 text-base font-medium text-gray-900 bg-white border border-transparent rounded-md hover:bg-gray-100">
+                How it works
+            </a>
         </div>
-    </main>
+    </div>
 </div>
-
 {% endblock %}

@@ -9,11 +9,15 @@ STATIC_OUTPUT_DIR = "static_site"
 
 @app.route('/')
 def index():
-    return render_template('index.html')
+    return render_template('index.html', include_header_footer = True)
 
 @app.route('/about')
 def about():
     return render_template('about.html')
+
+@app.route("/login")
+def login():
+    return render_template("login.html", include_header_footer=False)
 
 @app.route('/listing')
 def listing():

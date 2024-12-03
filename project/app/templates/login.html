@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+
+{% block title %}Login - CourtFinder{% endblock %}
+
+{% block html_classes %}h-screen{% endblock %}
+{% block body_classes %}h-screen{% endblock %}
+
+{% block content %}
+<div class="relative flex w-full h-screen">
+    <!-- Left Section: Login Form -->
+    <div class="relative z-10 flex flex-col justify-center flex-1 px-4 py-12 bg-gray-300 bg-opacity-50 sm:px-6 lg:px-20 xl:px-24 backdrop-blur-sm">
+        <div class="w-full max-w-sm mx-auto lg:w-96">
+            <div class="text-center">
+                <div class="flex items-center justify-center w-12 h-12 mx-auto bg-black rounded-full">
+                    <div class="flex items-center justify-center bg-white rounded-full w-11 h-11">
+                        <img class="w-auto h-8" src="https://media.publit.io/file/basketball-svgrepo-com.svg" alt="Your Company">
+                    </div>
+                </div>
+                <h2 class="mt-8 text-2xl font-bold tracking-tight text-gray-900">Sign In to Your Account</h2>
+                
+            </div>
+
+            <!-- Login Form -->
+            <div class="mt-10">
+                <form action="#" method="POST" class="space-y-6">
+                    <div>
+                        <label for="email" class="block text-sm font-medium text-gray-900">Email address</label>
+                        <div class="mt-2">
+                            <input type="email" name="email" id="email" autocomplete="email" required 
+                                   class="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 
+                                          outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 
+                                          focus:outline-2 focus:-outline-offset-2 focus:outline-blue-600 sm:text-sm">
+                        </div>
+                    </div>
+
+                    <div>
+                        <label for="password" class="block text-sm font-medium text-gray-900">Password</label>
+                        <div class="mt-2">
+                            <input type="password" name="password" id="password" autocomplete="current-password" required 
+                                   class="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 
+                                          outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 
+                                          focus:outline-2 focus:-outline-offset-2 focus:outline-blue-600 sm:text-sm">
+                        </div>
+                    </div>
+
+                    <div>
+                        <button type="submit" 
+                                class="flex w-full justify-center rounded-md bg-blue-600 px-3 py-1.5 text-sm font-semibold 
+                                       text-white shadow-sm hover:bg-blue-500 focus-visible:outline 
+                                       focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600">
+                            Sign in
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Right Section: Image -->
+    <div class="absolute inset-0 hidden rounded-lg lg:rounded-lg lg:block">
+        <img class="absolute inset-0 object-cover w-full h-full " 
+             src="https://images.unsplash.com/photo-1531124171126-a67c385c6b13?q=80&w=1740&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" 
+             alt="Basketball Court">
+        <div class="absolute inset-0 bg-gray-100 opacity-0"></div>
+    </div>
+</div>
+{% endblock %}
