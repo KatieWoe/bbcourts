@@ -46,7 +46,7 @@ def listing():
             photos.append(c_photo[0][1])
     """
     #return court
-    return render_template('listing.html', courts=courts, photos=photos)
+    return render_template('listing.html', courts=courts)
 
 @app.route('/courts/<int:court_id>')
 def court_details(court_id):
