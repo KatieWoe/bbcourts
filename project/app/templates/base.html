@@ -20,7 +20,7 @@
 {% block page_wrapper %}
 <div class="flex flex-col min-h-screen">
     {% block header %}
-        {% if include_header_footer %}
+        {% if include_header_footer | default(true) %}
             {% include 'header.html' %}
         {% endif %}
     {% endblock %}
@@ -34,7 +34,7 @@
     </main>
 
     {% block footer %}
-        {% if include_header_footer %}
+        {% if include_header_footer | default(true) %}
             {% include 'footer.html' %}
         {% endif %}
     {% endblock %}

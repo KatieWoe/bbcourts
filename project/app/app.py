@@ -1,8 +1,22 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 import os
+import psycopg2
+import db_setup as db 
+import access_methods as acc
 
 
 app = Flask(__name__)
+
+def initialize_db():
+    """Initialise the database tables and insert initial data."""
+    db.delete_tables()
+    db.create_tables()
+    acc.createCourt("Lakeshore Park Basketball Court", 4.5, 1, 1, 1, 1, 0, '10-18', '$5.99', 'Streeterville, Chicago', 'Nice indoor court')
+    acc.createCourt("Douglas Park Outdoor Courts", 4, 0, 1, 1, 1, 1, '9-20', '$3.99', 'North Lawndale, Chicago', 'Most popular among locals')
+    acc.createCourt("Margaret Hie Ding Lin Park Basketball Court", 5, 1, 0, 1, 0, 1, '11-19', '$4.00', 'Chinatown, Chicago', 'In a busy corner of Chinatown')
+    acc.createCourt("Gill Park Basketball Court", 3, 1, 0, 1, 0, 1, '10-19', '$7.00', 'Lakeview East, Chicago', 'Expensive')
+
+################################################################
 
 # Directory to save static files
 STATIC_OUTPUT_DIR = "static_site"
@@ -21,7 +35,9 @@ def login():
 
 @app.route('/listing')
 def listing():
-    return render_template('listing.html')
+    courts = acc.getCourts()
+    #return court
+    return render_template('listing.html', courts=courts)
 
 @app.route('/courts/<int:court_id>')
 def court_details(court_id):
@@ -72,4 +88,5 @@ def page_not_found(e):
 
 
 if __name__ == '__main__':
+    initialize_db()
     app.run(debug=True)

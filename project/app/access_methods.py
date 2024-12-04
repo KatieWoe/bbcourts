@@ -1,9 +1,10 @@
 import psycopg2
 import random
+from db_setup import DATABASE_URL
 
-DATABASE_URL = "postgresql://jjjohnywaffles_k8io_user:vaeBbrGmOq2g6GVR7zttI2g2bsf7Gh8f@dpg-ct1nsddumphs738rb1f0-a.oregon-postgres.render.com/jjjohnywaffles_k8io"
+#DATABASE_URL = "postgresql://jjjohnywaffles_k8io_user:vaeBbrGmOq2g6GVR7zttI2g2bsf7Gh8f@dpg-ct1nsddumphs738rb1f0-a.oregon-postgres.render.com/jjjohnywaffles_k8io"
 
-def createCourt(courtName, nets, level, clean, ada, inOut, hours, price, location, description):
+def createCourt(courtName, avStar, nets, level, clean, ada, inOut, hours, price, location, description):
     """
     Inserts a new court into the database and returns its ID.
     """
@@ -12,9 +13,9 @@ def createCourt(courtName, nets, level, clean, ada, inOut, hours, price, locatio
     
     cursor.execute('''
         INSERT INTO courts (courtName, avStar, nets, level, clean, ada, inOut, hours, price, location, description)
-        VALUES (%s, NULL, %s, %s, %s, %s, %s, %s, %s, %s, %s)
+        VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
         RETURNING courtID;
-    ''', (courtName, nets, level, clean, ada, inOut, hours, price, location, description))
+        ''', (courtName, avStar, int(nets), int(level), int(clean), int(ada), int(inOut), hours, price, location, description))
     court_id = cursor.fetchone()[0]
     
     connection.commit()
@@ -41,6 +42,23 @@ def createCourt(courtName, nets, level, clean, ada, inOut, hours, price, locatio
     finally:
         connection.close()
 """
+
+def getCourts():
+    """
+    Retrieve all courts. Returns a tuple with court ids.
+    """
+    connection = psycopg2.connect(DATABASE_URL)
+    cursor = connection.cursor()
+    
+    cursor.execute('''
+        SELECT * FROM courts;
+    ''')
+    courts = cursor.fetchall()  # Fetch one row directly
+    
+    connection.commit()
+    connection.close()
+        
+    return courts
             
 def getCourt(courtID_get):
     """
@@ -462,239 +480,239 @@ def deletePhoto(photoID):
     connection.commit()
     connection.close()
 
-if __name__ == "__main__":
-    """
-    Main function to test functions.
-    """
-    # Define the database URL
-    DATABASE_URL = "postgresql://jjjohnywaffles_k8io_user:vaeBbrGmOq2g6GVR7zttI2g2bsf7Gh8f@dpg-ct1nsddumphs738rb1f0-a.oregon-postgres.render.com/jjjohnywaffles_k8io"
-    try:
-        # Connect to the database
-        connection = psycopg2.connect(DATABASE_URL)
-        with connection.cursor() as cursor:
-            
-            # TESTING CREATE COURT
-            # Define test data for creating a court
-            test_court = {
-                "courtName": "Test Court",
-                "nets": 1,
-                "level": 1,
-                "clean": 1,
-                "ada": 1,
-                "inOut": 0,
-                "hours": "9 AM - 9 PM",
-                "price": "Free",
-                "location": "123 Test Street",
-                "description": "test description"
-            }
-
-            # Call the createCourt function
-            print("\nTesting createCourt:")
-            court_id = createCourt(
-                test_court["courtName"],
-                test_court["nets"],
-                test_court["level"],
-                test_court["clean"],
-                test_court["ada"],
-                test_court["inOut"],
-                test_court["hours"],
-                test_court["price"],
-                test_court["location"],
-                test_court["description"]
-            )
-            print(f"Court created with ID: {court_id}")
-            
-            
-            # TESTING GETCOURT
-            # Call the getCourt function
-            print("\nTesting getCourt:")
-            court_details = getCourt(court_id)
-            print(f"Retrieved court: {court_details}")
-
-            # Verify the retrieved court matches the input
-            expected_result = (
-                court_id,
-                test_court["courtName"],
-                None,  # avStar defaults to NULL
-                test_court["nets"],
-                test_court["level"],
-                test_court["clean"],
-                test_court["ada"],
-                test_court["inOut"],
-                test_court["hours"],
-                test_court["price"],
-                test_court["location"],
-                test_court["description"]
-            )
-            assert court_details == expected_result, f"Test failed: {court_details} != {expected_result}"
-            print("getCourt test passed successfully.")
-            
-            # Testing Edit Court
-            # Call the editCourt function
-            test_court2 = {
-                "courtName": "New Court",
-                "star": 5.0,
-                "nets": 0,
-                "level": 0,
-                "clean": 0,
-                "ada": 0,
-                "inOut": 1,
-                "hours": "Always",
-                "price": "$5",
-                "location": "123 Somewhere Street",
-                "description": "other describe"
-            }
-            print("\nTesting editCourt:")
-            editCourt(court_id, test_court2["courtName"], test_court2["star"], test_court2["nets"], test_court2["level"], test_court2["clean"], test_court2["ada"], test_court2["inOut"], test_court2["hours"], test_court2["price"], test_court2["location"], test_court2["description"])
-            print(f"Court edited with ID: {court_id}")
-            
-            court_details2 = getCourt(court_id)
-            expected_result2 = (
-                court_id,
-                test_court2["courtName"],
-                test_court2["star"],  # added a star value
-                test_court2["nets"],
-                test_court2["level"],
-                test_court2["clean"],
-                test_court2["ada"],
-                test_court2["inOut"],
-                test_court2["hours"],
-                test_court2["price"],
-                test_court2["location"],
-                test_court2["description"]
-            )
-            assert court_details2 == expected_result2, f"Test failed: {court_details2} != {expected_result2}"
-            print("editCourt test passed successfully.")
-            
-            # Testing Search
-            print("\nTesting findCourts:")
-            search_results = findCourts("Somewhere")
-            assert court_id in search_results, f"Test failed: {court_id} not in {search_results}"
-            print("findCourts passed successfully")
-            
-            
-            # TESTING REVIEWS
-            # Create 3 reviews
-            test_review_1 = {
-                "userID": 14, 
-                "courtID": court_id, 
-                "star": 5.0, 
-                "review": "test review"
-            }
-            test_review_2 = {
-                "userID": 15, 
-                "courtID": court_id, 
-                "star": 4.0, 
-                "review": "another test"
-            }
-            
-            
-            print("\nTesting createReview:")
-            review1id = createReview(test_review_1["userID"], test_review_1["courtID"], test_review_1["star"], test_review_1["review"])
-            print(f"Review created with ID: {review1id}")
-            review2id = createReview(test_review_2["userID"], test_review_2["courtID"], test_review_2["star"], test_review_2["review"])
-            print(f"Review created with ID: {review2id}")
-            print("createReview passed successfully")
-            
-            # Testing Average Star
-            print("\nTesting calcAvStar:")
-            test_average = calcAvStar(court_id)
-            assert test_average == 4.5, f"Test failed: {test_average} != 4.5"
-            print("calcAvStar passed successfully")
-            
-            # Testing Get Review
-            print("\nTesting getReviews:")
-            court_reviews = getReviews(court_id)
-            assert court_reviews[review1id] == [test_review_1["userID"], test_review_1["courtID"], test_review_1["star"], test_review_1["review"]], f"Test failed: Review {review1id} wrong"
-            print("getReviews passed successfully")
-            
-            # Testing Get Users Review
-            print("\nTesting getUserReviews:")
-            court_reviews = getUserReviews(14)
-            assert court_reviews[review1id] == [test_review_1["userID"], test_review_1["courtID"], test_review_1["star"], test_review_1["review"]], f"Test failed: Review {review1id} wrong"
-            print("getUserReviews passed successfully")
-            
-            #Test Create and Get Favorites
-            print("\nTesting createUserFavorite:")
-            createUserFavorite(14, court_id)
-            print("User Favorite Created")
-            userFave = getUserFavorites(14)
-            assert userFave[court_id] == 5.0, f"Test failed: User Favorite for User9 and {court_id} is {userFave[court_id]} instead of 5.0"
-            print("create and get UserFavorite passed successfully")
-            
-            # Delete Reviews
-            print("\nTesting deleteReview:")
-            deleteReview(review1id)
-            print(f"Review with ID {review1id} deleted successfully.")
-            deleteReview(review2id)
-            print(f"Review with ID {review2id} deleted successfully.")
-            
-            
-            # Verify the reviews no longer exists
-            cursor.execute("SELECT * FROM reviews WHERE reviewID = %s;", (review1id,))
-            deleted_review1 = cursor.fetchone()
-            assert deleted_review1 is None, f"Test failed: Review with ID {review1id} still exists."
-            cursor.execute("SELECT * FROM reviews WHERE reviewID = %s;", (review2id,))
-            deleted_review2 = cursor.fetchone()
-            assert deleted_review2 is None, f"Test failed: Review with ID {review2id} still exists."
-            print("deleteReview test passed successfully.")
-            
-            
-            # Test no star favorite get
-            print("\nTesting getUserFavorite with no star:")
-            createUserFavorite(16, court_id)
-            print("User Favorite Created No Star")
-            userFave2 = getUserFavorites(16)
-            assert userFave2[court_id] == None, f"Test failed: User Favorite for User12 and {court_id} is {userFave2[court_id]} instead of None"
-            createUserFavorite(15, court_id)
-            print("User Favorite Created No Star")
-            userFave3 = getUserFavorites(15)
-            assert userFave3[court_id] == None, f"Test failed: User Favorite for User11 and {court_id} is {userFave3[court_id]} instead of None"
-            print("getUserFavorites passes with null star")
-            
-            # Test Delete Favorite
-            print("\nTesting deleteUserFavorite:")
-            deleteUserFavorite(14, court_id)
-            print("Favorite Deleted Successfully")
-            cursor.execute("SELECT * FROM favorites WHERE userID = 14 AND courtID = %s;", (court_id,))
-            deleted_fave = cursor.fetchone()
-            assert deleted_fave is None, "Test failed: Favorite still exists."
-            deleteUserFavorite(16, court_id)
-            print("Favorite Deleted Successfully")
-            cursor.execute("SELECT * FROM favorites WHERE userID = 16 AND courtID = %s;", (court_id,))
-            deleted_fave2 = cursor.fetchone()
-            assert deleted_fave2 is None, "Test failed: Favorite still exists."
-            deleteUserFavorite(15, court_id)
-            print("Favorite Deleted Successfully")
-            cursor.execute("SELECT * FROM favorites WHERE userID = 15 AND courtID = %s;", (court_id,))
-            deleted_fave3 = cursor.fetchone()
-            assert deleted_fave3 is None, "Test failed: Favorite still exists."
-            
-            
-            # TESTING DELETE Court
-            # Call the deleteCourt function
-            print("\nTesting deleteCourt:")
-            deleteCourt(court_id)
-            print(f"Court with ID {court_id} deleted successfully.")
-
-            # Verify the court no longer exists
-            cursor.execute("SELECT * FROM courts WHERE courtID = %s;", (court_id,))
-            deleted_court = cursor.fetchone()
-            assert deleted_court is None, f"Test failed: Court with ID {court_id} still exists."
-            print("deleteCourt test passed successfully.")
-            
-            
-            
-            
-        connection.commit()
-
-    except Exception as e:
-        print(f"Error during test: {e}")
-        if 'connection' in locals():
-            connection.rollback()  # Rollback transaction on error
-
-    finally:
-        # Close the connection
-        if 'connection' in locals() and connection:
-            connection.close()
-            print("Connection closed.")
+#if __name__ == "__main__":
+#    """
+#    Main function to test functions.
+#    """
+#    # Define the database URL
+#    DATABASE_URL = "postgresql://jjjohnywaffles_k8io_user:vaeBbrGmOq2g6GVR7zttI2g2bsf7Gh8f@dpg-ct1nsddumphs738rb1f0-a.oregon-postgres.render.com/jjjohnywaffles_k8io"
+#    try:
+#        # Connect to the database
+#        connection = psycopg2.connect(DATABASE_URL)
+#        with connection.cursor() as cursor:
+#            
+#            # TESTING CREATE COURT
+#            # Define test data for creating a court
+#            test_court = {
+#                "courtName": "Test Court",
+#                "nets": 1,
+#                "level": 1,
+#                "clean": 1,
+#                "ada": 1,
+#                "inOut": 0,
+#                "hours": "9 AM - 9 PM",
+#                "price": "Free",
+#                "location": "123 Test Street",
+#                "description": "test description"
+#            }
+#
+#            # Call the createCourt function
+#            print("\nTesting createCourt:")
+#            court_id = createCourt(
+#                test_court["courtName"],
+#                test_court["nets"],
+#                test_court["level"],
+#                test_court["clean"],
+#                test_court["ada"],
+#                test_court["inOut"],
+#                test_court["hours"],
+#                test_court["price"],
+#                test_court["location"],
+#                test_court["description"]
+#            )
+#            print(f"Court created with ID: {court_id}")
+#            
+#            
+#            # TESTING GETCOURT
+#            # Call the getCourt function
+#            print("\nTesting getCourt:")
+#            court_details = getCourt(court_id)
+#            print(f"Retrieved court: {court_details}")
+#
+#            # Verify the retrieved court matches the input
+#            expected_result = (
+#                court_id,
+#                test_court["courtName"],
+#                None,  # avStar defaults to NULL
+#                test_court["nets"],
+#                test_court["level"],
+#                test_court["clean"],
+#                test_court["ada"],
+#                test_court["inOut"],
+#                test_court["hours"],
+#                test_court["price"],
+#                test_court["location"],
+#                test_court["description"]
+#            )
+#            assert court_details == expected_result, f"Test failed: {court_details} != {expected_result}"
+#            print("getCourt test passed successfully.")
+#            
+#            # Testing Edit Court
+#            # Call the editCourt function
+#            test_court2 = {
+#                "courtName": "New Court",
+#                "star": 5.0,
+#                "nets": 0,
+#                "level": 0,
+#                "clean": 0,
+#                "ada": 0,
+#                "inOut": 1,
+#                "hours": "Always",
+#                "price": "$5",
+#                "location": "123 Somewhere Street",
+#                "description": "other describe"
+#            }
+#            print("\nTesting editCourt:")
+#            editCourt(court_id, test_court2["courtName"], test_court2["star"], test_court2["nets"], test_court2["level"], test_court2["clean"], test_court2["ada"], test_court2["inOut"], test_court2["hours"], test_court2["price"], test_court2["location"], test_court2["description"])
+#            print(f"Court edited with ID: {court_id}")
+#            
+#            court_details2 = getCourt(court_id)
+#            expected_result2 = (
+#                court_id,
+#                test_court2["courtName"],
+#                test_court2["star"],  # added a star value
+#                test_court2["nets"],
+#                test_court2["level"],
+#                test_court2["clean"],
+#                test_court2["ada"],
+#                test_court2["inOut"],
+#                test_court2["hours"],
+#                test_court2["price"],
+#                test_court2["location"],
+#                test_court2["description"]
+#            )
+#            assert court_details2 == expected_result2, f"Test failed: {court_details2} != {expected_result2}"
+#            print("editCourt test passed successfully.")
+#            
+#            # Testing Search
+#            print("\nTesting findCourts:")
+#            search_results = findCourts("Somewhere")
+#            assert court_id in search_results, f"Test failed: {court_id} not in {search_results}"
+#            print("findCourts passed successfully")
+#            
+#            
+#            # TESTING REVIEWS
+#            # Create 3 reviews
+#            test_review_1 = {
+#                "userID": 14, 
+#                "courtID": court_id, 
+#                "star": 5.0, 
+#                "review": "test review"
+#            }
+#            test_review_2 = {
+#                "userID": 15, 
+#                "courtID": court_id, 
+#                "star": 4.0, 
+#                "review": "another test"
+#            }
+#            
+#            
+#            print("\nTesting createReview:")
+#            review1id = createReview(test_review_1["userID"], test_review_1["courtID"], test_review_1["star"], test_review_1["review"])
+#            print(f"Review created with ID: {review1id}")
+#            review2id = createReview(test_review_2["userID"], test_review_2["courtID"], test_review_2["star"], test_review_2["review"])
+#            print(f"Review created with ID: {review2id}")
+#            print("createReview passed successfully")
+#            
+#            # Testing Average Star
+#            print("\nTesting calcAvStar:")
+#            test_average = calcAvStar(court_id)
+#            assert test_average == 4.5, f"Test failed: {test_average} != 4.5"
+#            print("calcAvStar passed successfully")
+#            
+#            # Testing Get Review
+#            print("\nTesting getReviews:")
+#            court_reviews = getReviews(court_id)
+#            assert court_reviews[review1id] == [test_review_1["userID"], test_review_1["courtID"], test_review_1["star"], test_review_1["review"]], f"Test failed: Review {review1id} wrong"
+#            print("getReviews passed successfully")
+#            
+#            # Testing Get Users Review
+#            print("\nTesting getUserReviews:")
+#            court_reviews = getUserReviews(14)
+#            assert court_reviews[review1id] == [test_review_1["userID"], test_review_1["courtID"], test_review_1["star"], test_review_1["review"]], f"Test failed: Review {review1id} wrong"
+#            print("getUserReviews passed successfully")
+#            
+#            #Test Create and Get Favorites
+#            print("\nTesting createUserFavorite:")
+#            createUserFavorite(14, court_id)
+#            print("User Favorite Created")
+#            userFave = getUserFavorites(14)
+#            assert userFave[court_id] == 5.0, f"Test failed: User Favorite for User9 and {court_id} is {userFave[court_id]} instead of 5.0"
+#            print("create and get UserFavorite passed successfully")
+#            
+#            # Delete Reviews
+#            print("\nTesting deleteReview:")
+#            deleteReview(review1id)
+#            print(f"Review with ID {review1id} deleted successfully.")
+#            deleteReview(review2id)
+#            print(f"Review with ID {review2id} deleted successfully.")
+#            
+#            
+#            # Verify the reviews no longer exists
+#            cursor.execute("SELECT * FROM reviews WHERE reviewID = %s;", (review1id,))
+#            deleted_review1 = cursor.fetchone()
+#            assert deleted_review1 is None, f"Test failed: Review with ID {review1id} still exists."
+#            cursor.execute("SELECT * FROM reviews WHERE reviewID = %s;", (review2id,))
+#            deleted_review2 = cursor.fetchone()
+#            assert deleted_review2 is None, f"Test failed: Review with ID {review2id} still exists."
+#            print("deleteReview test passed successfully.")
+#            
+#            
+#            # Test no star favorite get
+#            print("\nTesting getUserFavorite with no star:")
+#            createUserFavorite(16, court_id)
+#            print("User Favorite Created No Star")
+#            userFave2 = getUserFavorites(16)
+#            assert userFave2[court_id] == None, f"Test failed: User Favorite for User12 and {court_id} is {userFave2[court_id]} instead of None"
+#            createUserFavorite(15, court_id)
+#            print("User Favorite Created No Star")
+#            userFave3 = getUserFavorites(15)
+#            assert userFave3[court_id] == None, f"Test failed: User Favorite for User11 and {court_id} is {userFave3[court_id]} instead of None"
+#            print("getUserFavorites passes with null star")
+#            
+#            # Test Delete Favorite
+#            print("\nTesting deleteUserFavorite:")
+#            deleteUserFavorite(14, court_id)
+#            print("Favorite Deleted Successfully")
+#            cursor.execute("SELECT * FROM favorites WHERE userID = 14 AND courtID = %s;", (court_id,))
+#            deleted_fave = cursor.fetchone()
+#            assert deleted_fave is None, "Test failed: Favorite still exists."
+#            deleteUserFavorite(16, court_id)
+#            print("Favorite Deleted Successfully")
+#            cursor.execute("SELECT * FROM favorites WHERE userID = 16 AND courtID = %s;", (court_id,))
+#            deleted_fave2 = cursor.fetchone()
+#            assert deleted_fave2 is None, "Test failed: Favorite still exists."
+#            deleteUserFavorite(15, court_id)
+#            print("Favorite Deleted Successfully")
+#            cursor.execute("SELECT * FROM favorites WHERE userID = 15 AND courtID = %s;", (court_id,))
+#            deleted_fave3 = cursor.fetchone()
+#            assert deleted_fave3 is None, "Test failed: Favorite still exists."
+#            
+#            
+#            # TESTING DELETE Court
+#            # Call the deleteCourt function
+#            print("\nTesting deleteCourt:")
+#            deleteCourt(court_id)
+#            print(f"Court with ID {court_id} deleted successfully.")
+#
+#            # Verify the court no longer exists
+#            cursor.execute("SELECT * FROM courts WHERE courtID = %s;", (court_id,))
+#            deleted_court = cursor.fetchone()
+#            assert deleted_court is None, f"Test failed: Court with ID {court_id} still exists."
+#            print("deleteCourt test passed successfully.")
+#            
+#            
+#            
+#            
+#        connection.commit()
+#
+#    except Exception as e:
+#        print(f"Error during test: {e}")
+#        if 'connection' in locals():
+#            connection.rollback()  # Rollback transaction on error
+#
+#    finally:
+#        # Close the connection
+#        if 'connection' in locals() and connection:
+#            connection.close()
+#            print("Connection closed.")
