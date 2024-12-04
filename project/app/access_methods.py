@@ -2,7 +2,7 @@ import psycopg2
 import random
 from db_setup import DATABASE_URL
 
-#DATABASE_URL = "postgresql://jjjohnywaffles_k8io_user:vaeBbrGmOq2g6GVR7zttI2g2bsf7Gh8f@dpg-ct1nsddumphs738rb1f0-a.oregon-postgres.render.com/jjjohnywaffles_k8io"
+#DATABASE_URL = "postgresql://jae_test_user:HtuRJ21AGVyAfz4e2rERt9n8ErU7Wupf@dpg-ct85p923esus73a5lba0-a.frankfurt-postgres.render.com/jae_test"
 
 def createCourt(courtName, avStar, nets, level, clean, ada, inOut, hours, price, location, description):
     """
