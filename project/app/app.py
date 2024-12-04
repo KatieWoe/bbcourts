@@ -36,7 +36,6 @@ def login():
 @app.route('/listing')
 def listing():
     courts = acc.getCourts()
-    """
     photos = []
     for court in courts:
         c_photo = getPhotos(court[0])
@@ -44,7 +43,6 @@ def listing():
             photos.append("https://images.unsplash.com/photo-1732564240612-d3f36ec92840?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8YmFza2V0YmFsbCUyMGNvdXJ0fGVufDB8fDJ8fHww")
         else:
             photos.append(c_photo[0][1])
-    """
     #return court
     return render_template('listing.html', courts=courts)
 
