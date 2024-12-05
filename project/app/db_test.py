@@ -15,10 +15,10 @@ def insert_test_data(connection):
     with connection.cursor() as cursor:
         # Insert data into the `courts` table
         cursor.execute("""
-            INSERT INTO courts (courtName, avStar, nets, level, clean, ada, inOut, hours, price, location)
+            INSERT INTO courts (courtName, avStar, nets, level, clean, ada, inOut, hours, price, location, description)
             VALUES
-            ('Court A', 4.5, 1, 1, 1, 1, 0, '9 AM - 9 PM', 'Free', '123 Main St'),
-            ('Court B', NULL, 0, 0, 0, 1, 1, '10 AM - 6 PM', '$5', '456 Elm St');
+            ('Court A', 4.5, 1, 1, 1, 1, 0, '9 AM - 9 PM', 'Free', '123 Main St', 'Court Description'),
+            ('Court B', NULL, 0, 0, 0, 1, 1, '10 AM - 6 PM', '$5', '456 Elm St', 'Generic Description');
         """)
 
         # Insert data into the `users` table
