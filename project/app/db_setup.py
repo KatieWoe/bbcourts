@@ -2,8 +2,9 @@ import psycopg2
 from psycopg2 import OperationalError, DatabaseError
 
 # Database URL
-#DATABASE_URL = "postgresql://jae_test_user:HtuRJ21AGVyAfz4e2rERt9n8ErU7Wupf@dpg-ct85p923esus73a5lba0-a.frankfurt-postgres.render.com/jae_test"
+# DATABASE_URL = "postgresql://jae_test_user:HtuRJ21AGVyAfz4e2rERt9n8ErU7Wupf@dpg-ct85p923esus73a5lba0-a.frankfurt-postgres.render.com/jae_test"
 DATABASE_URL = "postgresql://jjjohnywaffles_k8io_user:vaeBbrGmOq2g6GVR7zttI2g2bsf7Gh8f@dpg-ct1nsddumphs738rb1f0-a.oregon-postgres.render.com/jjjohnywaffles_k8io"
+
 
 def create_tables():
     commands = [
@@ -53,7 +54,7 @@ def create_tables():
             courtID INTEGER NOT NULL REFERENCES courts(courtID),
             photo VARCHAR NOT NULL
         )
-        """
+        """,
     ]
     conn = None
     try:
@@ -71,13 +72,14 @@ def create_tables():
         if conn:
             conn.close()
 
+
 def delete_tables():
     commands = [
         "DROP TABLE IF EXISTS photos CASCADE",
         "DROP TABLE IF EXISTS favorites CASCADE",
         "DROP TABLE IF EXISTS reviews CASCADE",
         "DROP TABLE IF EXISTS users CASCADE",
-        "DROP TABLE IF EXISTS courts CASCADE"
+        "DROP TABLE IF EXISTS courts CASCADE",
     ]
     conn = None
     try:
@@ -92,6 +94,7 @@ def delete_tables():
     finally:
         if conn:
             conn.close()
+
 
 if __name__ == "__main__":
     create_tables()

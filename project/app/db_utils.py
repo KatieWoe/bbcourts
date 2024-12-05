@@ -1,6 +1,7 @@
 import random
 import access_methods as acc  # Your data access functions
 
+
 def generate_dummy_courts_with_reviews(court_count, max_reviews_per_court=10):
     """Generates and seeds dummy court data with random reviews into the database."""
     locations = ["Chicago", "Los Angeles", "New York", "Phoenix", "Austin"]
@@ -9,7 +10,7 @@ def generate_dummy_courts_with_reviews(court_count, max_reviews_per_court=10):
         "Spacious indoor facility.",
         "Popular community court.",
         "Well-maintained park.",
-        "Scenic court with amazing views."
+        "Scenic court with amazing views.",
     ]
 
     for i in range(court_count):
@@ -24,7 +25,7 @@ def generate_dummy_courts_with_reviews(court_count, max_reviews_per_court=10):
             "hours": f"{random.randint(6, 12)} AM - {random.randint(6, 11)} PM",
             "price": random.choice(["Free", "$3", "$5", "$10"]),
             "location": f"{random.choice(locations)}, USA",
-            "description": random.choice(descriptions)
+            "description": random.choice(descriptions),
         }
 
         # Insert the court and get its ID
@@ -49,14 +50,18 @@ def generate_dummy_courts_with_reviews(court_count, max_reviews_per_court=10):
             for j in range(review_count):
                 try:
                     review = acc.createReview(
-                        userID=random.randint(1, 4),  # User IDs from 1 to 100 (matches the number of seeded users)
+                        userID=random.randint(
+                            1, 4
+                        ),  # User IDs from 1 to 100 (matches the number of seeded users)
                         courtID=court_id,
                         star=random.randint(1, 5),  # Random star rating between 1 and 5
-                        comment="Random review comment"  # Placeholder comment
+                        comment="Random review comment",  # Placeholder comment
                     )
                     print(f"  - Created review #{j+1} for court {court['courtName']}")
                 except Exception as review_error:
-                    print(f"  - Error creating review for court {court['courtName']}: {review_error}")
+                    print(
+                        f"  - Error creating review for court {court['courtName']}: {review_error}"
+                    )
 
             # Calculate the average star rating after generating reviews
             avStar = acc.calcAvStar(court_id)
@@ -77,7 +82,9 @@ def generate_dummy_courts_with_reviews(court_count, max_reviews_per_court=10):
                     location=court["location"],
                     description=court["description"],
                 )
-                print(f"  - Updated court {court['courtName']} with average star rating: {avStar}")
+                print(
+                    f"  - Updated court {court['courtName']} with average star rating: {avStar}"
+                )
             except Exception as edit_error:
                 print(f"  - Error updating court {court['courtName']}: {edit_error}")
 
@@ -90,10 +97,8 @@ def generate_dummy_users(count):
     for i in range(count):
         try:
             user = acc.createUser(
-                name=f"User{i+1}",
-                password="password123"  # Placeholder password
+                name=f"User{i+1}", password="password123"  # Placeholder password
             )
             print(f"Successfully created user: User{i+1}")
         except Exception as user_error:
             print(f"Error creating user: {user_error}")
-
