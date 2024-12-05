@@ -26,7 +26,7 @@
 - Presentation Files
 - Demo Video
 - [Source Code](project/app)
-- [Test cases](project/app/access_methods.py)
+- [Test cases](project/app/access_methods.py) May not work if Users table is not configured for tests. Tests passed 12/4/24
 - Source Documentation
 - [Public Deployment](https://bbcourts.onrender.com/)
 
