@@ -1,68 +1,139 @@
-{% extends "base.html" %}
-{% block content %}
-
+{% extends "base.html" %} {% block content %}
 
 <div class="bg-white">
-    <div class="pt-6 mx-auto overflow-hidden max-w-7xl sm:px-6 lg:px-8">
-        <nav aria-label="Breadcrumb">
-            <ol role="list" class="flex items-center max-w-2xl px-4 mx-auto space-x-2 sm:px-6 lg:max-w-7xl lg:px-8">
-                <li>
-                    <div class="flex items-center">
-                        <a href="#" class="mr-2 text-sm font-medium text-gray-900">Home</a>
-                        <svg width="16" height="20" viewBox="0 0 16 20" fill="currentColor" aria-hidden="true" class="w-4 h-5 text-gray-300">
-                            <path d="M5.697 4.34L8.98 16.532h1.327L7.025 4.341H5.697z" />
-                        </svg>
-                    </div>
-                </li>
-                <li>
-                    <div class="flex items-center">
-                        <a href="#" class="mr-2 text-sm font-medium text-gray-900">Courts in {TO DO}</a>
-                    </div>
-                </li>
-            </ol>
-        </nav>
-        
-        <h2 class="sr-only">Basketball Courts</h2>
+  <div class="pt-6 mx-auto overflow-hidden max-w-7xl sm:px-6 lg:px-8">
+    <nav aria-label="Breadcrumb">
+      <ol
+        role="list"
+        class="flex items-center max-w-2xl px-4 mx-auto space-x-2 sm:px-6 lg:max-w-7xl lg:px-8"
+      >
+        <li>
+          <div class="flex items-center">
+            <a href="#" class="mr-2 text-sm font-medium text-gray-900">Home</a>
+            <svg
+              width="16"
+              height="20"
+              viewBox="0 0 16 20"
+              fill="currentColor"
+              aria-hidden="true"
+              class="w-4 h-5 text-gray-300"
+            >
+              <path d="M5.697 4.34L8.98 16.532h1.327L7.025 4.341H5.697z" />
+            </svg>
+          </div>
+        </li>
+        <li>
+          <div class="flex items-center">
+            <a href="#" class="mr-2 text-sm font-medium text-gray-900"
+              >Courts in {TO DO}</a
+            >
+          </div>
+        </li>
+      </ol>
+    </nav>
 
-        <div class="grid grid-cols-2 mt-10 -mx-px border-l border-gray-200 sm:mx-0 md:grid-cols-3 lg:grid-cols-3">
+    <h2 class="sr-only">Basketball Courts</h2>
 
-            {% for court in courts %}
-<div class="relative p-4 border-b border-r border-gray-200 group sm:p-6">
-    <img src={{ photos[courts.index(court)] }} alt={{ court[1] }} 
-         class="object-cover bg-gray-200 rounded-lg aspect-square group-hover:opacity-75">
-    <div class="pt-10 pb-4 text-center">
-        <h3 class="text-lg font-medium text-gray-900">
+    <div
+      class="grid grid-cols-2 mt-10 -mx-px border-l border-gray-200 sm:mx-0 md:grid-cols-3 lg:grid-cols-3"
+    >
+      {% for court in courts %}
+      <div class="relative p-4 border-b border-r border-gray-200 group sm:p-6">
+        <img
+          src="{{ photos[courts.index(court)] }}"
+          alt="{{"
+          court[1]
+          }}
+          class="object-cover bg-gray-200 rounded-lg aspect-square group-hover:opacity-75"
+        />
+        <div class="pt-10 pb-4 text-center">
+          <h3 class="text-lg font-medium text-gray-900">
             <a href="#">
-                <span aria-hidden="true" class="absolute inset-0"></span>
-                {{ court[1] }}
+              <span aria-hidden="true" class="absolute inset-0"></span>
+              {{ court[1] }}
             </a>
-        </h3>
-        <div class="flex flex-col items-center mt-3">
+          </h3>
+          <div class="flex flex-col items-center mt-3">
             <p class="sr-only">{{ court[2] }} out of 5 stars</p>
             <div class="flex items-center">
-                {% for i in range(5) %}
-                    {% if i < (court[2] or 0)|round(0, 'floor') %}
+              {% for i in range(5) %} {% set rating = court[2] or 0 %} {% set
+              full_stars = rating|round(0, 'floor') %} {% set
+              partial_star_percentage = (rating - full_stars) * 100 %} {% if i <
+              full_stars %}
+              <!-- Full Yellow Star -->
+              <svg
+                class="text-yellow-400 size-5 shrink-0"
+                viewBox="0 0 20 20"
+                fill="currentColor"
+                aria-hidden="true"
+                data-slot="icon"
+              >
+                <path
+                  fill-rule="evenodd"
+                  d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401Z"
+                  clip-rule="evenodd"
+                />
+              </svg>
+              {% elif i == full_stars and partial_star_percentage > 0 %}
+              <!-- Half Yellow, Half Gray Star -->
+              <svg
+                class="size-5 shrink-0"
+                viewBox="0 0 20 20"
+                fill="currentColor"
+                aria-hidden="true"
+                data-slot="icon"
+              >
+                <!-- Background Gray Star -->
+                <path
+                  fill="gray"
+                  fill-rule="evenodd"
+                  d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401Z"
+                  clip-rule="evenodd"
+                />
 
-                        <svg class="text-yellow-400 size-5 shrink-0" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" data-slot="icon">
-                            <path fill-rule="evenodd" d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401Z" clip-rule="evenodd" />
-                        </svg>
-                    {% else %}
-                        <svg class="text-gray-400 size-5 shrink-0" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" data-slot="icon">
-                            <path fill-rule="evenodd" d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c-.635-.544-.297-1.584-.536-1.65l-4.752-.382-1.831-4.401Z" clip-rule="evenodd" />
-                        </svg>
-                    {% endif %}
-                {% endfor %}
+                <!-- Yellow Part of the Star -->
+                <g
+                  class="text-yellow-400 size-5 shrink-0"
+                  fill="currentColor"
+                  clip-path="url(#clip)"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401Z"
+                    clip-rule="evenodd"
+                  />
+                </g>
+                <defs>
+                  <clipPath id="clip">
+                    <!-- Show half of the star in yellow (50%) -->
+                    <rect width="50%" height="100%" />
+                  </clipPath>
+                </defs>
+              </svg>
+              {% else %}
+              <!-- Empty Star (Gray) -->
+              <svg
+                class="text-gray-400 size-5 shrink-0"
+                viewBox="0 0 20 20"
+                fill="currentColor"
+                aria-hidden="true"
+                data-slot="icon"
+              >
+                <path
+                  fill-rule="evenodd"
+                  d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c-.635-.544-.297-1.584-.536-1.65l-4.752-.382-1.831-4.401Z"
+                  clip-rule="evenodd"
+                />
+              </svg>
+              {% endif %} {% endfor %}
             </div>
+          </div>
+          <p class="mt-4 text-sm font-medium text-gray-900">{{ court[10] }}</p>
         </div>
-        <p class="mt-4 text-sm font-medium text-gray-900">{{ court[10] }}</p>
+      </div>
+      {% endfor %}
     </div>
+  </div>
 </div>
-{% endfor %}
-
-            
-        </div>
-    </div>
-</div>
-
 
 {% endblock %}
