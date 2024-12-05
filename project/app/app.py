@@ -108,10 +108,10 @@ def court_details(court_id):
         court = acc.getCourt(court_id)
         if not court:
             return render_template("404.html"), 404
-        
+
         # Fetch photos
         photos = acc.getPhotos(court_id)
-        
+
         # Fetch and process reviews
         reviews_dict = acc.getReviews(court_id)
         if not reviews_dict:
@@ -119,13 +119,13 @@ def court_details(court_id):
             total_reviews = 0
             rating = 0
         else:
+            # Ensure reviews are dictionaries
             reviews = [
                 {
                     'id': review_id,
-                    'username': review_data[0],
-                    'rating': float(review_data[1]),
-                    'image': review_data[2] or 'https://via.placeholder.com/150',
-                    'text': review_data[3]
+                    'username': review_data[0],  # Username
+                    'rating': float(review_data[1]),  # Star rating
+                    'text': review_data[2]  # Review comment
                 }
                 for review_id, review_data in reviews_dict.items()
             ]
@@ -137,17 +137,12 @@ def court_details(court_id):
         partial_star = 1 if (rating - full_stars) >= 0.5 else 0
         empty_stars = 5 - full_stars - partial_star
 
-        # Debugging
-        if os.getenv("FLASK_ENV") == "development":
-            print("Debug - First review:", reviews[0] if reviews else "No reviews")
-            print("Debug - Average rating:", rating)
-
         # Render template
         return render_template(
             "court_details.html",
             court=court,
             photos=photos,
-            reviews=reviews,
+            reviews=reviews,  # Pass dictionaries here
             total_reviews=total_reviews,
             full_stars=full_stars,
             partial_star=partial_star,
@@ -155,9 +150,12 @@ def court_details(court_id):
             int=int
         )
     except Exception as e:
+        import traceback
         print("Error occurred:")
         print(traceback.format_exc())
         return f"An error occurred: {str(e)}", 500
+
+
 
 
 @app.route("/reviews/<int:court_id>")
