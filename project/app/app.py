@@ -43,18 +43,33 @@ def listing():
 
     return render_template("listing.html", courts=courts, photos=photos)
 
+
 @app.route("/courts/<int:court_id>")
 def court_details(court_id):
-    court = acc.getCourt(court_id)
-    photos = acc.getPhotos(court_id)
-    rendered_html = render_template('court_details.html', court=court, photos=photos)
+    court = acc.getCourt(court_id)  # Get court details
+    if not court:
+        return render_template("404.html"), 404
 
-    output_path = os.path.join(STATIC_OUTPUT_DIR, f"court_{court_id}.html")
-    os.makedirs(STATIC_OUTPUT_DIR, exist_ok=True)
-    with open(output_path, "w", encoding="utf-8") as f:
-        f.write(rendered_html)
+    # Preprocess rating logic in Python
+    rating = court[2] or 0
+    full_stars = int(rating)  # Full stars
+    partial_star = 1 if (rating - full_stars) >= 0.5 else 0
+    empty_stars = 5 - full_stars - partial_star
 
-    return rendered_html
+    photos = acc.getPhotos(court_id)  # Get photos for the court
+    reviews = acc.getReviews(court_id)  # Get reviews for the court
+
+    return render_template(
+        "court_details.html",
+        court=court,
+        photos=photos,
+        reviews=reviews,
+        full_stars=full_stars,
+        partial_star=partial_star,
+        empty_stars=empty_stars,
+    )
+
+
 
 @app.route("/reviews/<int:court_id>")
 def reviews(court_id):
