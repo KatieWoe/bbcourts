@@ -801,8 +801,7 @@ if __name__ == "__main__":
             print("\nTesting getReviews:")
             court_reviews = getReviews(court_id)
             assert court_reviews[review1id] == [
-                test_review_1["userID"],
-                test_review_1["courtID"],
+                test_review_1["testUser14"],
                 test_review_1["star"],
                 test_review_1["review"],
             ], f"Test failed: Review {review1id} wrong"
