@@ -6,7 +6,6 @@
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
     <title>CourtFinder - Find the best basketball courts in your area</title>
     <style>
-        /* Optional: Smooth transition for menu */
         .menu-transition {
             transition: max-height 0.3s ease-in-out;
         }
@@ -14,15 +13,75 @@
             display: none;
         }
     </style>
+    
 </head>
 <body class="h-screen">
 
-<div class="flex flex-col h-full">
+
+<div class="flex flex-col min-h-screen">
+    
+        
+               <!-- Header -->
+   <header class="bg-gray-800">
+    <div class="px-2 mx-auto max-w-7xl sm:px-4 lg:divide-y lg:divide-gray-700 lg:px-8">
+        <div class="relative flex justify-between h-16">
+            <div class="relative z-10 flex items-center px-2 lg:px-0">
+                <div class="flex items-center justify-center w-12 h-12 bg-black rounded-full">
+                    <div class="flex items-center justify-center bg-white rounded-full w-11 h-11">
+                        <a href="/"><img class="w-auto h-8" src="https://media.publit.io/file/basketball-svgrepo-com.svg" alt="CourtFinder-logo"></a>
+                    </div>
+                </div>
+            </div>
+            <div class="relative z-0 flex items-center justify-center flex-1 px-2 sm:absolute sm:inset-0">
+                <div class="grid w-full grid-cols-1 sm:max-w-xs">
+                    <input type="search" name="search" aria-label="Search" class="col-start-1 row-start-1 block w-full rounded-md bg-gray-700 py-1.5 pl-10 pr-3 text-base text-white outline-none placeholder:text-gray-400 focus:bg-white focus:text-gray-900 focus:placeholder:text-gray-400 sm:text-sm/6" placeholder="Search">
+                    <svg class="self-center col-start-1 row-start-1 ml-3 text-gray-400 pointer-events-none size-5" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" data-slot="icon">
+                        <path fill-rule="evenodd" d="M9 3.5a5.5 5.5 0 1 0 0 11 5.5 5.5 0 0 0 0-11ZM2 9a7 7 0 1 1 12.452 4.391l3.328 3.329a.75.75 0 1 1-1.06 1.06l-3.329-3.328A7 7 0 0 1 2 9Z" clip-rule="evenodd" />
+                    </svg>
+                </div>
+            </div>
+            <div class="relative z-10 flex items-center lg:hidden">
+                <!-- Mobile menu button -->
+                <button id="hamburger" class="relative inline-flex items-center justify-center p-2 text-gray-400 rounded-md hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white">
+                    <span class="sr-only">Open menu</span>
+                    <svg id="hamburger-icon" class="block w-6 h-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+                    </svg>
+                    <svg id="close-icon" class="hidden w-6 h-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                </button>
+            </div>
+            <div class="hidden lg:relative lg:z-10 lg:ml-4 lg:flex lg:items-center lg:space-x-4">
+                <!-- Login Button -->
+                <button class="px-4 py-2 text-sm font-medium text-white bg-gray-800 rounded-md hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
+                    Login
+                </button>
+
+                <!-- Create Account Button -->
+                <button class="px-4 py-2 text-sm font-medium text-gray-800 bg-white rounded-md hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-800 focus:ring-offset-2 focus:ring-offset-white">
+                    Create an Account
+                </button>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Mobile Menu -->
+<nav id="mobile-menu" class="hidden overflow-hidden lg:hidden max-h-0">
+    <div class="px-2 pt-2 pb-3 space-y-1">
+        <a href="#" class="block px-3 py-2 text-base font-medium text-gray-300 rounded-md hover:bg-gray-700 hover:text-white">About</a>
+        <a href="#" class="block px-3 py-2 text-base font-medium text-gray-300 rounded-md hover:bg-gray-700 hover:text-white">Filter by City</a>
+        <a href="#" class="block px-3 py-2 text-base font-medium text-gray-300 rounded-md hover:bg-gray-700 hover:text-white">Top Rated Courts</a>
+    </div>
+</nav>
+        
     
 
     <!-- Main Content -->
     <main class="flex-1">
-        
+        <div class="relative px-4 py-8 sm:px-6 lg:px-8">
+            
 
 <!--
   This example requires some changes to your config:
@@ -380,12 +439,26 @@
   
 
 
+        </div>
     </main>
 
     
+        
+             <!-- Footer -->
+ <footer class="bg-gray-900">
+    <div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
+        <div class="py-10 border-t border-gray-800">
+            <p class="text-sm text-gray-400">Copyright &copy; 2024 CourtFinder</p>
+        </div>
+    </div>
+</footer>
+        
+    
 </div>
 
+
 <!-- JavaScript -->
+
 <script>
     const hamburger = document.getElementById('hamburger');
     const hamburgerIcon = document.getElementById('hamburger-icon');
@@ -406,6 +479,7 @@
         }
     });
 </script>
+
 
 </body>
 </html>
