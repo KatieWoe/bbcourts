@@ -3,7 +3,7 @@ import access_methods as acc
 
 def initialize_db():
     """Initialise the database tables and insert initial data."""
-    db.delete_tables()
+    #db.delete_tables()
     db.create_tables()
     acc.createCourt("Lakeshore Park Basketball Court", 4.5, 1, 1, 1, 1, 0, '10-18', '$5.99', 'Streeterville, Chicago', 'Nice indoor court. This court is a good place for pick up games, scheduled events, and the weather is often nice in this area. No major complaints!')
     acc.createCourt("Douglas Park Outdoor Courts", 4, 0, 1, 1, 1, 1, '9-20', '$3.99', 'North Lawndale, Chicago', 'Most popular among locals. This court has had a history of poor maintenance, but has drastically improved in recent years. A good, out of the way spot for a quick game.')

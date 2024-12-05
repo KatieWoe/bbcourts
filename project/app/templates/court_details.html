@@ -25,7 +25,7 @@
         <ol role="list" class="flex items-center max-w-2xl px-4 mx-auto space-x-2 sm:px-6 lg:max-w-7xl lg:px-8">
           <li>
             <div class="flex items-center">
-              <a href="#" class="mr-2 text-sm font-medium text-gray-900">Home</a>
+              <a href="{{url_for('index')}}" class="mr-2 text-sm font-medium text-gray-900">Home</a>
               <svg width="16" height="20" viewBox="0 0 16 20" fill="currentColor" aria-hidden="true" class="w-4 h-5 text-gray-300">
                 <path d="M5.697 4.34L8.98 16.532h1.327L7.025 4.341H5.697z" />
               </svg>
@@ -33,7 +33,7 @@
           </li>
           <li>
             <div class="flex items-center">
-              <a href="#" class="mr-2 text-sm font-medium text-gray-900">Courts</a>
+              <a href="{{url_for('listing')}}" class="mr-2 text-sm font-medium text-gray-900">Courts</a>
               <svg width="16" height="20" viewBox="0 0 16 20" fill="currentColor" aria-hidden="true" class="w-4 h-5 text-gray-300">
                 <path d="M5.697 4.34L8.98 16.532h1.327L7.025 4.341H5.697z" />
               </svg>
@@ -41,7 +41,7 @@
           </li>
   
           <li class="text-sm">
-            <a href="#" aria-current="page" class="font-medium text-gray-500 hover:text-gray-600">Courts Details</a>
+            <a href="{{url_for('court_details', court_id=court[0])}}" aria-current="page" class="font-medium text-gray-500 hover:text-gray-600">{{court[1]}}</a>
           </li>
         </ol>
       </nav>
@@ -143,7 +143,6 @@
             
               <div class="grid grid-cols-2 gap-4 mt-4">
                  <!-- Feature: Nets -->
-                 <!-- TODO: Change icon -->
                 <div class="flex items-center text-sm text-gray-900">
                   
                   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
@@ -157,7 +156,6 @@
                 </div>
 
                  <!-- Feature: Level ground -->
-                 <!-- TODO: Change icon -->
                 <div class="flex items-center text-sm text-gray-900">
                   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
                     <defs><style>.cls-1{fill:none;stroke:#020202;stroke-miterlimit:10;stroke-width:1.91px;}</style></defs><polygon class="cls-1" points="16.77 7.23 16.77 12 7.23 12 7.23 7.23 1.5 7.23 1.5 16.77 7.23 16.77 16.77 16.77 22.5 16.77 22.5 7.23 16.77 7.23"/><line class="cls-1" x1="7.23" y1="8.18" x2="16.77" y2="8.18"/><line class="cls-1" x1="13.91" y1="14.86" x2="13.91" y2="16.77"/><line class="cls-1" x1="17.73" y1="14.86" x2="17.73" y2="16.77"/><line class="cls-1" x1="6.27" y1="14.86" x2="6.27" y2="16.77"/><line class="cls-1" x1="10.09" y1="14.86" x2="10.09" y2="16.77"/>
@@ -170,7 +168,6 @@
                 </div>
 
                  <!-- Feature: Cleanliness -->
-                 <!-- TODO: Change icon -->
                 <div class="flex items-center text-sm text-gray-900">
                   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 32 32" stroke-width="1.5" stroke="currentColor" class="size-6">
                     <path d="M 28.28125 2.28125 L 18.28125 12.28125 L 17 11 L 17 10.96875 L 16.96875 10.9375 C 16.328125 10.367188 15.492188 10.09375 14.6875 10.09375 C 13.882813 10.09375 13.105469 10.394531 12.5 11 L 12.34375 11.125 L 11.84375 11.625 L 11.5 11.90625 L 2.375 19 L 1.5 19.71875 L 12.28125 30.5 L 13 29.625 L 20.0625 20.5625 L 20.09375 20.59375 L 21.09375 19.59375 L 21.125 19.59375 L 21.15625 19.5625 C 22.296875 18.277344 22.304688 16.304688 21.09375 15.09375 L 19.71875 13.71875 L 29.71875 3.71875 Z M 14.6875 12.09375 C 14.996094 12.085938 15.335938 12.191406 15.59375 12.40625 C 15.605469 12.414063 15.613281 12.429688 15.625 12.4375 L 19.6875 16.5 C 20.0625 16.875 20.097656 17.671875 19.6875 18.1875 C 19.671875 18.207031 19.671875 18.230469 19.65625 18.25 L 19.34375 18.53125 L 13.5625 12.75 L 13.90625 12.40625 C 14.097656 12.214844 14.378906 12.101563 14.6875 12.09375 Z M 12.03125 14.03125 L 17.96875 19.96875 L 12.09375 27.46875 L 10.65625 26.03125 L 12.8125 23.78125 L 11.375 22.40625 L 9.25 24.625 L 7.9375 23.3125 L 11.8125 19.40625 L 10.40625 18 L 6.5 21.875 L 4.53125 19.90625 Z"/>
@@ -183,7 +180,6 @@
                 </div>
                 
                  <!-- Feature: ADA -->
-                 <!-- TODO: Change icon -->
                 <div class="flex items-center text-sm text-gray-900">
                   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
                     <path d="M12 16L15.8889 16L17.4444 18.5H19" stroke="#000000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -199,7 +195,6 @@
                 </div>
 
                  <!-- Feature: inOut -->
-                 <!-- TODO: Change icon -->
                 <div class="flex items-center text-sm text-gray-900">
                   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v2.25m6.364.386-1.591 1.591M21 12h-2.25m-.386 6.364-1.591-1.591M12 18.75V21m-4.773-4.227-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0Z" />
@@ -212,7 +207,6 @@
                 </div>
 
                  <!-- Feature: Hours -->
-                 <!-- TODO: Change icon -->
                 <div class="flex items-center text-sm text-gray-900">
                   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
                     <circle cx="12" cy="12" r="9" stroke="#000000" stroke-linecap="round" stroke-linejoin="round"/>
@@ -224,7 +218,6 @@
                 </div>
             
                 <!-- Feature: Price -->
-                 <!-- TODO: Change icon -->
                 <div class="flex items-center text-sm text-gray-900">
                   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
                     <path d="M18 8.5V8.35417C18 6.50171 16.4983 5 14.6458 5H9.5C7.567 5 6 6.567 6 8.5C6 10.433 7.567 12 9.5 12H14.5C16.433 12 18 13.567 18 15.5C18 17.433 16.433 19 14.5 19H9.42708C7.53436 19 6 17.4656 6 15.5729V15.5M12 3V21" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
