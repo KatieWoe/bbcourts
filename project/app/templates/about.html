@@ -1,9 +1,44 @@
 {% extends "base.html" %}
 {% block content %}
 
-<div>
-    <h1>About page</h1>
-    <p>WIP</p>
+<div class="relative w-full h-screen">
+    <!-- Background Image -->
+    <div class="absolute inset-0 overflow-hidden rounded-md">
+        <img src="https://images.unsplash.com/photo-1519861531473-9200262188bf?q=80&w=2071&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+             class="object-cover w-full h-full" 
+             alt="Basketball Court Background">
+    </div>
+
+    <!-- Overlay -->
+    <div class="absolute inset-0 bg-gray-900 opacity-50"></div>
+
+    <!-- Content -->
+    <div class="relative z-10 flex items-center justify-center h-full px-4 text-center sm:px-6 lg:px-8">
+        <div class="max-w-3xl backdrop-blur-sm backdrop-filter text-white">
+            <h1 class="mb-4 text-4xl font-bold tracking-tight lg:text-6xl">
+                About CourtFinder
+            </h1>
+            <p class="mb-8 text-lg">
+                CourtFinder is the ultimate platform designed to help basketball players of all levels find the perfect court for their next game. Whether you’re searching for an immaculate, well-maintained court, or just the nearest spot to get in a quick session, we make it easy to locate the best basketball courts in your area.
+            </p>
+            <p class="mb-8 text-lg">
+                We are passionate about the game of basketball and understand how important it is to have access to quality courts that meet your needs. With user-driven reviews, detailed information, and real-time data, CourtFinder provides an easy-to-navigate resource to help you make informed decisions about where to play.
+            </p>
+            <h2 class="text-2xl font-semibold mb-4">
+                Our Vision
+            </h2>
+            <p class="text-lg mb-8">
+                Our vision is to create a comprehensive and user-driven platform where basketball enthusiasts can find and share detailed information about the best courts in their area. Whether you’re looking for a clean and accessible court, or simply the court which is closest to your location, CourtFinder will be able to provide everything you need to make an informed decision for your next hoop session.
+            </p>
+            <a href="{{ url_for('listing') }}" class="inline-block px-8 py-3 text-base font-medium text-gray-900 bg-white border border-transparent rounded-md hover:bg-gray-100">
+                Discover Courts Near You
+            </a>
+        </div>
+    </div>
 </div>
+<!--<div>-->
+<!--    <h1>About page</h1>-->
+<!--    <p>WIP</p>-->
+<!--</div>-->
 
 {% endblock %}
