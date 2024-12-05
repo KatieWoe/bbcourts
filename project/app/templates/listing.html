@@ -28,7 +28,7 @@
 
             {% for court in courts %}
 <div class="relative p-4 border-b border-r border-gray-200 group sm:p-6">
-    <img src="{{ photos[courts.index(court)] }}" alt="{{ court[1] }}" 
+    <img src={{ photos[courts.index(court)] }} alt={{ court[1] }} 
          class="object-cover bg-gray-200 rounded-lg aspect-square group-hover:opacity-75">
     <div class="pt-10 pb-4 text-center">
         <h3 class="text-lg font-medium text-gray-900">
