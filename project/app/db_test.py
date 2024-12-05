@@ -1,6 +1,6 @@
-# NOTE: This will add these made up values into the db. 
+# NOTE: This will add these made up values into the db.
 # Run each of the functions independently (comment out all of the functions besides the one you're testing).
-# I put them in order of execution. 
+# I put them in order of execution.
 # I recommend testing in this order: insert -> select -> remove -> select -> delete
 # Remember to delete since this is only test data and we don't actually want this in our database.
 
@@ -8,53 +8,65 @@
 import psycopg2
 from psycopg2 import sql
 
+
 def insert_test_data(connection):
     """
     Insert test data into the database.
     """
     with connection.cursor() as cursor:
         # Insert data into the `courts` table
-        cursor.execute("""
+        cursor.execute(
+            """
             INSERT INTO courts (courtName, avStar, nets, level, clean, ada, inOut, hours, price, location, description)
             VALUES
             ('Court A', 4.5, 1, 1, 1, 1, 0, '9 AM - 9 PM', 'Free', '123 Main St', 'Court Description'),
             ('Court B', NULL, 0, 0, 0, 1, 1, '10 AM - 6 PM', '$5', '456 Elm St', 'Generic Description');
-        """)
+        """
+        )
 
         # Insert data into the `users` table
-        cursor.execute("""
+        cursor.execute(
+            """
             INSERT INTO users (name, password)
             VALUES
             ('JohnDoe', 'hashed_password_123'),
             ('JaneSmith', 'hashed_password_456');
-        """)
+        """
+        )
 
         # Insert data into the `reviews` table
-        cursor.execute("""
+        cursor.execute(
+            """
             INSERT INTO reviews (userID, courtID, star, comment)
             VALUES
             (1, 1, 5, 'Great court with excellent amenities!'),
             (2, 2, 3, 'Average court, needs better maintenance.');
-        """)
+        """
+        )
 
         # Insert data into the `favorites` table
-        cursor.execute("""
+        cursor.execute(
+            """
             INSERT INTO favorites (userID, courtID, review)
             VALUES
             (1, 1, 5),
             (2, 2, 3);
-        """)
+        """
+        )
 
         # Insert data into the `photos` table
-        cursor.execute("""
+        cursor.execute(
+            """
             INSERT INTO photos (courtID, photo)
             VALUES
             (1, 'image_test/IMG_1776.jpg'),
             (2, 'image_test/IMG_2302.jpg');
-        """)
+        """
+        )
 
         connection.commit()
         print("Test data inserted successfully.")
+
 
 def select_data(connection):
     """
@@ -69,6 +81,7 @@ def select_data(connection):
             for row in rows:
                 print(row)
 
+
 def remove_data(connection):
     """
     Remove a specific entry from the database.
@@ -78,6 +91,7 @@ def remove_data(connection):
         cursor.execute("DELETE FROM reviews WHERE reviewID = 1;")
         connection.commit()
         print("Deleted review with reviewID = 1.")
+
 
 def delete_all_data(connection):
     """
@@ -90,8 +104,9 @@ def delete_all_data(connection):
         connection.commit()
         print("All data deleted successfully.")
 
+
 # REQUIRES URL :D
-        
+
 if __name__ == "__main__":
     DATABASE_URL = "postgresql://jjjohnywaffles_k8io_user:vaeBbrGmOq2g6GVR7zttI2g2bsf7Gh8f@dpg-ct1nsddumphs738rb1f0-a.oregon-postgres.render.com/jjjohnywaffles_k8io"
 
