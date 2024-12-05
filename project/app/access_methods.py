@@ -52,6 +52,9 @@ def createCourt(
     return court_id
 
 
+
+
+
 """
 def createCourt(courtName, nets, level, clean, ada, inOut, hours, price, location):
     connection = psycopg2.connect(DATABASE_URL)
