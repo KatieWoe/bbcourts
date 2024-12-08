@@ -9,7 +9,7 @@
 ## Team Members
 - Kathryn Woessner: Access Methods and Testing 
 - Jaekyeong Lee: Frontend development, database connection
-- Alex Chang  
+- Alex Chang  Backend development, API Integration
 - Toan Lam: Frontend design, UI/UX, API Integration   
 - Jonathan Hu: Backend design, Database, Access Methods, Testing
 
