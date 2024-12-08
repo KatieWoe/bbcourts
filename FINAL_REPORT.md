@@ -20,7 +20,7 @@
 ---
 
 ## Demo Video
-[5-Minute Demo Video](./3308_team1_demo.mov)
+[5-Minute Demo Video](https://drive.google.com/file/d/1ZSZBrg09PLhW3pr4gzusmKv4-maxAzds/view?resourcekey)
 
 ---
 
