@@ -58,11 +58,10 @@ def court_details(court_id):
     photos = acc.getPhotos(court_id)
     rendered_html = render_template("court_details.html", court=court, photos=photos)
 
-    output_path = os.path.join(STATIC_OUTPUT_DIR, f"court_{court_id}.html")
-    os.makedirs(STATIC_OUTPUT_DIR, exist_ok=True)
-    with open(output_path, "w", encoding="utf-8") as f:
-        f.write(rendered_html)
-
+    # output_path = os.path.join(STATIC_OUTPUT_DIR, f"court_{court_id}.html")
+    # os.makedirs(STATIC_OUTPUT_DIR, exist_ok=True)
+    # with open(output_path, "w", encoding="utf-8") as f:
+    #     f.write(rendered_html)
     return rendered_html
 
 
