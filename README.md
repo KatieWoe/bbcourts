@@ -22,7 +22,7 @@
 - [Weekly Status](research/docs/WEEKLY_STATUS.md)
 - [Page Testing](research/docs/PAGE_TESTING.md)
 - [SQL Testing](research/docs/SQL_TESTING.md)
-- Final Report
+- [Final Report](FINAL_REPORT.md)
 - [Presentation Files](https://github.com/KatieWoe/bbcourts/blob/main/research/docs/bbcourts%20presentation.pdf)
 - [Demo Video](https://drive.google.com/file/d/1ZSZBrg09PLhW3pr4gzusmKv4-maxAzds/view?resourcekey)
 - [Source Code](project/app)
