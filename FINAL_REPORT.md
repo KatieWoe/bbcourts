@@ -20,7 +20,7 @@
 ---
 
 ## Demo Video
-[5-Minute Demo Video](#) *(Insert actual video link here)*
+[5-Minute Demo Video](https://drive.google.com/file/d/1ZSZBrg09PLhW3pr4gzusmKv4-maxAzds/view?resourcekey)
 
 ---
 
