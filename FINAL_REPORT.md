@@ -2,6 +2,7 @@
 
 ## Project Title
 **CourtFinder** - Basketball Court Review Platform
+- CourtFinder connects basketball enthusiasts by providing reliable information on local courts, including reviews, conditions, and accessibility, fostering a vibrant player community.
 
 ---
 
@@ -9,7 +10,7 @@
 - Kathryn Woessner  
 - Jaekyeong Lee  
 - Alex Chang  
-- Toan Lam  
+- Toan Lam: Frontend design, UI/UX, API Integration   
 - Jonathan Hu  
 
 ---
