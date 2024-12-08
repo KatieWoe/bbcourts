@@ -42,11 +42,14 @@
   - Maintenance reporting functionality.
 - Created a responsive and user-friendly UI.
 - Established a SQL database to manage court information and user data.
+- Created functions that accessed the database and returned information to populate the application.
+- Created test functions to make sure access methods performed expected tasks.
 - Successfully hosted the application on Render - a public hosting platform.
 
 ### What We Were in the Middle of Implementing
 - Search and filtering functionality for courts.
 - User account creation.
+- Making testing methods more independent.
 
 ### What We Had Planned for the Future
 - The ability for users to upload courts
