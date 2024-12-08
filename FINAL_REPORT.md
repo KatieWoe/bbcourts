@@ -11,7 +11,7 @@
 - Jaekyeong Lee: Frontend development, database connection
 - Alex Chang  
 - Toan Lam: Frontend design, UI/UX, API Integration   
-- Jonathan Hu  
+- Jonathan Hu: Backend design, Database, Access Methods, Testing
 
 ---
 
