@@ -113,4 +113,4 @@ Jonathan Hu: Last week I implemented the code needed to initialize our database 
 
 ## Individual Updates
 
-Toan: Did the front end for court details page and made it dynamic alongside real time star rating average, update header with JS. 
+Toan: Did the front end for court details page and made it dynamic alongside real time star rating average. Seeded review data. Update header with JS. Added static login page, static review form page. 
