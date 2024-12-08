@@ -52,6 +52,9 @@ def createCourt(
     return court_id
 
 
+
+
+
 """
 def createCourt(courtName, nets, level, clean, ada, inOut, hours, price, location):
     connection = psycopg2.connect(DATABASE_URL)
@@ -274,27 +277,30 @@ def createReview(userID, courtID, star, comment):
 
 def getReviews(courtID):
     """
-    Get the reviews or a given court. Returns a dictionary with the key being the review ids, and the values a list of the other elements.
+    Get the reviews for a given court. Returns a dictionary with the key being the review IDs,
+    and the values a list of the other elements including the username, rating, and comment.
     """
     connection = psycopg2.connect(DATABASE_URL)
     cursor = connection.cursor()
 
     cursor.execute(
         """
-    SELECT * FROM reviews WHERE courtID = %s;
-    """,
+        SELECT r.reviewid, u.name, r.star, r.comment
+        FROM reviews r
+        JOIN users u ON r.userid = u.userid
+        WHERE r.courtid = %s;
+        """,
         (courtID,),
     )
     rev_tup = cursor.fetchall()
     reviews = {}
     for row in rev_tup:
-        reviews[row[0]] = [row[1], row[2], row[3], row[4]]
+        reviews[row[0]] = [row[1], row[2], row[3]]  # Ensure the comment is captured as row[3]
 
     connection.commit()
     connection.close()
 
     return reviews
-
 
 def getUserReviews(userID):
     """
@@ -795,8 +801,7 @@ if __name__ == "__main__":
             print("\nTesting getReviews:")
             court_reviews = getReviews(court_id)
             assert court_reviews[review1id] == [
-                test_review_1["userID"],
-                test_review_1["courtID"],
+                test_review_1["testUser14"],
                 test_review_1["star"],
                 test_review_1["review"],
             ], f"Test failed: Review {review1id} wrong"

@@ -4,10 +4,58 @@ import psycopg2
 import db_setup as db
 import access_methods as acc
 
+import sys
+import traceback
+
 app = Flask(__name__)
+
 
 # Directory to save static files
 STATIC_OUTPUT_DIR = "static_site"
+
+
+
+def calcAvStar(courtID_calc):
+    """
+    Get the star rating from reviews for the court given. Calculate the average and return the average.
+    """
+    try:
+        connection = psycopg2.connect(db.DATABASE_URL)
+        cursor = connection.cursor()
+
+        cursor.execute(
+            """
+        SELECT star FROM reviews WHERE courtID = %s;
+        """,
+            (courtID_calc,),
+        )
+
+        stars_tup = cursor.fetchall()
+        stars = []
+        for row in stars_tup:
+            stars.append(row[0])
+        
+        # Handle case where there are no reviews
+        if not stars:
+            return 0
+            
+        avStar = sum(stars) / len(stars)
+
+        connection.close()
+        return avStar
+
+    except Exception as e:
+        print(f"Error calculating average star rating: {str(e)}")
+        return 0
+    finally:
+        if 'connection' in locals():
+            connection.close()
+
+
+@app.errorhandler(Exception)
+def handle_error(e):
+    print(traceback.format_exc(), file=sys.stderr)
+    return str(e), 500
 
 
 @app.route("/")
@@ -52,11 +100,60 @@ def listing():
     return render_template("listing.html", courts=courts, photos=photos)
 
 
+
 @app.route("/courts/<int:court_id>")
 def court_details(court_id):
-    court = acc.getCourt(court_id)
-    photos = acc.getPhotos(court_id)
-    rendered_html = render_template("court_details.html", court=court, photos=photos)
+    try:
+        # Fetch court details
+        court = acc.getCourt(court_id)
+        if not court:
+            return render_template("404.html"), 404
+
+        # Fetch photos
+        photos = acc.getPhotos(court_id)
+
+        # Fetch and process reviews
+        reviews_dict = acc.getReviews(court_id)
+        if not reviews_dict:
+            reviews = []
+            total_reviews = 0
+            rating = 0
+        else:
+            # Ensure reviews are dictionaries
+            reviews = [
+                {
+                    'id': review_id,
+                    'username': review_data[0],  # Username
+                    'rating': float(review_data[1]),  # Star rating
+                    'text': review_data[2]  # Review comment
+                }
+                for review_id, review_data in reviews_dict.items()
+            ]
+            total_reviews = len(reviews)
+            rating = calcAvStar(court_id)
+
+        # Calculate star display values
+        full_stars = int(rating)
+        partial_star = 1 if (rating - full_stars) >= 0.5 else 0
+        empty_stars = 5 - full_stars - partial_star
+
+        # Render template
+        return render_template(
+            "court_details.html",
+            court=court,
+            photos=photos,
+            reviews=reviews,  # Pass dictionaries here
+            total_reviews=total_reviews,
+            full_stars=full_stars,
+            partial_star=partial_star,
+            empty_stars=empty_stars,
+            int=int
+        )
+    except Exception as e:
+        import traceback
+        print("Error occurred:")
+        print(traceback.format_exc())
+        return f"An error occurred: {str(e)}", 500
 
     # output_path = os.path.join(STATIC_OUTPUT_DIR, f"court_{court_id}.html")
     # os.makedirs(STATIC_OUTPUT_DIR, exist_ok=True)
@@ -77,4 +174,5 @@ def page_not_found(e):
 
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.debug = True  # Enable debug mode
+    app.run()

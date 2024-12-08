@@ -22,12 +22,12 @@
 - [Weekly Status](research/docs/WEEKLY_STATUS.md)
 - [Page Testing](research/docs/PAGE_TESTING.md)
 - [SQL Testing](research/docs/SQL_TESTING.md)
-- Final Report
-- Presentation Files
-- Demo Video
+- [Final Report](FINAL_REPORT.md)
+- [Presentation Files](https://github.com/KatieWoe/bbcourts/blob/main/research/docs/bbcourts%20presentation.pdf)
+- [Demo Video](https://drive.google.com/file/d/1ZSZBrg09PLhW3pr4gzusmKv4-maxAzds/view?resourcekey)
 - [Source Code](project/app)
-- [Test cases](project/app/access_methods.py)
-- Source Documentation
+- [Test cases](project/app/access_methods.py) May not work if Users table is not configured for tests. Tests passed 12/4/24
+- [Source Documentation](research/docs/DOCUMENTATION.md)
 - [Public Deployment](https://bbcourts.onrender.com/)
 
 ## Vision Statement
